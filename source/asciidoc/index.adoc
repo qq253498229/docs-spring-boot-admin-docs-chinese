@@ -1,4 +1,4 @@
-= Spring Boot Admin Reference Guide =
+= Spring Boot Admin 参考指南 =
 include::../env.adoc[]
 :revnumber: {project-version}
 :revdate: {commit-time}
@@ -13,13 +13,15 @@ include::../env.adoc[]
 :last-update-label!:
 :tabsize: 2
 
-== What is Spring Boot Admin? ==
+== 什么是 Spring Boot Admin? ==
 
-codecentric's Spring Boot Admin is a community project to manage and monitor your http://projects.spring.io/spring-boot/[Spring Boot] ^(R)^ applications.
-The applications register with our Spring Boot Admin Client (via HTTP) or are discovered using Spring Cloud ^(R)^ (e.g. Eureka, Consul).
-The UI is just a Vue.js application on top of the Spring Boot Actuator endpoints.
+Spring Boot Admin 是 codecentric 公司开发的一款开源社区项目，目标是让用户更方便的管理以及监控
+http://projects.spring.io/spring-boot/[Spring Boot] ^(R)^
+应用。
+应用可以通过我们的Spring Boot Admin客户端（通过HTTP的方式）或者使用Spring Cloud ^(R)^（比如Eureka，consul的方式）注册。
+而前端UI则是使用Vue.js，基于Spring Boot Actuator默认接口开发的。
 
-Support for Python applications is available using https://github.com/SolarEdgeTech/pyctuator[Pyctuator].
+针对Python应用可以使用 https://github.com/SolarEdgeTech/pyctuator[Pyctuator] 来进行支持。
 
 include::getting-started.adoc[]
 

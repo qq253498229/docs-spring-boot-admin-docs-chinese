@@ -1,5 +1,5 @@
 [[getting-started]]
-== Getting started ==
+== 入门 ==
 
 [[set-up-admin-server]]
 === Setting up Spring Boot Admin Server ===

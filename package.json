@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "asciidoctor asciidoc/index.adoc -o docs/index.html",
+    "build": "asciidoctor source/asciidoc/index.adoc -o docs/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

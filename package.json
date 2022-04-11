@@ -1,0 +1,15 @@
+{
+  "name": "docs-spring-boot-admin-docs-chinese",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "asciidoctor asciidoc/index.adoc -o docs/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "asciidoctor": "^2.2.6"
+  }
+}

@@ -62,7 +62,7 @@
 ----
 ====
 
-. Pull in the Spring Boot Admin Server configuration via adding `@EnableAdminServer` to your configuration:
+. 在main class上添加`@EnableAdminServer`注解，启用SBA服务器端配置:
 +
 [source,java]
 ----
@@ -76,14 +76,18 @@ public class SpringBootAdminApplication {
 }
 ----
 
-NOTE: If you want to setup the Spring Boot Admin Server via war-deployment in a servlet-container, please have a look at the {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-war/[spring-boot-admin-sample-war].
+NOTE: 如果你想通过部署war包，以servlet容器的方式来设置SBA，那么请查看 {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-war/[spring-boot-admin-sample-war]。
 
-See also the {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-servlet/[spring-boot-admin-sample-servlet] project, which also adds security.
+同时也看看 {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-servlet/[spring-boot-admin-sample-servlet]，
+其中添加了安全保护。
 
 [[register-client-applications]]
 === 注册客户端应用程序 ===
 
-To register your application at the SBA Server, you can either include the SBA Client or use http://projects.spring.io/spring-cloud/spring-cloud.html[Spring Cloud Discovery] (e.g. Eureka, Consul, ...). There is also a <<spring-cloud-discovery-static-config,simple option using a static configuration on the SBA Server side>>.
+要想在SBA服务端注册你的应用，你需要引入SBA客户端，或者是使用
+https://spring.io/projects/spring-cloud[Spring Cloud服务发现] (例如 Eureka、Consul等等)。
+这里有一个
+<<spring-cloud-discovery-static-config,在SBA服务端使用静态配置的简单选项>>。
 
 [[register-clients-via-spring-boot-admin]]
 ==== SBA客户端服务 ====

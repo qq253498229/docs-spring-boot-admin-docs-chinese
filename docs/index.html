@@ -733,7 +733,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Pull in the Spring Boot Admin Server configuration via adding <code>@EnableAdminServer</code> to your configuration:</p>
+<p>在main class上添加`@EnableAdminServer`注解，启用SBA服务器端配置:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
@@ -756,19 +756,23 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you want to setup the Spring Boot Admin Server via war-deployment in a servlet-container, please have a look at the <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-war/">spring-boot-admin-sample-war</a>.
+如果你想通过部署war包，以servlet容器的方式来设置SBA，那么请查看 <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-war/">spring-boot-admin-sample-war</a>。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>See also the <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-servlet/">spring-boot-admin-sample-servlet</a> project, which also adds security.</p>
+<p>同时也看看 <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-servlet/">spring-boot-admin-sample-servlet</a>，
+其中添加了安全保护。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="register-client-applications"><a class="anchor" href="#register-client-applications"></a><a class="link" href="#register-client-applications">2.2. 注册客户端应用程序</a></h3>
 <div class="paragraph">
-<p>To register your application at the SBA Server, you can either include the SBA Client or use <a href="http://projects.spring.io/spring-cloud/spring-cloud.html">Spring Cloud Discovery</a> (e.g. Eureka, Consul, &#8230;&#8203;). There is also a <a href="#spring-cloud-discovery-static-config">simple option using a static configuration on the SBA Server side</a>.</p>
+<p>要想在SBA服务端注册你的应用，你需要引入SBA客户端，或者是使用
+<a href="https://spring.io/projects/spring-cloud">Spring Cloud服务发现</a> (例如 Eureka、Consul等等)。
+这里有一个
+<a href="#spring-cloud-discovery-static-config">在SBA服务端使用静态配置的简单选项</a>。</p>
 </div>
 <div class="sect3">
 <h4 id="register-clients-via-spring-boot-admin"><a class="anchor" href="#register-clients-via-spring-boot-admin"></a><a class="link" href="#register-clients-via-spring-boot-admin">2.2.1. SBA客户端服务</a></h4>

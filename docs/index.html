@@ -551,11 +551,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#client-applications">3. 客户端应用程序</a>
 <ul class="sectlevel2">
-<li><a href="#show-version-in-application-list">3.1. Show Version in Application List</a></li>
-<li><a href="#jmx-bean-management">3.2. JMX-Bean Management</a></li>
-<li><a href="#logfile">3.3. Logfile Viewer</a></li>
-<li><a href="#show-instance-tags">3.4. Show Tags per Instance</a></li>
-<li><a href="#spring-boot-admin-client">3.5. Spring Boot Admin Client</a></li>
+<li><a href="#show-version-in-application-list">3.1. 在应用列表中显示版本号</a></li>
+<li><a href="#jmx-bean-management">3.2. JMX-Bean的管理</a></li>
+<li><a href="#logfile">3.3. 查看日志文件</a></li>
+<li><a href="#show-instance-tags">3.4. 显示实例的标签</a></li>
+<li><a href="#spring-boot-admin-client">3.5. Spring Boot Admin 客户端</a></li>
 </ul>
 </li>
 <li><a href="#spring-boot-admin-server">4. Spring Boot Admin Server</a>
@@ -1023,7 +1023,7 @@ app.run()</code></pre>
 <h2 id="client-applications"><a class="anchor" href="#client-applications"></a><a class="link" href="#client-applications">3. 客户端应用程序</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="show-version-in-application-list"><a class="anchor" href="#show-version-in-application-list"></a><a class="link" href="#show-version-in-application-list">3.1. Show Version in Application List</a></h3>
+<h3 id="show-version-in-application-list"><a class="anchor" href="#show-version-in-application-list"></a><a class="link" href="#show-version-in-application-list">3.1. 在应用列表中显示版本号</a></h3>
 <div class="paragraph">
 <p>For <strong>Spring Boot</strong> applications the easiest way to show the version, is to use the <code>build-info</code> goal from the <code>spring-boot-maven-plugin</code>, which generates the <code>META-INF/build-info.properties</code>.
 See also the <a href="http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-build-info">Spring Boot Reference Guide</a>.</p>
@@ -1064,7 +1064,7 @@ See also the <a href="http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/re
 </div>
 </div>
 <div class="sect2">
-<h3 id="jmx-bean-management"><a class="anchor" href="#jmx-bean-management"></a><a class="link" href="#jmx-bean-management">3.2. JMX-Bean Management</a></h3>
+<h3 id="jmx-bean-management"><a class="anchor" href="#jmx-bean-management"></a><a class="link" href="#jmx-bean-management">3.2. JMX-Bean的管理</a></h3>
 <div class="paragraph">
 <p>To interact with JMX-beans in the admin UI you have to include <a href="https://jolokia.org/">Jolokia</a> in your application.
 As Jolokia is servlet based there is no support for reactive applications.
@@ -1082,7 +1082,7 @@ With Spring Boot 2.2.0 you might want to set <code>spring.jmx.enabled=true</code
 </div>
 </div>
 <div class="sect2">
-<h3 id="logfile"><a class="anchor" href="#logfile"></a><a class="link" href="#logfile">3.3. Logfile Viewer</a></h3>
+<h3 id="logfile"><a class="anchor" href="#logfile"></a><a class="link" href="#logfile">3.3. 查看日志文件</a></h3>
 <div class="paragraph">
 <p>By default the logfile is not accessible via actuator endpoints and therefore not visible in Spring Boot Admin.
 In order to enable the logfile actuator endpoint you need to configure Spring Boot to write a logfile, either by setting
@@ -1117,7 +1117,7 @@ Enables the logfile actuator endpoint.</td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-instance-tags"><a class="anchor" href="#show-instance-tags"></a><a class="link" href="#show-instance-tags">3.4. Show Tags per Instance</a></h3>
+<h3 id="show-instance-tags"><a class="anchor" href="#show-instance-tags"></a><a class="link" href="#show-instance-tags">3.4. 显示实例的标签</a></h3>
 <div class="paragraph">
 <p><code>Tags</code> are a way to add visual markers per instance, they will appear in the application list as well as in the instance view.
 By default no tags are added to instances, and it&#8217;s up to the client to specify the desired tags by adding the information to the metadata or info endpoint.</p>
@@ -1134,7 +1134,7 @@ info.tags.environment=test</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="spring-boot-admin-client"><a class="anchor" href="#spring-boot-admin-client"></a><a class="link" href="#spring-boot-admin-client">3.5. Spring Boot Admin Client</a></h3>
+<h3 id="spring-boot-admin-client"><a class="anchor" href="#spring-boot-admin-client"></a><a class="link" href="#spring-boot-admin-client">3.5. Spring Boot Admin 客户端</a></h3>
 <div class="paragraph">
 <p>The Spring Boot Admin Client registers the application at the admin server.
 This is done by periodically doing a HTTP post request to the SBA Server providing information about the application.</p>

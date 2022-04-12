@@ -537,9 +537,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_什么是_spring_boot_admin">1. 什么是 Spring Boot Admin?</a></li>
-<li><a href="#getting-started">2. Getting started</a>
+<li><a href="#getting-started">2. 入门</a>
 <ul class="sectlevel2">
-<li><a href="#set-up-admin-server">2.1. Setting up Spring Boot Admin Server</a></li>
+<li><a href="#set-up-admin-server">2.1. 配置 Spring Boot Admin 服务端程序</a></li>
 <li><a href="#register-client-applications">2.2. Registering Client Applications</a>
 <ul class="sectlevel3">
 <li><a href="#register-clients-via-spring-boot-admin">2.2.1. Spring Boot Admin Client</a></li>
@@ -653,17 +653,20 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect1">
-<h2 id="getting-started"><a class="anchor" href="#getting-started"></a><a class="link" href="#getting-started">2. Getting started</a></h2>
+<h2 id="getting-started"><a class="anchor" href="#getting-started"></a><a class="link" href="#getting-started">2. 入门</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="set-up-admin-server"><a class="anchor" href="#set-up-admin-server"></a><a class="link" href="#set-up-admin-server">2.1. Setting up Spring Boot Admin Server</a></h3>
+<h3 id="set-up-admin-server"><a class="anchor" href="#set-up-admin-server"></a><a class="link" href="#set-up-admin-server">2.1. 配置 Spring Boot Admin 服务端程序</a></h3>
 <div class="paragraph">
-<p>First, you need to setup your server. To do this just setup a simple boot project (using <a href="http://start.spring.io" class="bare">start.spring.io</a>). As Spring Boot Admin Server is capable of running as servlet or webflux application, you need to decide on this and add the according Spring Boot Starter. In this example we&#8217;re using the servlet web starter.</p>
+<p>第一步，你需要配置你的服务端程序。
+为此，只需要配置一个基础的boot项目（使用 <a href="http://start.spring.io" class="bare">start.spring.io</a> 生成脚手架）。
+由于Spring Boot Admin Server同时支持servlet和webflux，所以你需要在其中进行选择，并添加对应的Spring Boot Starter。
+在本例中，我们使用servlet作为web starter。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add Spring Boot Admin Server starter to your dependencies:</p>
+<p>将Spring Boot Admin Server的starter添加到你的依赖中:</p>
 <div class="listingblock">
 <div class="title">pom.xml</div>
 <div class="content">
@@ -689,7 +692,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you want to use a snapshot version of Spring Boot Admin Server you most likely need to include the spring and sonatype snapshot repositories:</p>
+<p>如果你使用的是Spring Boot Admin Server的snapshot版本，那么可能还需要添加spring的sonatype snapshot仓库:</p>
 </div>
 <div class="listingblock">
 <div class="title">pom.xml</div>

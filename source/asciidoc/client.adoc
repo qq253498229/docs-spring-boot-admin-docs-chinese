@@ -1,5 +1,5 @@
 [[client-applications]]
-== Client Applications ==
+== 客户端应用程序 ==
 
 [[show-version-in-application-list]]
 === Show Version in Application List ===

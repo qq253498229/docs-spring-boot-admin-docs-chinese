@@ -2,7 +2,7 @@
 == 入门 ==
 
 [[set-up-admin-server]]
-=== 配置 Spring Boot Admin 服务端程序 ===
+=== 配置Spring Boot Admin服务端应用程序 ===
 
 第一步，你需要配置你的服务端程序。
 为此，只需要配置一个基础的boot项目（使用 http://start.spring.io 生成脚手架）。
@@ -81,12 +81,12 @@ NOTE: If you want to setup the Spring Boot Admin Server via war-deployment in a 
 See also the {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-servlet/[spring-boot-admin-sample-servlet] project, which also adds security.
 
 [[register-client-applications]]
-=== 注册客户端应用 ===
+=== 注册客户端应用程序 ===
 
 To register your application at the SBA Server, you can either include the SBA Client or use http://projects.spring.io/spring-cloud/spring-cloud.html[Spring Cloud Discovery] (e.g. Eureka, Consul, ...). There is also a <<spring-cloud-discovery-static-config,simple option using a static configuration on the SBA Server side>>.
 
 [[register-clients-via-spring-boot-admin]]
-==== Spring Boot Admin 客户端 ====
+==== Spring Boot Admin 客户端服务 ====
 
 Each application that wants to register has to include the Spring Boot Admin Client. In order to secure the endpoints, also add the `spring-boot-starter-security`.
 
@@ -194,7 +194,7 @@ See also {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-eureka/
 TIP: You can include the Spring Boot Admin Server to your Eureka server. Setup everything as described above and set `spring.boot.admin.context-path` to something different than `"/"` so that the Spring Boot Admin Server UI won't clash with Eureka's one.
 
 [[register-python-applications]]
-==== 使用Pyctuator注册Python应用 ====
+==== 使用Pyctuator注册Python应用程序 ====
 
 You can easily integrate Spring Boot Admin with https://flask.palletsprojects.com[Flask] or https://fastapi.tiangolo.com/[FastAPI] Python applications using the https://github.com/SolarEdgeTech/pyctuator[Pyctuator] project.
 

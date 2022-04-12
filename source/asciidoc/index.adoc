@@ -13,7 +13,7 @@ include::../env.adoc[]
 :last-update-label!:
 :tabsize: 2
 
-== 什么是 Spring Boot Admin? ==
+== 什么是 Spring Boot Admin（SBA）? ==
 
 Spring Boot Admin 是 codecentric 公司开发的一款开源社区项目，目标是让用户更方便的管理以及监控
 http://projects.spring.io/spring-boot/[Spring Boot] ^(R)^

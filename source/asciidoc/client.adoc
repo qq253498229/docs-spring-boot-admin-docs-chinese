@@ -92,7 +92,7 @@ info.tags.environment=test
 ----
 
 [[spring-boot-admin-client]]
-=== Spring Boot Admin 客户端 ===
+=== SBA客户端 ===
 
 The Spring Boot Admin Client registers the application at the admin server.
 This is done by periodically doing a HTTP post request to the SBA Server providing information about the application.

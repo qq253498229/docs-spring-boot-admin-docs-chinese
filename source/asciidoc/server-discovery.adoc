@@ -1,10 +1,10 @@
 [[spring-cloud-discovery-support]]
-=== Spring Cloud Discovery ===
+=== Spring Cloud 服务发现 ===
 
 The Spring Boot Admin Server can use Spring Clouds `DiscoveryClient` to discover applications. The advantage is that the clients don't have to include the `spring-boot-admin-starter-client`. You just have to add a `DiscoveryClient` implementation to your admin server - everything else is done by AutoConfiguration.
 
 [[spring-cloud-discovery-static-config]]
-==== Static Configuration using SimpleDiscoveryClient ====
+==== 使用SimpleDiscoveryClient进行静态配置 ====
 
 Spring Cloud provides a `SimpleDiscoveryClient`. It allows you to specify client applications via static configuration:
 
@@ -35,11 +35,11 @@ spring:
                   management.context-path: /actuator
 ----
 
-==== Other DiscoveryClients ====
+==== 其它方式的服务发现客户端 ====
 Spring Boot Admin supports all other implementations of Spring Cloud's `DiscoveryClient` (Eureka, Zookeeper, Consul, ...). You need to add it to the Spring Boot Admin Server and configure it properly.
 An <<discover-clients-via-spring-cloud-discovery,example setup using Eureka>> is shown above.
 
-==== Converting ServiceInstances ====
+==== 转换服务实例 ====
 
 The information from the service registry are converted by the `ServiceInstanceConverter`. Spring Boot Admin ships with a default and Eureka converter implementation. The correct one is selected by AutoConfiguration.
 

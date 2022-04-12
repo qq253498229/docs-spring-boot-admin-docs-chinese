@@ -2,7 +2,7 @@
 == 入门 ==
 
 [[set-up-admin-server]]
-=== 配置Spring Boot Admin服务端应用程序 ===
+=== 配置SBA服务端应用程序 ===
 
 第一步，你需要配置你的服务端程序。
 为此，只需要配置一个基础的boot项目（使用 http://start.spring.io 生成脚手架）。
@@ -86,7 +86,7 @@ See also the {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-ser
 To register your application at the SBA Server, you can either include the SBA Client or use http://projects.spring.io/spring-cloud/spring-cloud.html[Spring Cloud Discovery] (e.g. Eureka, Consul, ...). There is also a <<spring-cloud-discovery-static-config,simple option using a static configuration on the SBA Server side>>.
 
 [[register-clients-via-spring-boot-admin]]
-==== Spring Boot Admin 客户端服务 ====
+==== SBA客户端服务 ====
 
 Each application that wants to register has to include the Spring Boot Admin Client. In order to secure the endpoints, also add the `spring-boot-starter-security`.
 

@@ -1,12 +1,12 @@
 [[spring-boot-admin-server]]
-== Spring Boot Admin Server ==
+== SBA服务端 ==
 
-=== Running Behind a Front-end Proxy Server ===
+=== 通过代理访问运行的服务端 ===
 
 In case the Spring Boot Admin server is running behind a reverse proxy, it may be requried to configure the public url where the server is reachable via (`spring.boot.admin.ui.public-url`).
 In addition when the reverse proxy terminates the https connection, it may be necessary to configure `server.forward-headers-strategy=native` (also see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server[Spring Boot Reference Guide]).
 
-=== Configuration Options ===
+=== 配置项 ===
 |===
 | Property name |Description |Default value
 

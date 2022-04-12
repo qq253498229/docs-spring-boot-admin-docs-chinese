@@ -534,15 +534,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="revdate">08.04.2022</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">目录</div>
 <ul class="sectlevel1">
-<li><a href="#_什么是_spring_boot_admin">1. 什么是 Spring Boot Admin?</a></li>
+<li><a href="#_什么是_spring_boot_adminsba">1. 什么是 Spring Boot Admin（SBA）?</a></li>
 <li><a href="#getting-started">2. 入门</a>
 <ul class="sectlevel2">
-<li><a href="#set-up-admin-server">2.1. 配置Spring Boot Admin服务端应用程序</a></li>
+<li><a href="#set-up-admin-server">2.1. 配置SBA服务端应用程序</a></li>
 <li><a href="#register-client-applications">2.2. 注册客户端应用程序</a>
 <ul class="sectlevel3">
-<li><a href="#register-clients-via-spring-boot-admin">2.2.1. Spring Boot Admin 客户端服务</a></li>
+<li><a href="#register-clients-via-spring-boot-admin">2.2.1. SBA客户端服务</a></li>
 <li><a href="#discover-clients-via-spring-cloud-discovery">2.2.2. Spring Cloud 服务发现</a></li>
 <li><a href="#register-python-applications">2.2.3. 使用Pyctuator注册Python应用程序</a></li>
 </ul>
@@ -555,90 +555,90 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#jmx-bean-management">3.2. JMX-Bean的管理</a></li>
 <li><a href="#logfile">3.3. 查看日志文件</a></li>
 <li><a href="#show-instance-tags">3.4. 显示实例的标签</a></li>
-<li><a href="#spring-boot-admin-client">3.5. Spring Boot Admin 客户端</a></li>
+<li><a href="#spring-boot-admin-client">3.5. SBA客户端</a></li>
 </ul>
 </li>
-<li><a href="#spring-boot-admin-server">4. Spring Boot Admin Server</a>
+<li><a href="#spring-boot-admin-server">4. SBA服务端</a>
 <ul class="sectlevel2">
-<li><a href="#_running_behind_a_front_end_proxy_server">4.1. Running Behind a Front-end Proxy Server</a></li>
-<li><a href="#_configuration_options">4.2. Configuration Options</a></li>
-<li><a href="#spring-cloud-discovery-support">4.3. Spring Cloud Discovery</a>
+<li><a href="#_通过代理访问运行的服务端">4.1. 通过代理访问运行的服务端</a></li>
+<li><a href="#_配置项">4.2. 配置项</a></li>
+<li><a href="#spring-cloud-discovery-support">4.3. Spring Cloud 服务发现</a>
 <ul class="sectlevel3">
-<li><a href="#spring-cloud-discovery-static-config">4.3.1. Static Configuration using SimpleDiscoveryClient</a></li>
-<li><a href="#_other_discoveryclients">4.3.2. Other DiscoveryClients</a></li>
-<li><a href="#_converting_serviceinstances">4.3.3. Converting ServiceInstances</a></li>
+<li><a href="#spring-cloud-discovery-static-config">4.3.1. 使用SimpleDiscoveryClient进行静态配置</a></li>
+<li><a href="#_其它方式的服务发现客户端">4.3.2. 其它方式的服务发现客户端</a></li>
+<li><a href="#_转换服务实例">4.3.3. 转换服务实例</a></li>
 <li><a href="#_cloudfoundry">4.3.4. CloudFoundry</a></li>
 </ul>
 </li>
-<li><a href="#clustering-support">4.4. Clustering</a></li>
-<li><a href="#_notifications">4.5. Notifications</a>
+<li><a href="#clustering-support">4.4. 集群</a></li>
+<li><a href="#_同志">4.5. 同志</a>
 <ul class="sectlevel3">
-<li><a href="#mail-notifications">4.5.1. Mail Notifications</a></li>
-<li><a href="#pagerduty-notifications">4.5.2. PagerDuty Notifications</a></li>
-<li><a href="#opsgenie-notifications">4.5.3. OpsGenie Notifications</a></li>
-<li><a href="#hipchat-notifications">4.5.4. Hipchat Notifications</a></li>
-<li><a href="#slack-notifications">4.5.5. Slack Notifications</a></li>
-<li><a href="#letschat-notifications">4.5.6. Let&#8217;s Chat Notifications</a></li>
-<li><a href="#ms-teams-notifications">4.5.7. Microsoft Teams Notifications</a></li>
-<li><a href="#telegram-notifications">4.5.8. Telegram Notifications</a></li>
-<li><a href="#discord-notifications">4.5.9. Discord Notifications</a></li>
-<li><a href="#notification-proxy">4.5.10. Notification Proxy Settings</a></li>
-<li><a href="#reminder-notifications">4.5.11. Notification Reminder</a></li>
-<li><a href="#filtering-notifications">4.5.12. Filtering Notifications</a></li>
-<li><a href="#DingTalk-notifications">4.5.13. DingTalk Notifications</a></li>
+<li><a href="#mail-notifications">4.5.1. 邮件通知</a></li>
+<li><a href="#pagerduty-notifications">4.5.2. PagerDuty通知</a></li>
+<li><a href="#opsgenie-notifications">4.5.3. OpsGenie通知</a></li>
+<li><a href="#hipchat-notifications">4.5.4. Hipchat通知</a></li>
+<li><a href="#slack-notifications">4.5.5. Slack通知</a></li>
+<li><a href="#letschat-notifications">4.5.6. Let&#8217;s Chat通知</a></li>
+<li><a href="#ms-teams-notifications">4.5.7. Microsoft Teams通知</a></li>
+<li><a href="#telegram-notifications">4.5.8. Telegram通知</a></li>
+<li><a href="#discord-notifications">4.5.9. Discord通知</a></li>
+<li><a href="#notification-proxy">4.5.10. 配置提醒的代理</a></li>
+<li><a href="#reminder-notifications">4.5.11. 通知提醒</a></li>
+<li><a href="#filtering-notifications">4.5.12. 过滤通知</a></li>
+<li><a href="#DingTalk-notifications">4.5.13. 钉钉通知</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#securing-spring-boot-admin">5. Security</a>
+<li><a href="#securing-spring-boot-admin">5. 安全</a>
 <ul class="sectlevel2">
-<li><a href="#_securing_spring_boot_admin_server">5.1. Securing Spring Boot Admin Server</a></li>
-<li><a href="#_securing_client_actuator_endpoints">5.2. Securing Client Actuator Endpoints</a>
+<li><a href="#_保护sba服务端的安全">5.1. 保护SBA服务端的安全</a></li>
+<li><a href="#_保护客户端默认actuator接口">5.2. 保护客户端默认Actuator接口</a>
 <ul class="sectlevel3">
-<li><a href="#_sba_client">5.2.1. SBA Client</a></li>
-<li><a href="#_sba_server">5.2.2. SBA Server</a></li>
+<li><a href="#_sba客户端">5.2.1. SBA客户端</a></li>
+<li><a href="#_sba服务端">5.2.2. SBA服务端</a></li>
 <li><a href="#_eureka">5.2.3. Eureka</a></li>
 <li><a href="#_consul">5.2.4. Consul</a></li>
-<li><a href="#_csrf_on_actuator_endpoints">5.2.5. CSRF on Actuator Endpoints</a></li>
+<li><a href="#_默认actuator接口的csrf保护">5.2.5. 默认Actuator接口的CSRF保护</a></li>
 </ul>
 </li>
-<li><a href="#_using_mutual_tls">5.3. Using Mutual TLS</a></li>
+<li><a href="#_使用自定义tls">5.3. 使用自定义TLS</a></li>
 </ul>
 </li>
-<li><a href="#customizing">6. Customizing</a>
+<li><a href="#customizing">6. 自定义</a>
 <ul class="sectlevel2">
-<li><a href="#customizing-notifiers">6.1. Custom Notifiers</a></li>
-<li><a href="#customizing-headers">6.2. Injecting Custom HTTP Headers</a></li>
-<li><a href="#customizing-instance-filter">6.3. Intercepting Requests And Responses</a></li>
-<li><a href="#customizing-external-views">6.4. Linking / Embedding External Pages</a></li>
-<li><a href="#customizing-custom-views">6.5. Custom Views</a>
+<li><a href="#customizing-notifiers">6.1. 自定义通知器</a></li>
+<li><a href="#customizing-headers">6.2. 自定义HTTP请求头</a></li>
+<li><a href="#customizing-instance-filter">6.3. 对请求和响应进行拦截</a></li>
+<li><a href="#customizing-external-views">6.4. 链接/嵌入外部页面</a></li>
+<li><a href="#customizing-custom-views">6.5. 自定义页面</a>
 <ul class="sectlevel3">
-<li><a href="#customizing-custom-views-top-level">6.5.1. Adding a Top-Level View</a></li>
-<li><a href="#customizing-custom-views-instance">6.5.2. Visualizing a Custom Endpoint</a></li>
+<li><a href="#customizing-custom-views-top-level">6.5.1. 添加最外层页面</a></li>
+<li><a href="#customizing-custom-views-instance">6.5.2. 查看自定义接口</a></li>
 </ul>
 </li>
-<li><a href="#_customizing_header_logo_and_title">6.6. Customizing Header Logo and Title</a></li>
-<li><a href="#_customizing_login_logo">6.7. Customizing Login Logo</a></li>
-<li><a href="#_customizing_favicon">6.8. Customizing Favicon</a></li>
-<li><a href="#_customizing_available_languages">6.9. Customizing Available Languages</a></li>
-<li><a href="#_showing_hiding_views">6.10. Showing / Hiding views</a></li>
+<li><a href="#_自定义顶部logo和标题">6.6. 自定义顶部Logo和标题</a></li>
+<li><a href="#_自定义登录logo">6.7. 自定义登录Logo</a></li>
+<li><a href="#_自定义favicon">6.8. 自定义Favicon</a></li>
+<li><a href="#_自定义可用语言">6.9. 自定义可用语言</a></li>
+<li><a href="#_显示隐藏页面">6.10. 显示/隐藏页面</a></li>
 </ul>
 </li>
-<li><a href="#monitoring-spring-boot-1.5.x">7. Monitoring Spring Boot 1.5.x</a></li>
-<li><a href="#_changes_with_2_x">8. Changes with 2.x</a>
+<li><a href="#monitoring-spring-boot-1.5.x">7. 监听1.5.x版本的Spring Boot</a></li>
+<li><a href="#_2_x版本的变化">8. 2.x版本的变化</a>
 <ul class="sectlevel2">
-<li><a href="#_ui">8.1. UI</a></li>
-<li><a href="#_backend">8.2. Backend</a></li>
-<li><a href="#_client">8.3. Client</a></li>
+<li><a href="#_页面">8.1. 页面</a></li>
+<li><a href="#_后端">8.2. 后端</a></li>
+<li><a href="#_客户端">8.3. 客户端</a></li>
 </ul>
 </li>
-<li><a href="#faqs">9. FAQs</a></li>
+<li><a href="#faqs">9. 常见问题</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_什么是_spring_boot_admin"><a class="anchor" href="#_什么是_spring_boot_admin"></a><a class="link" href="#_什么是_spring_boot_admin">1. 什么是 Spring Boot Admin?</a></h2>
+<h2 id="_什么是_spring_boot_adminsba"><a class="anchor" href="#_什么是_spring_boot_adminsba"></a><a class="link" href="#_什么是_spring_boot_adminsba">1. 什么是 Spring Boot Admin（SBA）?</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Spring Boot Admin 是 codecentric 公司开发的一款开源社区项目，目标是让用户更方便的管理以及监控
@@ -656,7 +656,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h2 id="getting-started"><a class="anchor" href="#getting-started"></a><a class="link" href="#getting-started">2. 入门</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="set-up-admin-server"><a class="anchor" href="#set-up-admin-server"></a><a class="link" href="#set-up-admin-server">2.1. 配置Spring Boot Admin服务端应用程序</a></h3>
+<h3 id="set-up-admin-server"><a class="anchor" href="#set-up-admin-server"></a><a class="link" href="#set-up-admin-server">2.1. 配置SBA服务端应用程序</a></h3>
 <div class="paragraph">
 <p>第一步，你需要配置你的服务端程序。
 为此，只需要配置一个基础的boot项目（使用 <a href="http://start.spring.io" class="bare">start.spring.io</a> 生成脚手架）。
@@ -771,7 +771,7 @@ If you want to setup the Spring Boot Admin Server via war-deployment in a servle
 <p>To register your application at the SBA Server, you can either include the SBA Client or use <a href="http://projects.spring.io/spring-cloud/spring-cloud.html">Spring Cloud Discovery</a> (e.g. Eureka, Consul, &#8230;&#8203;). There is also a <a href="#spring-cloud-discovery-static-config">simple option using a static configuration on the SBA Server side</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="register-clients-via-spring-boot-admin"><a class="anchor" href="#register-clients-via-spring-boot-admin"></a><a class="link" href="#register-clients-via-spring-boot-admin">2.2.1. Spring Boot Admin 客户端服务</a></h4>
+<h4 id="register-clients-via-spring-boot-admin"><a class="anchor" href="#register-clients-via-spring-boot-admin"></a><a class="link" href="#register-clients-via-spring-boot-admin">2.2.1. SBA客户端服务</a></h4>
 <div class="paragraph">
 <p>Each application that wants to register has to include the Spring Boot Admin Client. In order to secure the endpoints, also add the <code>spring-boot-starter-security</code>.</p>
 </div>
@@ -1134,7 +1134,7 @@ info.tags.environment=test</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="spring-boot-admin-client"><a class="anchor" href="#spring-boot-admin-client"></a><a class="link" href="#spring-boot-admin-client">3.5. Spring Boot Admin 客户端</a></h3>
+<h3 id="spring-boot-admin-client"><a class="anchor" href="#spring-boot-admin-client"></a><a class="link" href="#spring-boot-admin-client">3.5. SBA客户端</a></h3>
 <div class="paragraph">
 <p>The Spring Boot Admin Client registers the application at the admin server.
 This is done by periodically doing a HTTP post request to the SBA Server providing information about the application.</p>
@@ -1301,17 +1301,17 @@ user.password</p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="spring-boot-admin-server"><a class="anchor" href="#spring-boot-admin-server"></a><a class="link" href="#spring-boot-admin-server">4. Spring Boot Admin Server</a></h2>
+<h2 id="spring-boot-admin-server"><a class="anchor" href="#spring-boot-admin-server"></a><a class="link" href="#spring-boot-admin-server">4. SBA服务端</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_running_behind_a_front_end_proxy_server"><a class="anchor" href="#_running_behind_a_front_end_proxy_server"></a><a class="link" href="#_running_behind_a_front_end_proxy_server">4.1. Running Behind a Front-end Proxy Server</a></h3>
+<h3 id="_通过代理访问运行的服务端"><a class="anchor" href="#_通过代理访问运行的服务端"></a><a class="link" href="#_通过代理访问运行的服务端">4.1. 通过代理访问运行的服务端</a></h3>
 <div class="paragraph">
 <p>In case the Spring Boot Admin server is running behind a reverse proxy, it may be requried to configure the public url where the server is reachable via (<code>spring.boot.admin.ui.public-url</code>).
 In addition when the reverse proxy terminates the https connection, it may be necessary to configure <code>server.forward-headers-strategy=native</code> (also see <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server">Spring Boot Reference Guide</a>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_configuration_options"><a class="anchor" href="#_configuration_options"></a><a class="link" href="#_configuration_options">4.2. Configuration Options</a></h3>
+<h3 id="_配置项"><a class="anchor" href="#_配置项"></a><a class="link" href="#_配置项">4.2. 配置项</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1486,12 +1486,12 @@ In addition when the reverse proxy terminates the https connection, it may be ne
 </table>
 </div>
 <div class="sect2">
-<h3 id="spring-cloud-discovery-support"><a class="anchor" href="#spring-cloud-discovery-support"></a><a class="link" href="#spring-cloud-discovery-support">4.3. Spring Cloud Discovery</a></h3>
+<h3 id="spring-cloud-discovery-support"><a class="anchor" href="#spring-cloud-discovery-support"></a><a class="link" href="#spring-cloud-discovery-support">4.3. Spring Cloud 服务发现</a></h3>
 <div class="paragraph">
 <p>The Spring Boot Admin Server can use Spring Clouds <code>DiscoveryClient</code> to discover applications. The advantage is that the clients don&#8217;t have to include the <code>spring-boot-admin-starter-client</code>. You just have to add a <code>DiscoveryClient</code> implementation to your admin server - everything else is done by AutoConfiguration.</p>
 </div>
 <div class="sect3">
-<h4 id="spring-cloud-discovery-static-config"><a class="anchor" href="#spring-cloud-discovery-static-config"></a><a class="link" href="#spring-cloud-discovery-static-config">4.3.1. Static Configuration using SimpleDiscoveryClient</a></h4>
+<h4 id="spring-cloud-discovery-static-config"><a class="anchor" href="#spring-cloud-discovery-static-config"></a><a class="link" href="#spring-cloud-discovery-static-config">4.3.1. 使用SimpleDiscoveryClient进行静态配置</a></h4>
 <div class="paragraph">
 <p>Spring Cloud provides a <code>SimpleDiscoveryClient</code>. It allows you to specify client applications via static configuration:</p>
 </div>
@@ -1524,14 +1524,14 @@ In addition when the reverse proxy terminates the https connection, it may be ne
 </div>
 </div>
 <div class="sect3">
-<h4 id="_other_discoveryclients"><a class="anchor" href="#_other_discoveryclients"></a><a class="link" href="#_other_discoveryclients">4.3.2. Other DiscoveryClients</a></h4>
+<h4 id="_其它方式的服务发现客户端"><a class="anchor" href="#_其它方式的服务发现客户端"></a><a class="link" href="#_其它方式的服务发现客户端">4.3.2. 其它方式的服务发现客户端</a></h4>
 <div class="paragraph">
 <p>Spring Boot Admin supports all other implementations of Spring Cloud&#8217;s <code>DiscoveryClient</code> (Eureka, Zookeeper, Consul, &#8230;&#8203;). You need to add it to the Spring Boot Admin Server and configure it properly.
 An <a href="#discover-clients-via-spring-cloud-discovery">example setup using Eureka</a> is shown above.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_converting_serviceinstances"><a class="anchor" href="#_converting_serviceinstances"></a><a class="link" href="#_converting_serviceinstances">4.3.3. Converting ServiceInstances</a></h4>
+<h4 id="_转换服务实例"><a class="anchor" href="#_转换服务实例"></a><a class="link" href="#_转换服务实例">4.3.3. 转换服务实例</a></h4>
 <div class="paragraph">
 <p>The information from the service registry are converted by the <code>ServiceInstanceConverter</code>. Spring Boot Admin ships with a default and Eureka converter implementation. The correct one is selected by AutoConfiguration.</p>
 </div>
@@ -1681,7 +1681,7 @@ Here is a sample configuration for Eureka:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clustering-support"><a class="anchor" href="#clustering-support"></a><a class="link" href="#clustering-support">4.4. Clustering</a></h3>
+<h3 id="clustering-support"><a class="anchor" href="#clustering-support"></a><a class="link" href="#clustering-support">4.4. 集群</a></h3>
 <div class="paragraph">
 <p>Spring Boot Admin Server supports cluster replication via Hazelcast. It is automatically enabled when a <code>HazelcastConfig</code>- or <code>HazelcastInstance</code>-Bean is present. You can also configure the Hazelcast instance to be persistent, to keep the status over restarts.
 Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-hazelcast/">Spring Boot support for Hazelcast</a>.</p>
@@ -1774,9 +1774,9 @@ Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-
 </table>
 </div>
 <div class="sect2">
-<h3 id="_notifications"><a class="anchor" href="#_notifications"></a><a class="link" href="#_notifications">4.5. Notifications</a></h3>
+<h3 id="_同志"><a class="anchor" href="#_同志"></a><a class="link" href="#_同志">4.5. 同志</a></h3>
 <div class="sect3">
-<h4 id="mail-notifications"><a class="anchor" href="#mail-notifications"></a><a class="link" href="#mail-notifications">4.5.1. Mail Notifications</a></h4>
+<h4 id="mail-notifications"><a class="anchor" href="#mail-notifications"></a><a class="link" href="#mail-notifications">4.5.1. 邮件通知</a></h4>
 <div class="paragraph">
 <p>Mail notifications will be delivered as HTML emails rendered using <a href="https://www.thymeleaf.org/">Thymeleaf</a> templates.
 To enable Mail notifications, configure a <code>JavaMailSender</code> using <code>spring-boot-starter-mail</code> and set a recipient.</p>
@@ -1883,7 +1883,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="pagerduty-notifications"><a class="anchor" href="#pagerduty-notifications"></a><a class="link" href="#pagerduty-notifications">4.5.2. PagerDuty Notifications</a></h4>
+<h4 id="pagerduty-notifications"><a class="anchor" href="#pagerduty-notifications"></a><a class="link" href="#pagerduty-notifications">4.5.2. PagerDuty通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://www.pagerduty.com/">PagerDuty</a> notifications you just have to add a generic service to your PagerDuty-account and set <code>spring.boot.admin.notify.pagerduty.service-key</code> to the service-key you received.</p>
 </div>
@@ -1941,7 +1941,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="opsgenie-notifications"><a class="anchor" href="#opsgenie-notifications"></a><a class="link" href="#opsgenie-notifications">4.5.3. OpsGenie Notifications</a></h4>
+<h4 id="opsgenie-notifications"><a class="anchor" href="#opsgenie-notifications"></a><a class="link" href="#opsgenie-notifications">4.5.3. OpsGenie通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://www.opsgenie.com/">OpsGenie</a> notifications you just have to add a new JSON Rest API integration to your OpsGenie account and set <code>spring.boot.admin.notify.opsgenie.api-key</code> to the apiKey you received.</p>
 </div>
@@ -2014,7 +2014,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="hipchat-notifications"><a class="anchor" href="#hipchat-notifications"></a><a class="link" href="#hipchat-notifications">4.5.4. Hipchat Notifications</a></h4>
+<h4 id="hipchat-notifications"><a class="anchor" href="#hipchat-notifications"></a><a class="link" href="#hipchat-notifications">4.5.4. Hipchat通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://www.hipchat.com/">Hipchat</a> notifications you need to create an API token on your Hipchat account and set the appropriate configuration properties.</p>
 </div>
@@ -2072,7 +2072,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="slack-notifications"><a class="anchor" href="#slack-notifications"></a><a class="link" href="#slack-notifications">4.5.5. Slack Notifications</a></h4>
+<h4 id="slack-notifications"><a class="anchor" href="#slack-notifications"></a><a class="link" href="#slack-notifications">4.5.5. Slack通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://slack.com/">Slack</a> notifications you need to add a incoming Webhook under custom integrations on your Slack
 account and configure it appropriately.</p>
@@ -2131,7 +2131,7 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="letschat-notifications"><a class="anchor" href="#letschat-notifications"></a><a class="link" href="#letschat-notifications">4.5.6. Let&#8217;s Chat Notifications</a></h4>
+<h4 id="letschat-notifications"><a class="anchor" href="#letschat-notifications"></a><a class="link" href="#letschat-notifications">4.5.6. Let&#8217;s Chat通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://sdelements.github.io/lets-chat/">Let&#8217;s Chat</a> notifications you need to add the host url and add the API token and username from Let&#8217;s Chat</p>
 </div>
@@ -2189,7 +2189,7 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="ms-teams-notifications"><a class="anchor" href="#ms-teams-notifications"></a><a class="link" href="#ms-teams-notifications">4.5.7. Microsoft Teams Notifications</a></h4>
+<h4 id="ms-teams-notifications"><a class="anchor" href="#ms-teams-notifications"></a><a class="link" href="#ms-teams-notifications">4.5.7. Microsoft Teams通知</a></h4>
 <div class="paragraph">
 <p>To enable Microsoft Teams notifications you need to setup a connector webhook url and set the appropriate configuration property.</p>
 </div>
@@ -2262,7 +2262,7 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="telegram-notifications"><a class="anchor" href="#telegram-notifications"></a><a class="link" href="#telegram-notifications">4.5.8. Telegram Notifications</a></h4>
+<h4 id="telegram-notifications"><a class="anchor" href="#telegram-notifications"></a><a class="link" href="#telegram-notifications">4.5.8. Telegram通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://telegram.org/">Telegram</a> notifications you need to create and authorize a telegram bot and set the appropriate configuration properties for auth-token and chat-id.</p>
 </div>
@@ -2315,7 +2315,7 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="discord-notifications"><a class="anchor" href="#discord-notifications"></a><a class="link" href="#discord-notifications">4.5.9. Discord Notifications</a></h4>
+<h4 id="discord-notifications"><a class="anchor" href="#discord-notifications"></a><a class="link" href="#discord-notifications">4.5.9. Discord通知</a></h4>
 <div class="paragraph">
 <p>To enable Discord notifications you need to create a webhook and set the appropriate configuration property.</p>
 </div>
@@ -2368,7 +2368,7 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="notification-proxy"><a class="anchor" href="#notification-proxy"></a><a class="link" href="#notification-proxy">4.5.10. Notification Proxy Settings</a></h4>
+<h4 id="notification-proxy"><a class="anchor" href="#notification-proxy"></a><a class="link" href="#notification-proxy">4.5.10. 配置提醒的代理</a></h4>
 <div class="paragraph">
 <p>All Notifiers which are using a <code>RestTemplate</code> can be configured to use a proxy.</p>
 </div>
@@ -2411,7 +2411,7 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="reminder-notifications"><a class="anchor" href="#reminder-notifications"></a><a class="link" href="#reminder-notifications">4.5.11. Notification Reminder</a></h4>
+<h4 id="reminder-notifications"><a class="anchor" href="#reminder-notifications"></a><a class="link" href="#reminder-notifications">4.5.11. 通知提醒</a></h4>
 <div class="paragraph">
 <p>The <code>RemindingNotifier</code> sends reminders for down/offline applications, it delegates the sending of notifications to another notifier.</p>
 </div>
@@ -2454,7 +2454,7 @@ account and configure it appropriately.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="filtering-notifications"><a class="anchor" href="#filtering-notifications"></a><a class="link" href="#filtering-notifications">4.5.12. Filtering Notifications</a></h4>
+<h4 id="filtering-notifications"><a class="anchor" href="#filtering-notifications"></a><a class="link" href="#filtering-notifications">4.5.12. 过滤通知</a></h4>
 <div class="paragraph">
 <p>The <code>FilteringNotifier</code> allows you to filter certain notification based on rules you can add/remove at runtime. It delegates the sending of notifications to another notifier.</p>
 </div>
@@ -2523,7 +2523,7 @@ This example combines the reminding and filtering notifiers. This allows you to 
 </div>
 </div>
 <div class="sect3">
-<h4 id="DingTalk-notifications"><a class="anchor" href="#DingTalk-notifications"></a><a class="link" href="#DingTalk-notifications">4.5.13. DingTalk Notifications</a></h4>
+<h4 id="DingTalk-notifications"><a class="anchor" href="#DingTalk-notifications"></a><a class="link" href="#DingTalk-notifications">4.5.13. 钉钉通知</a></h4>
 <div class="paragraph">
 <p>To enable <a href="https://www.dingtalk.com/">DingTalk</a> notifications you need to create and authorize a dingtalk bot and set the appropriate configuration properties for webhookUrl and secret.</p>
 </div>
@@ -2569,10 +2569,10 @@ This example combines the reminding and filtering notifiers. This allows you to 
 </div>
 </div>
 <div class="sect1">
-<h2 id="securing-spring-boot-admin"><a class="anchor" href="#securing-spring-boot-admin"></a><a class="link" href="#securing-spring-boot-admin">5. Security</a></h2>
+<h2 id="securing-spring-boot-admin"><a class="anchor" href="#securing-spring-boot-admin"></a><a class="link" href="#securing-spring-boot-admin">5. 安全</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_securing_spring_boot_admin_server"><a class="anchor" href="#_securing_spring_boot_admin_server"></a><a class="link" href="#_securing_spring_boot_admin_server">5.1. Securing Spring Boot Admin Server</a></h3>
+<h3 id="_保护sba服务端的安全"><a class="anchor" href="#_保护sba服务端的安全"></a><a class="link" href="#_保护sba服务端的安全">5.1. 保护SBA服务端的安全</a></h3>
 <div class="paragraph">
 <p>Since there are several approaches on solving authentication and authorization in distributed web applications Spring Boot Admin doesn&#8217;t ship a default one.
 By default <code>spring-boot-admin-server-ui</code> provides a login page and a logout button.</p>
@@ -2689,7 +2689,7 @@ If you protect the <code>/instances</code> endpoint don&#8217;t forget to config
 </div>
 </div>
 <div class="sect2">
-<h3 id="_securing_client_actuator_endpoints"><a class="anchor" href="#_securing_client_actuator_endpoints"></a><a class="link" href="#_securing_client_actuator_endpoints">5.2. Securing Client Actuator Endpoints</a></h3>
+<h3 id="_保护客户端默认actuator接口"><a class="anchor" href="#_保护客户端默认actuator接口"></a><a class="link" href="#_保护客户端默认actuator接口">5.2. 保护客户端默认Actuator接口</a></h3>
 <div class="paragraph">
 <p>When the actuator endpoints are secured using HTTP Basic authentication the SBA Server needs credentials to access them. You can submit the credentials in the metadata when registering the application. The <code>BasicAuthHttpHeaderProvider</code> then uses this metadata to add the <code>Authorization</code> header to access your application&#8217;s actuator endpoints. You can provide your own <code>HttpHeadersProvider</code> to alter the behaviour (e.g. add some decryption) or add extra headers.</p>
 </div>
@@ -2742,7 +2742,7 @@ When using this approach the SBA Server decides whether or not the user can acce
 </table>
 </div>
 <div class="sect3">
-<h4 id="_sba_client"><a class="anchor" href="#_sba_client"></a><a class="link" href="#_sba_client">5.2.1. SBA Client</a></h4>
+<h4 id="_sba客户端"><a class="anchor" href="#_sba客户端"></a><a class="link" href="#_sba客户端">5.2.1. SBA客户端</a></h4>
 <div class="listingblock">
 <div class="title">application.yml</div>
 <div class="content">
@@ -2756,7 +2756,7 @@ When using this approach the SBA Server decides whether or not the user can acce
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sba_server"><a class="anchor" href="#_sba_server"></a><a class="link" href="#_sba_server">5.2.2. SBA Server</a></h4>
+<h4 id="_sba服务端"><a class="anchor" href="#_sba服务端"></a><a class="link" href="#_sba服务端">5.2.2. SBA服务端</a></h4>
 <div class="paragraph">
 <p>You can specify credentials via configuration properties in your admin server.</p>
 </div>
@@ -2847,7 +2847,7 @@ Consul does not allow dots (".") in metadata keys, use dashes instead.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_csrf_on_actuator_endpoints"><a class="anchor" href="#_csrf_on_actuator_endpoints"></a><a class="link" href="#_csrf_on_actuator_endpoints">5.2.5. CSRF on Actuator Endpoints</a></h4>
+<h4 id="_默认actuator接口的csrf保护"><a class="anchor" href="#_默认actuator接口的csrf保护"></a><a class="link" href="#_默认actuator接口的csrf保护">5.2.5. 默认Actuator接口的CSRF保护</a></h4>
 <div class="paragraph">
 <p>Some of the actuator endpoints (e.g. <code>/loggers</code>) support POST requests. When using Spring Security you need to ignore the actuator endpoints for CSRF-Protection as the Spring Boot Admin Server currently lacks support.</p>
 </div>
@@ -2863,7 +2863,7 @@ Consul does not allow dots (".") in metadata keys, use dashes instead.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_mutual_tls"><a class="anchor" href="#_using_mutual_tls"></a><a class="link" href="#_using_mutual_tls">5.3. Using Mutual TLS</a></h3>
+<h3 id="_使用自定义tls"><a class="anchor" href="#_使用自定义tls"></a><a class="link" href="#_使用自定义tls">5.3. 使用自定义TLS</a></h3>
 <div class="paragraph">
 <p>SBA Server can also use client certificates to authenticate when accessing the actuator endpoints.
 If a custom configured <code>ClientHttpConnector</code> bean is present, Spring Boot will automatically configure a <code>WebClient.Builder</code> using it, which will be used by Spring Boot Admin.</p>
@@ -2885,10 +2885,10 @@ If a custom configured <code>ClientHttpConnector</code> bean is present, Spring 
 </div>
 </div>
 <div class="sect1">
-<h2 id="customizing"><a class="anchor" href="#customizing"></a><a class="link" href="#customizing">6. Customizing</a></h2>
+<h2 id="customizing"><a class="anchor" href="#customizing"></a><a class="link" href="#customizing">6. 自定义</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="customizing-notifiers"><a class="anchor" href="#customizing-notifiers"></a><a class="link" href="#customizing-notifiers">6.1. Custom Notifiers</a></h3>
+<h3 id="customizing-notifiers"><a class="anchor" href="#customizing-notifiers"></a><a class="link" href="#customizing-notifiers">6.1. 自定义通知器</a></h3>
 <div class="paragraph">
 <p>You can add your own Notifiers by adding Spring Beans which implement the <code>Notifier</code> interface, at best by extending
 <code>AbstractEventNotifier</code> or <code>AbstractStatusChangeNotifier</code>.</p>
@@ -2922,7 +2922,7 @@ If a custom configured <code>ClientHttpConnector</code> bean is present, Spring 
 </div>
 </div>
 <div class="sect2">
-<h3 id="customizing-headers"><a class="anchor" href="#customizing-headers"></a><a class="link" href="#customizing-headers">6.2. Injecting Custom HTTP Headers</a></h3>
+<h3 id="customizing-headers"><a class="anchor" href="#customizing-headers"></a><a class="link" href="#customizing-headers">6.2. 自定义HTTP请求头</a></h3>
 <div class="paragraph">
 <p>In case you need to inject custom HTTP headers into the requests made to the monitored application&#8217;s actuator endpoints you can easily add a <code>HttpHeadersProvider</code>:</p>
 </div>
@@ -2940,7 +2940,7 @@ If a custom configured <code>ClientHttpConnector</code> bean is present, Spring 
 </div>
 </div>
 <div class="sect2">
-<h3 id="customizing-instance-filter"><a class="anchor" href="#customizing-instance-filter"></a><a class="link" href="#customizing-instance-filter">6.3. Intercepting Requests And Responses</a></h3>
+<h3 id="customizing-instance-filter"><a class="anchor" href="#customizing-instance-filter"></a><a class="link" href="#customizing-instance-filter">6.3. 对请求和响应进行拦截</a></h3>
 <div class="paragraph">
 <p>You can intercept and modify requests and responses made to the monitored application&#8217;s actuator endpoints by implementing the <code>InstanceExchangeFilterFunction</code> interface.
 This can be useful for auditing or adding some extra security checks.</p>
@@ -2959,7 +2959,7 @@ This can be useful for auditing or adding some extra security checks.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="customizing-external-views"><a class="anchor" href="#customizing-external-views"></a><a class="link" href="#customizing-external-views">6.4. Linking / Embedding External Pages</a></h3>
+<h3 id="customizing-external-views"><a class="anchor" href="#customizing-external-views"></a><a class="link" href="#customizing-external-views">6.4. 链接/嵌入外部页面</a></h3>
 <div class="paragraph">
 <p>You can very simply add a link to external pages via configuration or even embed them (adding the <code>iframe=true</code>):</p>
 </div>
@@ -2977,7 +2977,7 @@ This can be useful for auditing or adding some extra security checks.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="customizing-custom-views"><a class="anchor" href="#customizing-custom-views"></a><a class="link" href="#customizing-custom-views">6.5. Custom Views</a></h3>
+<h3 id="customizing-custom-views"><a class="anchor" href="#customizing-custom-views"></a><a class="link" href="#customizing-custom-views">6.5. 自定义页面</a></h3>
 <div class="paragraph">
 <p>It is possible to add custom views to the ui. The views must be implemented as <a href="https://vuejs.org/">Vue.js</a> components.</p>
 </div>
@@ -3009,7 +3009,7 @@ The <code>install()</code> function receives the following parameters in order t
 <p>If new top level routes are added to the frontend, they also must be known to the backend. Add a <code>/META-INF/spring-boot-admin-server-ui/extensions/{name}/routes.txt</code> with all your new toplevel routes (one route per line).</p>
 </div>
 <div class="sect3">
-<h4 id="customizing-custom-views-top-level"><a class="anchor" href="#customizing-custom-views-top-level"></a><a class="link" href="#customizing-custom-views-top-level">6.5.1. Adding a Top-Level View</a></h4>
+<h4 id="customizing-custom-views-top-level"><a class="anchor" href="#customizing-custom-views-top-level"></a><a class="link" href="#customizing-custom-views-top-level">6.5.1. 添加最外层页面</a></h4>
 <div class="paragraph">
 <p>Here is a simple top level view just listing all registered applications:</p>
 </div>
@@ -3106,7 +3106,7 @@ There are some helpful methods on the application and instances object available
 </div>
 </div>
 <div class="sect3">
-<h4 id="customizing-custom-views-instance"><a class="anchor" href="#customizing-custom-views-instance"></a><a class="link" href="#customizing-custom-views-instance">6.5.2. Visualizing a Custom Endpoint</a></h4>
+<h4 id="customizing-custom-views-instance"><a class="anchor" href="#customizing-custom-views-instance"></a><a class="link" href="#customizing-custom-views-instance">6.5.2. 查看自定义接口</a></h4>
 <div class="paragraph">
 <p>Here is a view to show a custom endpoint:</p>
 </div>
@@ -3221,7 +3221,7 @@ You can override default views by putting the same group and name as the one you
 </div>
 </div>
 <div class="sect2">
-<h3 id="_customizing_header_logo_and_title"><a class="anchor" href="#_customizing_header_logo_and_title"></a><a class="link" href="#_customizing_header_logo_and_title">6.6. Customizing Header Logo and Title</a></h3>
+<h3 id="_自定义顶部logo和标题"><a class="anchor" href="#_自定义顶部logo和标题"></a><a class="link" href="#_自定义顶部logo和标题">6.6. 自定义顶部Logo和标题</a></h3>
 <div class="paragraph">
 <p>You can set custom information in the header (i.e. displaying staging information or company name) by using following configuration properties:</p>
 </div>
@@ -3241,7 +3241,7 @@ or you must ensure yourself that the image gets served correctly (e.g. by regist
 </div>
 </div>
 <div class="sect2">
-<h3 id="_customizing_login_logo"><a class="anchor" href="#_customizing_login_logo"></a><a class="link" href="#_customizing_login_logo">6.7. Customizing Login Logo</a></h3>
+<h3 id="_自定义登录logo"><a class="anchor" href="#_自定义登录logo"></a><a class="link" href="#_自定义登录logo">6.7. 自定义登录Logo</a></h3>
 <div class="paragraph">
 <p>You can set a custom image to be displayed on the login page.</p>
 </div>
@@ -3264,7 +3264,7 @@ or you must ensure yourself that the image gets served correctly (e.g. by regist
 </div>
 </div>
 <div class="sect2">
-<h3 id="_customizing_favicon"><a class="anchor" href="#_customizing_favicon"></a><a class="link" href="#_customizing_favicon">6.8. Customizing Favicon</a></h3>
+<h3 id="_自定义favicon"><a class="anchor" href="#_自定义favicon"></a><a class="link" href="#_自定义favicon">6.8. 自定义Favicon</a></h3>
 <div class="paragraph">
 <p>It is possible to use a custom favicon, which is also used for desktop notifications. Spring Boot Admin uses a different icon when one or more application is down.</p>
 </div>
@@ -3290,7 +3290,7 @@ or you must ensure yourself that the image gets served correctly (e.g. by regist
 </div>
 </div>
 <div class="sect2">
-<h3 id="_customizing_available_languages"><a class="anchor" href="#_customizing_available_languages"></a><a class="link" href="#_customizing_available_languages">6.9. Customizing Available Languages</a></h3>
+<h3 id="_自定义可用语言"><a class="anchor" href="#_自定义可用语言"></a><a class="link" href="#_自定义可用语言">6.9. 自定义可用语言</a></h3>
 <div class="paragraph">
 <p>To filter languages to a subset of all supported languages:</p>
 </div>
@@ -3303,7 +3303,7 @@ or you must ensure yourself that the image gets served correctly (e.g. by regist
 </div>
 </div>
 <div class="sect2">
-<h3 id="_showing_hiding_views"><a class="anchor" href="#_showing_hiding_views"></a><a class="link" href="#_showing_hiding_views">6.10. Showing / Hiding views</a></h3>
+<h3 id="_显示隐藏页面"><a class="anchor" href="#_显示隐藏页面"></a><a class="link" href="#_显示隐藏页面">6.10. 显示/隐藏页面</a></h3>
 <div class="paragraph">
 <p>You can very simply hide views in the navbar:</p>
 </div>
@@ -3322,7 +3322,7 @@ or you must ensure yourself that the image gets served correctly (e.g. by regist
 </div>
 </div>
 <div class="sect1">
-<h2 id="monitoring-spring-boot-1.5.x"><a class="anchor" href="#monitoring-spring-boot-1.5.x"></a><a class="link" href="#monitoring-spring-boot-1.5.x">7. Monitoring Spring Boot 1.5.x</a></h2>
+<h2 id="monitoring-spring-boot-1.5.x"><a class="anchor" href="#monitoring-spring-boot-1.5.x"></a><a class="link" href="#monitoring-spring-boot-1.5.x">7. 监听1.5.x版本的Spring Boot</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>It is possible to monitor Spring Boot 1.5.x applications with Spring Boot Admin 2.x. The old Spring Boot Admin Client is
@@ -3348,7 +3348,7 @@ able to register at a newer server. Since the API has slight changes, you need t
 </div>
 </div>
 <div class="sect1">
-<h2 id="_changes_with_2_x"><a class="anchor" href="#_changes_with_2_x"></a><a class="link" href="#_changes_with_2_x">8. Changes with 2.x</a></h2>
+<h2 id="_2_x版本的变化"><a class="anchor" href="#_2_x版本的变化"></a><a class="link" href="#_2_x版本的变化">8. 2.x版本的变化</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -3358,7 +3358,7 @@ able to register at a newer server. Since the API has slight changes, you need t
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_ui"><a class="anchor" href="#_ui"></a><a class="link" href="#_ui">8.1. UI</a></h3>
+<h3 id="_页面"><a class="anchor" href="#_页面"></a><a class="link" href="#_页面">8.1. 页面</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3389,7 +3389,7 @@ able to register at a newer server. Since the API has slight changes, you need t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_backend"><a class="anchor" href="#_backend"></a><a class="link" href="#_backend">8.2. Backend</a></h3>
+<h3 id="_后端"><a class="anchor" href="#_后端"></a><a class="link" href="#_后端">8.2. 后端</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3435,7 +3435,7 @@ able to register at a newer server. Since the API has slight changes, you need t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_client"><a class="anchor" href="#_client"></a><a class="link" href="#_client">8.3. Client</a></h3>
+<h3 id="_客户端"><a class="anchor" href="#_客户端"></a><a class="link" href="#_客户端">8.3. 客户端</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3456,7 +3456,7 @@ able to register at a newer server. Since the API has slight changes, you need t
 </div>
 </div>
 <div class="sect1">
-<h2 id="faqs"><a class="anchor" href="#faqs"></a><a class="link" href="#faqs">9. FAQs</a></h2>
+<h2 id="faqs"><a class="anchor" href="#faqs"></a><a class="link" href="#faqs">9. 常见问题</a></h2>
 <div class="sectionbody">
 <div class="dlist q-and-a">
 <dl>

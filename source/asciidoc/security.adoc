@@ -1,7 +1,7 @@
 [[securing-spring-boot-admin]]
-== Security ==
+== 安全 ==
 
-=== Securing Spring Boot Admin Server ===
+=== 保护SBA服务端的安全 ===
 
 Since there are several approaches on solving authentication and authorization in distributed web applications Spring Boot Admin doesn't ship a default one.
 By default `spring-boot-admin-server-ui` provides a login page and a logout button.
@@ -32,7 +32,7 @@ For a complete sample look at {github-src}/spring-boot-admin-samples/spring-boot
 
 NOTE: If you protect the `/instances` endpoint don't forget to configure the username and password on your SBA-Client using `spring.boot.admin.client.username` and `spring.boot.admin.client.password`.
 
-=== Securing Client Actuator Endpoints ===
+=== 保护客户端默认Actuator接口 ===
 
 When the actuator endpoints are secured using HTTP Basic authentication the SBA Server needs credentials to access them. You can submit the credentials in the metadata when registering the application. The `BasicAuthHttpHeaderProvider` then uses this metadata to add the `Authorization` header to access your application's actuator endpoints. You can provide your own `HttpHeadersProvider` to alter the behaviour (e.g. add some decryption) or add extra headers.
 
@@ -45,7 +45,7 @@ WARNING: When using Spring Cloud Discovery, you must be aware that anybody who c
 TIP: When using this approach the SBA Server decides whether or not the user can access the registered applications. There are more complex solutions possible (using OAuth2) to let the clients decide if the user can access the endpoints. For that please have a look at the samples in https://github.com/joshiste/spring-boot-admin-samples[joshiste/spring-boot-admin-samples^].
 
 
-==== SBA Client ====
+==== SBA客户端 ====
 [source,yaml]
 .application.yml
 ----
@@ -57,7 +57,7 @@ spring.boot.admin.client:
         user.password: ${spring.security.user.password}
 ----
 
-==== SBA Server ====
+==== SBA服务端 ====
 
 You can specify credentials via configuration properties in your admin server.
 
@@ -110,7 +110,7 @@ spring.cloud.consul:
 WARNING: Consul does not allow dots (".") in metadata keys, use dashes instead.
 
 
-==== CSRF on Actuator Endpoints ====
+==== 默认Actuator接口的CSRF保护 ====
 
 Some of the actuator endpoints (e.g. `/loggers`) support POST requests. When using Spring Security you need to ignore the actuator endpoints for CSRF-Protection as the Spring Boot Admin Server currently lacks support.
 
@@ -124,7 +124,7 @@ protected void configure(HttpSecurity http) throws Exception {
 ----
 
 
-=== Using Mutual TLS ===
+=== 使用自定义TLS ===
 
 SBA Server can also use client certificates to authenticate when accessing the actuator endpoints.
 If a custom configured `ClientHttpConnector` bean is present, Spring Boot will automatically configure a `WebClient.Builder` using it, which will be used by Spring Boot Admin.

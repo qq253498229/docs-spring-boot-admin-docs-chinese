@@ -1072,10 +1072,10 @@ app.run()</code></pre>
 <div class="sect2">
 <h3 id="jmx-bean-management"><a class="anchor" href="#jmx-bean-management"></a><a class="link" href="#jmx-bean-management">3.2. JMX-Bean的管理</a></h3>
 <div class="paragraph">
-<p>To interact with JMX-beans in the admin UI you have to include <a href="https://jolokia.org/">Jolokia</a> in your application.
-As Jolokia is servlet based there is no support for reactive applications.
-In case you are using the <code>spring-boot-admin-starter-client</code> it will be pulled in for you, if not add Jolokia to your dependencies.
-With Spring Boot 2.2.0 you might want to set <code>spring.jmx.enabled=true</code> if you want to expose Spring beans via JMX.</p>
+<p>要想在admin页面中与JMX-beans进行交互，必须在应用中引入 <a href="https://jolokia.org/">Jolokia</a>。
+由于Jolokia是基于servlet开发的，所以不支持响应式应用。
+如果你使用的是 <code>spring-boot-admin-starter-client</code> 这个依赖，那么它自动会为您引入，如果没有的话，则需要手动的将Jolokia添加到依赖中。
+针对Spring Boot 2.2.0版本，如果您想通过JMX暴露Spring bean的话，可能需要设置 <code>spring.jmx.enabled=true</code>。</p>
 </div>
 <div class="listingblock">
 <div class="title">pom.xml</div>
@@ -1090,16 +1090,15 @@ With Spring Boot 2.2.0 you might want to set <code>spring.jmx.enabled=true</code
 <div class="sect2">
 <h3 id="logfile"><a class="anchor" href="#logfile"></a><a class="link" href="#logfile">3.3. 查看日志文件</a></h3>
 <div class="paragraph">
-<p>By default the logfile is not accessible via actuator endpoints and therefore not visible in Spring Boot Admin.
-In order to enable the logfile actuator endpoint you need to configure Spring Boot to write a logfile, either by setting
-<code>logging.file.path</code> or <code>logging.file.name</code>.</p>
+<p>默认情况下，无法通过actuator接口访问日志文件，因此默认Spring Boot Admin中是看不到日志文件的。
+要想启用actuator的日志文件接口，需要设置 <code>logging.file.path</code> 或 <code>logging.file.name</code> 来配置Spring Boot读写日志文件。</p>
 </div>
 <div class="paragraph">
-<p>Spring Boot Admin will detect everything that looks like an URL and render it as hyperlink.</p>
+<p>Spring Boot Admin会检测所有看起来像URL的东西，并将其呈现为超链接。</p>
 </div>
 <div class="paragraph">
-<p>ANSI color-escapes are also supported.
-You need to set a custom file log pattern as Spring Boot&#8217;s default one doesn&#8217;t use colors.</p>
+<p>ANSI颜色转义语法也是支持的。
+你可以自定义一个文件日志的表达式，因为Spring Boot默认情况下是不使用颜色的。</p>
 </div>
 <div class="listingblock">
 <div class="title">application.properties</div>
@@ -1112,12 +1111,11 @@ logging.pattern.file=%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${P
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Destination the logfile is written to.
-Enables the logfile actuator endpoint.</td>
+<td>定义日志文件的写入目录。启用日志文件的actuator接口。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>File log pattern using ANSI colors.</td>
+<td>文件日志使用自定义的ANSI颜色。</td>
 </tr>
 </table>
 </div>
@@ -1125,16 +1123,16 @@ Enables the logfile actuator endpoint.</td>
 <div class="sect2">
 <h3 id="show-instance-tags"><a class="anchor" href="#show-instance-tags"></a><a class="link" href="#show-instance-tags">3.4. 显示实例的标签</a></h3>
 <div class="paragraph">
-<p><code>Tags</code> are a way to add visual markers per instance, they will appear in the application list as well as in the instance view.
-By default no tags are added to instances, and it&#8217;s up to the client to specify the desired tags by adding the information to the metadata or info endpoint.</p>
+<p>您可以为每个实例添加一个 <code>标签（Tags）</code> 来提高其可读性，它们会显示在应用列表以及实例试图中。
+默认情况下实例不会被添加任何标签，它取决与客户端有没有向metadata元数据中添加标签或是向其它info接口中指定标签。</p>
 </div>
 <div class="listingblock">
 <div class="title">application.properties</div>
 <div class="content">
-<pre>#using the metadata
+<pre>#使用metadata元数据
 spring.boot.admin.client.instance.metadata.tags.environment=test
 
-#using the info endpoint
+#使用info接口
 info.tags.environment=test</pre>
 </div>
 </div>

@@ -40,10 +40,10 @@ springBoot {
 [[jmx-bean-management]]
 === JMX-Bean的管理 ===
 
-To interact with JMX-beans in the admin UI you have to include https://jolokia.org/[Jolokia] in your application.
-As Jolokia is servlet based there is no support for reactive applications.
-In case you are using the `spring-boot-admin-starter-client` it will be pulled in for you, if not add Jolokia to your dependencies.
-With Spring Boot 2.2.0 you might want to set `spring.jmx.enabled=true` if you want to expose Spring beans via JMX.
+要想在admin页面中与JMX-beans进行交互，必须在应用中引入 https://jolokia.org/[Jolokia]。
+由于Jolokia是基于servlet开发的，所以不支持响应式应用。
+如果你使用的是 `spring-boot-admin-starter-client` 这个依赖，那么它自动会为您引入，如果没有的话，则需要手动的将Jolokia添加到依赖中。
+针对Spring Boot 2.2.0版本，如果您想通过JMX暴露Spring bean的话，可能需要设置 `spring.jmx.enabled=true`。
 
 [source,xml]
 .pom.xml
@@ -57,36 +57,34 @@ With Spring Boot 2.2.0 you might want to set `spring.jmx.enabled=true` if you wa
 [[logfile]]
 === 查看日志文件 ===
 
-By default the logfile is not accessible via actuator endpoints and therefore not visible in Spring Boot Admin.
-In order to enable the logfile actuator endpoint you need to configure Spring Boot to write a logfile, either by setting
-`logging.file.path` or `logging.file.name`.
+默认情况下，无法通过actuator接口访问日志文件，因此默认Spring Boot Admin中是看不到日志文件的。
+要想启用actuator的日志文件接口，需要设置 `logging.file.path` 或 `logging.file.name` 来配置Spring Boot读写日志文件。
 
-Spring Boot Admin will detect everything that looks like an URL and render it as hyperlink.
+Spring Boot Admin会检测所有看起来像URL的东西，并将其呈现为超链接。
 
-ANSI color-escapes are also supported.
-You need to set a custom file log pattern as Spring Boot's default one doesn't use colors.
+ANSI颜色转义语法也是支持的。
+你可以自定义一个文件日志的表达式，因为Spring Boot默认情况下是不使用颜色的。
 
 .application.properties
 ----
 logging.file.name=/var/log/sample-boot-application.log <1>
 logging.pattern.file=%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx <2>
 ----
-<1> Destination the logfile is written to.
-Enables the logfile actuator endpoint.
-<2> File log pattern using ANSI colors.
+<1> 定义日志文件的写入目录。启用日志文件的actuator接口。
+<2> 文件日志使用自定义的ANSI颜色。
 
 [[show-instance-tags]]
 === 显示实例的标签 ===
 
-`Tags` are a way to add visual markers per instance, they will appear in the application list as well as in the instance view.
-By default no tags are added to instances, and it's up to the client to specify the desired tags by adding the information to the metadata or info endpoint.
+您可以为每个实例添加一个 `标签（Tags）` 来提高其可读性，它们会显示在应用列表以及实例试图中。
+默认情况下实例不会被添加任何标签，它取决与客户端有没有向metadata元数据中添加标签或是向其它info接口中指定标签。
 
 .application.properties
 ----
-#using the metadata
+#使用metadata元数据
 spring.boot.admin.client.instance.metadata.tags.environment=test
 
-#using the info endpoint
+#使用info接口
 info.tags.environment=test
 ----
 

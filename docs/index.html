@@ -1140,8 +1140,8 @@ info.tags.environment=test</pre>
 <div class="sect2">
 <h3 id="spring-boot-admin-client"><a class="anchor" href="#spring-boot-admin-client"></a><a class="link" href="#spring-boot-admin-client">3.5. SBA客户端</a></h3>
 <div class="paragraph">
-<p>The Spring Boot Admin Client registers the application at the admin server.
-This is done by periodically doing a HTTP post request to the SBA Server providing information about the application.</p>
+<p>Spring Boot Admin客户端会注册在admin的服务端上。
+这是通过定期向SBA服务端发送HTTP post请求来完成的，同时也会向服务端提供应用信息。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1150,14 +1150,13 @@ This is done by periodically doing a HTTP post request to the SBA Server providi
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-There are plenty of properties to influence the way how the SBA Client registers your application.
-In case that doesn&#8217;t fit your needs, you can provide your own <code>ApplicationFactory</code> implementation.
+有一些可选的属性可以影响SBA客户端的注册方式。如果这些不满足您的需求，你也可以通过提供 <code>ApplicationFactory</code> 实现的方式手动拓展。
 </td>
 </tr>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Spring Boot Admin Client configuration options</caption>
+<caption class="title">表格 1. Spring Boot Admin 客户端配置可选项</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1165,121 +1164,124 @@ In case that doesn&#8217;t fit your needs, you can provide your own <code>Applic
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Property name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">属性名</th>
+<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the Spring Boot Admin Client.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开启Spring Boot Admin 客户端。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated ordered list of URLs of the Spring Boot Admin server to register at. This triggers the AutoConfiguration. <strong>Mandatory</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">向哪些Spring Boot Admin服务端注册，可以传一个列表，URL中间以逗号分割。这个参数会自动触发。<strong>强制性</strong> 的。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.api-path</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Http-path of registration endpoint at your admin server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">提供admin服务端的http注册路径。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"instances"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.username<br>
 spring.boot.admin.client.password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Username and password in case the SBA Server api is protected with HTTP Basic authentication.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果SBA服务端启用了HTTP Basic认证，则需要提供用户名和密码。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.period</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Interval for repeating the registration (in ms).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">重复注册的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>10,000</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.connect-timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Connect timeout for the registration (in ms).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">注册链接的超时时间（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>5,000</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.read-timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read timeout for the registration (in ms).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">注册时的读取超时时间（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>5,000</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.auto-registration</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true the periodic task to register the application is automatically scheduled after the application is ready.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果设置成true的话，在应用程序启动完成后，会自动执行注册定时任务。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.auto-deregistration</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Switch to enable auto-deregistration at Spring Boot Admin server when context is closed. If the value is unset the feature is active if a running CloudPlatform was detected.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在上下文关闭后是否自动从Spring Boot Admin服务端注销。如果没有设置这个值的话，则会通过CloudPlatform的活动状态来判断。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.register-once</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true the client will only register against one admin server (in order defined by <code>spring.boot.admin.instance.url</code>); if that admin server goes down, will automatically register against the next admin server. If false, will register against all admin servers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果设置为true的话，客户端只会注册到一个admin服务端中（根据 <code>spring.boot.admin.instance.url</code> 中定义的顺序）；
+如果admin服务端挂掉了的话，则会自动注册到下一个admin服务端。
+如果设置为false，那么会注册到所有配置的admin服务端中。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.health-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Health-url to register with. Can be overridden in case the reachable URL is different (e.g. Docker). Must be unique in registry.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guessed based on management-url and <code>endpoints.health.id</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">注册使用的健康检查url，如果URL不同也可以被覆盖（例如在使用Docker的时候）。在注册时必须时唯一的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根据 management-url 和 <code>endpoints.health.id</code> 进行拼接。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.management-base-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base url for computing the management-url to register with. The path is inferred at runtime, and appended to the base url.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guessed based on <code>management.port</code>, service-url and <code>server.servlet-path</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根据 management-url 在注册时进行计算。这个路径在运行期间才会拼接到base url上。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">通过 <code>management.port</code> 、 service-url 和 <code>server.servlet-path</code> 计算获得。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.management-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Management-url to register with. Can be overridden in case the reachable url is different (e.g. Docker).</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guessed based on management-base-url and <code>management.context-path</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要注册的Management-url。如果URL不同也可以被覆盖（例如在使用Docker的时候）。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">通过 management-base-url 和 <code>management.context-path</code> 计算获得。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.service-base-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base url for computing the service-url to register with. The path is inferred at runtime, and appended to the base url. In Cloudfoundry environments you can switching to https like this: <code>spring.boot.admin.client.instance.service-base-url=https://${vcap.application.uris[0]}</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guessed based on hostname, <code>server.port</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base url用于计算将要注册的service-url。这个路径在运行期间才会计算，并拼接到base url上。
+在Cloudfoundry环境下，你可以通过 <code>spring.boot.admin.client.instance.service-base-url=https://${vcap.application.uris[0]}</code> 来进行切换。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">通过 hostname 和 <code>server.port</code> 计算获得。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.service-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service-url to register with. Can be overridden in case the reachable url is different (e.g. Docker).</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guessed based on service-base-url and <code>server.context-path</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将要注册的 Service-url。如果URL不同也可以被覆盖（例如在使用Docker的时候）。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">通过 service-base-url 和 <code>server.context-path</code> 计算获得。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.service-path</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service-path to register with. Can be overridden in case the reachable path is different (e.g. context-path set programmatically).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将要注册的 Service-path。如果URL不同也可以被覆盖（例如以代码的方式设置了context-path）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name to register with.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${spring.application.name}</code> if set, <code>"spring-boot-application"</code> otherwise.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将要注册的实例名。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果设置了 <code>${spring.application.name}</code> 的话就使用这个，否则会使用 <code>"spring-boot-application"</code> 。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.service-host-type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select which information should be considered when sending the host of a service:<br>
-    * <code>IP</code>: Uses the IP returned by <code>InetAddress.getHostAddress()</code><br>
-    * <code>HOST_NAME</code>: Uses the host name of a single machine returned by <code>InetAddress.getHostName()</code><br>
-    * <code>CANONICAL_HOST_NAME</code>: Uses the FQDN returned by <code>InetAddress.geCanonicalHostName()</code><br>
-    If <code>server.address</code> or <code>management.address</code> is set in the service, the value will overrule this property.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择向服务端发送哪种host信息:<br>
+    * <code>IP</code>: 使用 <code>InetAddress.getHostAddress()</code> 返回的IP<br>
+    * <code>HOST_NAME</code>: 使用 <code>InetAddress.getHostName()</code> 返回的单个主机名<br>
+    * <code>CANONICAL_HOST_NAME</code>: 使用 <code>InetAddress.geCanonicalHostName()</code> 返回的FQDN(Fully Qualified Domain Name：全限定域名：同时带有主机名和域名的名称。例如：主机名是bigserver,域名是mycompany.com,那么FQDN就是bigserver.mycompany.com)<br>
+    如果在服务中设置了 <code>server.address</code> 或者是 <code>management.address</code> 属性，那么这个值会被覆盖掉。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CANONICAL_HOST_NAME</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.metadata.*</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata key-value-pairs to be associated with this instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">与该实例相关联的元数据键值对。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.client.instance.metadata.tags.*</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tags as key-value-pairs to be associated with this instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">与该实例相关联的标签键值对。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Instance metadata options</caption>
+<caption class="title">表格 2. 实例元数据可选项</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1289,14 +1291,14 @@ spring.boot.admin.client.password</p></td>
 <tr>
 <th class="tableblock halign-left valign-top">Key</th>
 <th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user.name<br>
 user.password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Credentials being used to access the endpoints.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用于访问接口的权限凭证。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -1564,7 +1566,7 @@ When using Eureka, the <code>healthCheckUrl</code> known to Eureka is used for h
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Instance metadata options</caption>
+<caption class="title">表格 3. Instance metadata options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1612,7 +1614,7 @@ user.password</p></td>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Discovery configuration options</caption>
+<caption class="title">表格 4. Discovery configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1745,7 +1747,7 @@ Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-
 </ol>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Hazelcast configuration options</caption>
+<caption class="title">表格 5. Hazelcast configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1831,7 +1833,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 <li>
 <p>Configure the mail with the options below</p>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Mail notifications configuration options</caption>
+<caption class="title">表格 6. Mail notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1892,7 +1894,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 <p>To enable <a href="https://www.pagerduty.com/">PagerDuty</a> notifications you just have to add a generic service to your PagerDuty-account and set <code>spring.boot.admin.notify.pagerduty.service-key</code> to the service-key you received.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. PagerDuty notifications configuration options</caption>
+<caption class="title">表格 7. PagerDuty notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1950,7 +1952,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 <p>To enable <a href="https://www.opsgenie.com/">OpsGenie</a> notifications you just have to add a new JSON Rest API integration to your OpsGenie account and set <code>spring.boot.admin.notify.opsgenie.api-key</code> to the apiKey you received.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. OpsGenie notifications configuration options</caption>
+<caption class="title">表格 8. OpsGenie notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2023,7 +2025,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 <p>To enable <a href="https://www.hipchat.com/">Hipchat</a> notifications you need to create an API token on your Hipchat account and set the appropriate configuration properties.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. Hipchat notifications configuration options</caption>
+<caption class="title">表格 9. Hipchat notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2082,7 +2084,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 account and configure it appropriately.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Slack notifications configuration options</caption>
+<caption class="title">表格 10. Slack notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2140,7 +2142,7 @@ account and configure it appropriately.</p>
 <p>To enable <a href="https://sdelements.github.io/lets-chat/">Let&#8217;s Chat</a> notifications you need to add the host url and add the API token and username from Let&#8217;s Chat</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. Let&#8217;s Chat notifications configuration options</caption>
+<caption class="title">表格 11. Let&#8217;s Chat notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2198,7 +2200,7 @@ account and configure it appropriately.</p>
 <p>To enable Microsoft Teams notifications you need to setup a connector webhook url and set the appropriate configuration property.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Microsoft Teams notifications configuration options</caption>
+<caption class="title">表格 12. Microsoft Teams notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2271,7 +2273,7 @@ account and configure it appropriately.</p>
 <p>To enable <a href="https://telegram.org/">Telegram</a> notifications you need to create and authorize a telegram bot and set the appropriate configuration properties for auth-token and chat-id.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Telegram notifications configuration options</caption>
+<caption class="title">表格 13. Telegram notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2324,7 +2326,7 @@ account and configure it appropriately.</p>
 <p>To enable Discord notifications you need to create a webhook and set the appropriate configuration property.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. Discord notifications configuration options</caption>
+<caption class="title">表格 14. Discord notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2377,7 +2379,7 @@ account and configure it appropriately.</p>
 <p>All Notifiers which are using a <code>RestTemplate</code> can be configured to use a proxy.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. Notification Proxy configuration options</caption>
+<caption class="title">表格 15. Notification Proxy configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2532,7 +2534,7 @@ This example combines the reminding and filtering notifiers. This allows you to 
 <p>To enable <a href="https://www.dingtalk.com/">DingTalk</a> notifications you need to create and authorize a dingtalk bot and set the appropriate configuration properties for webhookUrl and secret.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. DingTalk notifications configuration options</caption>
+<caption class="title">表格 16. DingTalk notifications configuration options</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">

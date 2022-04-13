@@ -91,109 +91,111 @@ info.tags.environment=test
 [[spring-boot-admin-client]]
 === SBA客户端 ===
 
-The Spring Boot Admin Client registers the application at the admin server.
-This is done by periodically doing a HTTP post request to the SBA Server providing information about the application.
+Spring Boot Admin客户端会注册在admin的服务端上。
+这是通过定期向SBA服务端发送HTTP post请求来完成的，同时也会向服务端提供应用信息。
 
-TIP: There are plenty of properties to influence the way how the SBA Client registers your application.
-In case that doesn't fit your needs, you can provide your own `ApplicationFactory` implementation.
+TIP: 有一些可选的属性可以影响SBA客户端的注册方式。如果这些不满足您的需求，你也可以通过提供 `ApplicationFactory` 实现的方式手动拓展。
 
-.Spring Boot Admin Client configuration options
+.Spring Boot Admin 客户端配置可选项
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |默认值
 
 | spring.boot.admin.client.enabled
-| Enables the Spring Boot Admin Client.
+| 开启Spring Boot Admin 客户端。
 | `true`
 
 | spring.boot.admin.client.url
-| Comma separated ordered list of URLs of the Spring Boot Admin server to register at. This triggers the AutoConfiguration. *Mandatory*.
+| 向哪些Spring Boot Admin服务端注册，可以传一个列表，URL中间以逗号分割。这个参数会自动触发。*强制性* 的。
 |
 
 | spring.boot.admin.client.api-path
-| Http-path of registration endpoint at your admin server.
+| 提供admin服务端的http注册路径。
 | `"instances"`
 
 | spring.boot.admin.client.username +
 spring.boot.admin.client.password
-| Username and password in case the SBA Server api is protected with HTTP Basic authentication.
+| 如果SBA服务端启用了HTTP Basic认证，则需要提供用户名和密码。
 |
 
 | spring.boot.admin.client.period
-| Interval for repeating the registration (in ms).
+| 重复注册的间隔（单位毫秒ms）。
 | `10,000`
 
 | spring.boot.admin.client.connect-timeout
-| Connect timeout for the registration (in ms).
+| 注册链接的超时时间（单位毫秒ms）。
 | `5,000`
 
 | spring.boot.admin.client.read-timeout
-| Read timeout for the registration (in ms).
+| 注册时的读取超时时间（单位毫秒ms）。
 | `5,000`
 
 | spring.boot.admin.client.auto-registration
-| If set to true the periodic task to register the application is automatically scheduled after the application is ready.
+| 如果设置成true的话，在应用程序启动完成后，会自动执行注册定时任务。
 | `true`
 
 | spring.boot.admin.client.auto-deregistration
-| Switch to enable auto-deregistration at Spring Boot Admin server when context is closed. If the value is unset the feature is active if a running CloudPlatform was detected.
+| 在上下文关闭后是否自动从Spring Boot Admin服务端注销。如果没有设置这个值的话，则会通过CloudPlatform的活动状态来判断。
 | `null`
 
 | spring.boot.admin.client.register-once
-| If set to true the client will only register against one admin server (in order defined by `spring.boot.admin.instance.url`); if that admin server goes down, will automatically register against the next admin server. If false, will register against all admin servers.
+| 如果设置为true的话，客户端只会注册到一个admin服务端中（根据 `spring.boot.admin.instance.url` 中定义的顺序）；
+如果admin服务端挂掉了的话，则会自动注册到下一个admin服务端。
+如果设置为false，那么会注册到所有配置的admin服务端中。
 | `true`
 
 | spring.boot.admin.client.instance.health-url
-| Health-url to register with. Can be overridden in case the reachable URL is different (e.g. Docker). Must be unique in registry.
-| Guessed based on management-url and `endpoints.health.id`.
+| 注册使用的健康检查url，如果URL不同也可以被覆盖（例如在使用Docker的时候）。在注册时必须时唯一的。
+| 根据 management-url 和 `endpoints.health.id` 进行拼接。
 
 | spring.boot.admin.client.instance.management-base-url
-| Base url for computing the management-url to register with. The path is inferred at runtime, and appended to the base url.
-| Guessed based on `management.port`, service-url and `server.servlet-path`.
+| 根据 management-url 在注册时进行计算。这个路径在运行期间才会拼接到base url上。
+| 通过 `management.port` 、 service-url 和 `server.servlet-path` 计算获得。
 
 | spring.boot.admin.client.instance.management-url
-| Management-url to register with. Can be overridden in case the reachable url is different (e.g. Docker).
-| Guessed based on management-base-url and `management.context-path`.
+| 要注册的Management-url。如果URL不同也可以被覆盖（例如在使用Docker的时候）。
+| 通过 management-base-url 和 `management.context-path` 计算获得。
 
 | spring.boot.admin.client.instance.service-base-url
-| Base url for computing the service-url to register with. The path is inferred at runtime, and appended to the base url. In Cloudfoundry environments you can switching to https like this: `spring.boot.admin.client.instance.service-base-url=https://${vcap.application.uris[0]}`
-| Guessed based on hostname, `server.port`.
+| Base url用于计算将要注册的service-url。这个路径在运行期间才会计算，并拼接到base url上。
+在Cloudfoundry环境下，你可以通过 `spring.boot.admin.client.instance.service-base-url=https://${vcap.application.uris[0]}` 来进行切换。
+| 通过 hostname 和 `server.port` 计算获得。
 
 | spring.boot.admin.client.instance.service-url
-| Service-url to register with. Can be overridden in case the reachable url is different (e.g. Docker).
-| Guessed based on service-base-url and `server.context-path`.
+| 将要注册的 Service-url。如果URL不同也可以被覆盖（例如在使用Docker的时候）。
+| 通过 service-base-url 和 `server.context-path` 计算获得。
 
 | spring.boot.admin.client.instance.service-path
-| Service-path to register with. Can be overridden in case the reachable path is different (e.g. context-path set programmatically).
+| 将要注册的 Service-path。如果URL不同也可以被覆盖（例如以代码的方式设置了context-path）。
 | /
 
 | spring.boot.admin.client.instance.name
-| Name to register with.
-| `${spring.application.name}` if set, `"spring-boot-application"` otherwise.
+| 将要注册的实例名。
+| 如果设置了 `${spring.application.name}` 的话就使用这个，否则会使用 `"spring-boot-application"` 。
 
 | spring.boot.admin.client.instance.service-host-type
-| Select which information should be considered when sending the host of a service: +
-    * `IP`: Uses the IP returned by `InetAddress.getHostAddress()` +
-    * `HOST_NAME`: Uses the host name of a single machine returned by `InetAddress.getHostName()` +
-    * `CANONICAL_HOST_NAME`: Uses the FQDN returned by `InetAddress.geCanonicalHostName()` +
-    If `server.address` or `management.address` is set in the service, the value will overrule this property.
+| 选择向服务端发送哪种host信息: +
+    * `IP`: 使用 `InetAddress.getHostAddress()` 返回的IP +
+    * `HOST_NAME`: 使用 `InetAddress.getHostName()` 返回的单个主机名 +
+    * `CANONICAL_HOST_NAME`: 使用 `InetAddress.geCanonicalHostName()` 返回的FQDN(Fully Qualified Domain Name：全限定域名：同时带有主机名和域名的名称。例如：主机名是bigserver,域名是mycompany.com,那么FQDN就是bigserver.mycompany.com) +
+    如果在服务中设置了 `server.address` 或者是 `management.address` 属性，那么这个值会被覆盖掉。
 | `CANONICAL_HOST_NAME`
 
 
 | spring.boot.admin.client.instance.metadata.*
-| Metadata key-value-pairs to be associated with this instance.
+| 与该实例相关联的元数据键值对。
 |
 
 | spring.boot.admin.client.instance.metadata.tags.*
-| Tags as key-value-pairs to be associated with this instance.
+| 与该实例相关联的标签键值对。
 |
 |===
 
-.Instance metadata options
+.实例元数据可选项
 |===
-| Key |Value |Default value
+| Key |Value |默认值
 
 | user.name +
 user.password
-| Credentials being used to access the endpoints.
+| 用于访问接口的权限凭证。
 |
 |===

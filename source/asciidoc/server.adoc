@@ -3,19 +3,19 @@
 
 === 通过代理访问运行的服务端 ===
 
-In case the Spring Boot Admin server is running behind a reverse proxy, it may be requried to configure the public url where the server is reachable via (`spring.boot.admin.ui.public-url`).
-In addition when the reverse proxy terminates the https connection, it may be necessary to configure `server.forward-headers-strategy=native` (also see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server[Spring Boot Reference Guide]).
+如果Spring Boot Admin服务端是通过反向代理访问的，那么可能需要通过 (`spring.boot.admin.ui.public-url`) 配置一个公开的url来访问服务端。
+此外，当反向代理阻断了https链接时，可能需要配置 `server.forward-headers-strategy=native` （同时请参考 https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server[Spring Boot 参考指南]）。
 
 === 配置项 ===
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |默认值
 
 | spring.boot.admin.server.enabled
-| Enables the Spring Boot Admin Server.
+| 开启Spring Boot Admin 服务端。
 | `true`
 
 | spring.boot.admin.context-path
-| The context-path prefixes the path where the Admin Server's statics assets and API should be served. Relative to the Dispatcher-Servlet.
+| 访问Admin服务端静态资源以及API的上下文前缀。这是相对于Dispatcher-Servlet来说的。
 |
 
 | spring.boot.admin.monitor.status-interval

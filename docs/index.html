@@ -1312,8 +1312,8 @@ user.password</p></td>
 <div class="sect2">
 <h3 id="_通过代理访问运行的服务端"><a class="anchor" href="#_通过代理访问运行的服务端"></a><a class="link" href="#_通过代理访问运行的服务端">4.1. 通过代理访问运行的服务端</a></h3>
 <div class="paragraph">
-<p>In case the Spring Boot Admin server is running behind a reverse proxy, it may be requried to configure the public url where the server is reachable via (<code>spring.boot.admin.ui.public-url</code>).
-In addition when the reverse proxy terminates the https connection, it may be necessary to configure <code>server.forward-headers-strategy=native</code> (also see <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server">Spring Boot Reference Guide</a>).</p>
+<p>如果Spring Boot Admin服务端是通过反向代理访问的，那么可能需要通过 (<code>spring.boot.admin.ui.public-url</code>) 配置一个公开的url来访问服务端。
+此外，当反向代理阻断了https链接时，可能需要配置 <code>server.forward-headers-strategy=native</code> （同时请参考 <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-use-tomcat-behind-a-proxy-server">Spring Boot 参考指南</a>）。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1326,20 +1326,20 @@ In addition when the reverse proxy terminates the https connection, it may be ne
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Property name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">属性名</th>
+<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.server.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the Spring Boot Admin Server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开启Spring Boot Admin 服务端。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.context-path</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The context-path prefixes the path where the Admin Server&#8217;s statics assets and API should be served. Relative to the Dispatcher-Servlet.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">访问Admin服务端静态资源以及API的上下文前缀。这是相对于Dispatcher-Servlet来说的。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>

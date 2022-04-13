@@ -142,13 +142,14 @@ public static class SecurityPermitAllConfig extends WebSecurityConfigurerAdapter
 [[discover-clients-via-spring-cloud-discovery]]
 ==== Spring Cloud 服务发现 ====
 
-If you already use Spring Cloud Discovery for your applications you don't need the SBA Client. Just add a DiscoveryClient to Spring Boot Admin Server, the rest is done by our AutoConfiguration.
+如果已经在应用中使用了Spring Cloud Discovery，那么就不需要SBA客户端了。
+只需要为Spring Boot Admin服务端添加一个DiscoveryClient，其余的工作都会由我们自动配置完成。
 
-The following steps uses Eureka, but other Spring Cloud Discovery implementations are supported as well. There are examples using {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-consul/[Consul] and https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-zookeeper/[Zookeeper].
+下面的步骤中我们使用的是Eureka，但是其它的Spring Cloud Discovery实现也都支持的很好。 这里就有一些使用 {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-consul/[Consul] 和 https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-zookeeper/[Zookeeper] 的例子。
 
-Also, have a look at the http://projects.spring.io/spring-cloud/spring-cloud.html[Spring Cloud documentation].
+另外，也参考一下 http://projects.spring.io/spring-cloud/spring-cloud.html[Spring Cloud 文档]。
 
-. Add spring-cloud-starter-eureka to your dependencies:
+. 在依赖中添加spring-cloud-starter-eureka:
 +
 [source,xml]
 .pom.xml
@@ -156,7 +157,7 @@ Also, have a look at the http://projects.spring.io/spring-cloud/spring-cloud.htm
 include::{samples-dir}/spring-boot-admin-sample-eureka/pom.xml[tags=dependency-eureka,indent=0]
 ----
 
-. Enable discovery by adding `@EnableDiscoveryClient` to your configuration:
+. 在配置类中添加 `@EnableDiscoveryClient` 注解以启用服务发现:
 +
 [source,java]
 ----
@@ -180,39 +181,39 @@ public class SpringBootAdminApplication {
     }
 }
 ----
-<1> For the sake of brevity we're disabling the security for now. Have a look at the <<securing-spring-boot-admin,security section>> on how to deal with secured endpoints.
+<1> 为了演示的简单，我们禁用了安全功能。请查看 <<securing-spring-boot-admin,安全处理章节>> 来学习如何保护您的接口。
 
 
-. Tell the Eureka client where to find the service registry:
+. 告诉Eureka客户端在哪里查找服务:
 +
 [source,yml]
 .application.yml
 ----
 include::{samples-dir}/spring-boot-admin-sample-eureka/src/main/resources/application.yml[tags=configuration-eureka]
 ----
-<1> Configuration section for the Eureka client
-<2> As with Spring Boot 2 most of the endpoints aren't exposed via http by default, we expose all of them. For production you should carefully choose which endpoints to expose.
+<1> 针对Eureka客户端的配置部分
+<2> 与Spring Boot 2一样，大部分默认接口都没有通过http暴露出来，这里我们将它们全部暴露。在生产环境，您应该酌情选择您要公开的接口。
 
-See also {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-eureka/[spring-boot-admin-sample-eureka].
+另外，也参考一下 {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-eureka/[spring-boot-admin-sample-eureka]。
 
-TIP: You can include the Spring Boot Admin Server to your Eureka server. Setup everything as described above and set `spring.boot.admin.context-path` to something different than `"/"` so that the Spring Boot Admin Server UI won't clash with Eureka's one.
+TIP: 你也可以将Spring Boot Admin服务端安装在Eureka服务端上。首先将前文的安装步骤重复一遍，然后将 `spring.boot.admin.context-path` 设置为除了 `"/"` 之外的其它路径，这样Spring Boot Admin服务端的用户交互页面就不会和Eureka的冲突了。
 
 [[register-python-applications]]
 ==== 使用Pyctuator注册Python应用程序 ====
 
-You can easily integrate Spring Boot Admin with https://flask.palletsprojects.com[Flask] or https://fastapi.tiangolo.com/[FastAPI] Python applications using the https://github.com/SolarEdgeTech/pyctuator[Pyctuator] project.
+使用 https://github.com/SolarEdgeTech/pyctuator[Pyctuator]，您可以轻松的将Spring Boot Admin与 https://flask.palletsprojects.com[Flask] 或者是 https://fastapi.tiangolo.com/[FastAPI] 轻松的集成在一起。
 
+下面的例子使用的是Flask，但是其它web框架也支持的很好。
+有关框架的更新列表以及所支持的功能，请查看Pyctuator官方文档。
 
-The following steps uses Flask, but other web frameworks are supported as well. See Pyctuator's documentation for an updated list of supported frameworks and features.
-
-. Install the pyctuator package:
+. 安装pyctuator包:
 +
 [source,bash]
 ----
 pip install pyctuator
 ----
 
-. Enable pyctuator by pointing it to your Flask app and letting it know where Spring Boot Admin is running:
+. 将pyctuator指向你的Flask应用，让它知道Spring Boot Admin是在哪里运行的，从而启用pyctuator:
 +
 [source,python]
 ----
@@ -240,4 +241,4 @@ Pyctuator(
 app.run()
 ----
 
-For further details and examples, see Pyctuator's https://github.com/SolarEdgeTech/pyctuator/blob/master/README.md[documentation] and https://github.com/SolarEdgeTech/pyctuator/tree/master/examples[examples].
+有关更多的详细信息和示例，请查看Pyctuator的 https://github.com/SolarEdgeTech/pyctuator/blob/master/README.md[官方文档] 以及 https://github.com/SolarEdgeTech/pyctuator/tree/master/examples[官方示例]。

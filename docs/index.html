@@ -777,12 +777,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect3">
 <h4 id="register-clients-via-spring-boot-admin"><a class="anchor" href="#register-clients-via-spring-boot-admin"></a><a class="link" href="#register-clients-via-spring-boot-admin">2.2.1. SBA客户端服务</a></h4>
 <div class="paragraph">
-<p>Each application that wants to register has to include the Spring Boot Admin Client. In order to secure the endpoints, also add the <code>spring-boot-starter-security</code>.</p>
+<p>所有要注册的应用都需要添加Spring Boot Admin客户端依赖。
+如果要想对默认接口进行安全保护，还需要添加 <code>spring-boot-starter-security</code> 依赖。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add spring-boot-admin-starter-client to your dependencies:</p>
+<p>添加spring-boot-admin-starter-client依赖:</p>
 <div class="listingblock">
 <div class="title">pom.xml</div>
 <div class="content">
@@ -799,7 +800,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </li>
 <li>
-<p>Enable the SBA Client by configuring the URL of the Spring Boot Admin Server:</p>
+<p>配置Spring Boot Admin服务端的URL来开启SBA客户端:</p>
 <div class="listingblock">
 <div class="title">application.properties</div>
 <div class="content">
@@ -812,21 +813,21 @@ management.info.env.enabled=true <i class="conum" data-value="3"></i><b>(3)</b><
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The URL of the Spring Boot Admin Server to register at.</td>
+<td>将要注册到的Spring Boot Admin 服务端URL地址。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>As with Spring Boot 2 most of the endpoints aren&#8217;t exposed via http by default, we expose all of them. For production you should carefully choose which endpoints to expose.</td>
+<td>与Spring Boot 2一样，大部分默认接口都没有通过http暴露出来，这里我们将它们全部暴露。在生产环境，您应该酌情选择您要公开的接口。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Since Spring Boot 2.6, env info contributor is disabled by default. Hence, we have to enable it.</td>
+<td>在Spring Boot 2.6版本之后，env信息默认是关闭的。所以我们必须启用它们。</td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Make the actuator endpoints accessible:</p>
+<p>让所有的actuator接口都可以访问:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
@@ -843,7 +844,7 @@ management.info.env.enabled=true <i class="conum" data-value="3"></i><b>(3)</b><
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>For the sake of brevity we&#8217;re disabling the security for now. Have a look at the <a href="#securing-spring-boot-admin">security section</a> on how to deal with secured endpoints.</td>
+<td>为了演示的简单，我们禁用了安全功能。请查看 <a href="#securing-spring-boot-admin">安全处理章节</a> 来学习如何保护您的接口。</td>
 </tr>
 </table>
 </div>

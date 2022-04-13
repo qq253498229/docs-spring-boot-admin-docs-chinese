@@ -4,10 +4,9 @@
 [[show-version-in-application-list]]
 === 在应用列表中显示版本号 ===
 
-For *Spring Boot* applications the easiest way to show the version, is to use the `build-info` goal from the `spring-boot-maven-plugin`, which generates the `META-INF/build-info.properties`.
-See also the http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-build-info[Spring Boot Reference Guide].
+对于 *Spring Boot* 应用程序，显示版本号最简单的办法，就是使用 `spring-boot-maven-plugin` maven插件，然后配置 goal `build-info`，之后该插件就会生成 `META-INF/build-info.properties` 文件了。更多详情请查看 http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-build-info[Spring Boot 参考指南]。
 
-For *non-Spring Boot* applications you can either add a `version` or `build.version` to the registration metadata and the version will show up in the application list.
+对于 *非Spring Boot* 应用的话，可以在注册的时候添加 `version` 或 `build.version` 参数，这样在应用列表中就会显示版本号了。
 
 [source,xml]
 .pom.xml
@@ -29,7 +28,7 @@ For *non-Spring Boot* applications you can either add a `version` or `build.vers
 </build>
 ----
 
-To generate the build-info in a gradle project, add the following snippet to your `build.gradle`:
+要想在gradle项目中生成构建信息的话，请在 `build.gradle` 文件中添加下面的代码:
 [source,groovy]
 .build.gradle
 ----

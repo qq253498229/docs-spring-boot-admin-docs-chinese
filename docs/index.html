@@ -571,7 +571,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </ul>
 </li>
 <li><a href="#clustering-support">4.4. 集群</a></li>
-<li><a href="#_通知">4.5. 通知</a>
+<li><a href="#_消息通知">4.5. 消息通知</a>
 <ul class="sectlevel3">
 <li><a href="#mail-notifications">4.5.1. 邮件通知</a></li>
 <li><a href="#pagerduty-notifications">4.5.2. PagerDuty通知</a></li>
@@ -582,8 +582,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#ms-teams-notifications">4.5.7. Microsoft Teams通知</a></li>
 <li><a href="#telegram-notifications">4.5.8. Telegram通知</a></li>
 <li><a href="#discord-notifications">4.5.9. Discord通知</a></li>
-<li><a href="#notification-proxy">4.5.10. 配置提醒的代理</a></li>
-<li><a href="#reminder-notifications">4.5.11. 通知提醒</a></li>
+<li><a href="#notification-proxy">4.5.10. 为消息通知配置代理</a></li>
+<li><a href="#reminder-notifications">4.5.11. 通知发送程序</a></li>
 <li><a href="#filtering-notifications">4.5.12. 过滤通知</a></li>
 <li><a href="#DingTalk-notifications">4.5.13. 钉钉通知</a></li>
 </ul>
@@ -1786,18 +1786,17 @@ user.password</p></td>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_通知"><a class="anchor" href="#_通知"></a><a class="link" href="#_通知">4.5. 通知</a></h3>
+<h3 id="_消息通知"><a class="anchor" href="#_消息通知"></a><a class="link" href="#_消息通知">4.5. 消息通知</a></h3>
 <div class="sect3">
 <h4 id="mail-notifications"><a class="anchor" href="#mail-notifications"></a><a class="link" href="#mail-notifications">4.5.1. 邮件通知</a></h4>
 <div class="paragraph">
-<p>Mail notifications will be delivered as HTML emails rendered using <a href="https://www.thymeleaf.org/">Thymeleaf</a> templates.
-To enable Mail notifications, configure a <code>JavaMailSender</code> using <code>spring-boot-starter-mail</code> and set a recipient.</p>
+<p>邮件通知是以HTML格式渲染的电子邮件，它使用 <a href="https://www.thymeleaf.org/">Thymeleaf</a> 作为模板。 要想开启邮件通知，需要使用 <code>spring-boot-starter-mail</code> 配置 <code>JavaMailSender</code> 并设置一个收件人。</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/mail-notification-sample.png" alt="Sample Mail Notification">
 </div>
-<div class="title">Figure 1. Sample Mail Notification</div>
+<div class="title">图片 1. 邮件通知的例子</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1806,8 +1805,7 @@ To enable Mail notifications, configure a <code>JavaMailSender</code> using <cod
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To prevent disclosure of sensitive information, the default mail template doesn&#8217;t show any metadata of
-the instance. If you want to you show some of the metadata you can use a custom template.
+为了防止敏感信息被泄露，默认邮件模板中不显示任何实例的元数据。如果你想显示的话，可以自定义模板。
 </td>
 </tr>
 </table>
@@ -1815,7 +1813,7 @@ the instance. If you want to you show some of the metadata you can use a custom 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add spring-boot-starter-mail to your dependencies:</p>
+<p>将spring-boot-starter-mail添加到依赖中:</p>
 <div class="listingblock">
 <div class="title">pom.xml</div>
 <div class="content">
@@ -1827,7 +1825,7 @@ the instance. If you want to you show some of the metadata you can use a custom 
 </div>
 </li>
 <li>
-<p>Configure a JavaMailSender</p>
+<p>配置一个JavaMailSender</p>
 <div class="listingblock">
 <div class="title">application.properties</div>
 <div class="content">
@@ -1837,9 +1835,9 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 </div>
 </li>
 <li>
-<p>Configure the mail with the options below</p>
+<p>根据下面的可选项配置邮件</p>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">表格 6. Mail notifications configuration options</caption>
+<caption class="title">表格 6. 邮件提醒配置的可选项</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1847,45 +1845,45 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Property name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">属性名</th>
+<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">面若防治</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable mail notifications</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开启邮件提醒</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.ignore-changes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-delimited list of status changes to be ignored. Format: "&lt;from-status&gt;:&lt;to-status&gt;". Wildcards allowed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要忽略的状态变化，使用逗号分割。格式是: "&lt;from-status&gt;:&lt;to-status&gt;"。允许使用通配符</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"UNKNOWN:UP"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.template</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Resource path to the Thymeleaf template used for rendering.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用于渲染的Thymeleaf模板路径</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"classpath:/META-INF/spring-boot-admin-server/mail/status-changed.html"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-delimited list of mail recipients</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">邮件收件人列表，用逗号进行分割</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"root@localhost"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.cc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-delimited list of carbon-copy recipients</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">副本收件人列表，用逗号分割</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Mail sender</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">邮件发送人</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"Spring Boot Admin &lt;noreply@localhost&gt;"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.mail.additional-properties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Additional properties which can be accessed from the template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可以从模板读取的其它属性</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -2086,8 +2084,7 @@ spring.boot.admin.notify.mail.to=admin@example.com</pre>
 <div class="sect3">
 <h4 id="slack-notifications"><a class="anchor" href="#slack-notifications"></a><a class="link" href="#slack-notifications">4.5.5. Slack通知</a></h4>
 <div class="paragraph">
-<p>To enable <a href="https://slack.com/">Slack</a> notifications you need to add a incoming Webhook under custom integrations on your Slack
-account and configure it appropriately.</p>
+<p>To enable <a href="https://slack.com/">Slack</a> notifications you need to add a incoming Webhook under custom integrations on your Slack account and configure it appropriately.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">表格 10. Slack notifications configuration options</caption>
@@ -2380,12 +2377,12 @@ account and configure it appropriately.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="notification-proxy"><a class="anchor" href="#notification-proxy"></a><a class="link" href="#notification-proxy">4.5.10. 配置提醒的代理</a></h4>
+<h4 id="notification-proxy"><a class="anchor" href="#notification-proxy"></a><a class="link" href="#notification-proxy">4.5.10. 为消息通知配置代理</a></h4>
 <div class="paragraph">
-<p>All Notifiers which are using a <code>RestTemplate</code> can be configured to use a proxy.</p>
+<p>所有的消息通知都是使用 <code>RestTemplate</code> 来进行发送的，所以我们可以为其配置一个代理。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">表格 15. Notification Proxy configuration options</caption>
+<caption class="title">表格 15. 通知代理的可选配置</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2393,48 +2390,51 @@ account and configure it appropriately.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Property name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">属性名</th>
+<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.proxy.host</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The proxy host</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">代理的 host</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.proxy.port</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The proxy port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">代理的 port</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.proxy.username</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The proxy username (if proxy requires authentication)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">代理的 username (如果代理需要身份认证的话)</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.proxy.password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The proxy password (if proxy requires authentication)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">代理的 password (如果代理需要身份认证的话)</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="reminder-notifications"><a class="anchor" href="#reminder-notifications"></a><a class="link" href="#reminder-notifications">4.5.11. 通知提醒</a></h4>
+<h4 id="reminder-notifications"><a class="anchor" href="#reminder-notifications"></a><a class="link" href="#reminder-notifications">4.5.11. 通知发送程序</a></h4>
 <div class="paragraph">
-<p>The <code>RemindingNotifier</code> sends reminders for down/offline applications, it delegates the sending of notifications to another notifier.</p>
+<p><code>RemindingNotifier</code> 会在应用停机/离线的时候发送消息通知，它会将通知的发送委托给另外一个通知发送程序。</p>
 </div>
 <div class="paragraph">
-<p>By default a reminder is triggered when a registered application changes to <code>DOWN</code> or <code>OFFLINE</code>. You can alter this behaviour via <code>setReminderStatuses()</code>. The reminder ends when either the status changes to a non-triggering status or the regarding application gets deregistered.</p>
+<p>默认情况下，这个通知发送程序会在一个已注册发生 <code>停机</code> 或 <code>离线</code> 的时候触发。
+你也可以通过 <code>setReminderStatuses()</code> 来修改这个行为。
+当这个状态变成了无需触发，或者是相关服务注销了的话，这个通知发送程序就会结束。</p>
 </div>
 <div class="paragraph">
-<p>By default the reminders are sent every 10 minutes, to change this use <code>setReminderPeriod()</code>. The <code>RemindingNotifier</code> itself doesn&#8217;t start the background thread to send the reminders, you need to take care of this as shown in the given example below;</p>
+<p>默认情况下，通知发送程序每隔10分钟发送一次，可以使用 <code>setReminderPeriod()</code> 对这个间隔进行修改。
+<code>RemindingNotifier</code> 本身不会开启后台线程来调用通知发送程序，你需要按照下面的示例来处理这个问题;</p>
 </div>
 <div class="listingblock">
-<div class="title">How to configure reminders</div>
+<div class="title">如何配置通知发送程序</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">NotifierConfiguration</span> {
@@ -2456,11 +2456,11 @@ account and configure it appropriately.</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The reminders will be sent every 10 minutes.</td>
+<td>通知发送程序会每隔10分钟发送一次。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Schedules sending of due reminders every 10 seconds.</td>
+<td>每隔10秒种安排一次通知发送。</td>
 </tr>
 </table>
 </div>
@@ -2468,16 +2468,18 @@ account and configure it appropriately.</p>
 <div class="sect3">
 <h4 id="filtering-notifications"><a class="anchor" href="#filtering-notifications"></a><a class="link" href="#filtering-notifications">4.5.12. 过滤通知</a></h4>
 <div class="paragraph">
-<p>The <code>FilteringNotifier</code> allows you to filter certain notification based on rules you can add/remove at runtime. It delegates the sending of notifications to another notifier.</p>
+<p><code>FilteringNotifier</code> 允许在运行时添加/删除消息通知过滤的规则。
+它会将通知的发送委托给另一个发送程序。</p>
 </div>
 <div class="paragraph">
-<p>If you add a <code>FilteringNotifier</code> to your <code>ApplicationContext</code> a RESTful interface on <code>notifications/filter</code> gets available.</p>
+<p>如果向 <code>ApplicationContext</code> 添加了 <code>FilteringNotifier</code>，那么RESTful页面中的 <code>消息通知/过滤器</code> 就可以访问了。</p>
 </div>
 <div class="paragraph">
-<p>This notifier is useful if you don&#8217;t want receive notifications when deploying your applications. Before stopping the application you can add an (expiring) filter either via a <code>POST</code> request.</p>
+<p>尤其时在部署应用的时候，如果你不想接受提醒，此时过滤器就能帮到你。
+在停止应用之前你可以通过 <code>POST</code> 请求发送一个（带有过期时间的）过滤条件。</p>
 </div>
 <div class="listingblock">
-<div class="title">How to configure filtering</div>
+<div class="title">如何配置过滤器</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>(proxyBeanMethods = <span class="predefined-constant">false</span>)
 <span class="directive">public</span> <span class="type">class</span> <span class="class">NotifierConfig</span> {
@@ -2513,11 +2515,11 @@ account and configure it appropriately.</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Add the <code>FilteringNotifier</code> bean using a delegate (e.g. <code>MailNotifier</code> when configured)</td>
+<td>使用delegate添加一个 <code>FilteringNotifier</code> Bean (例如在配置 <code>MailNotifier</code> 时)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Add the <code>RemindingNotifier</code> as primary bean using the <code>FilteringNotifier</code> as delegate.</td>
+<td>使用 <code>FilteringNotifier</code> 作为delegate，将 <code>RemindingNotifier</code> 添加为primary bean。</td>
 </tr>
 </table>
 </div>
@@ -2528,7 +2530,8 @@ account and configure it appropriately.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This example combines the reminding and filtering notifiers. This allows you to get notifications after the deployed application hasn&#8217;t restarted in a certain amount of time (until the filter expires).
+这个示例结合了消息提醒和通知过滤。
+这可以让你在部署应用后的一段时间内（直到过滤条件过期）不会收到消息通知。
 </td>
 </tr>
 </table>
@@ -2537,10 +2540,10 @@ This example combines the reminding and filtering notifiers. This allows you to 
 <div class="sect3">
 <h4 id="DingTalk-notifications"><a class="anchor" href="#DingTalk-notifications"></a><a class="link" href="#DingTalk-notifications">4.5.13. 钉钉通知</a></h4>
 <div class="paragraph">
-<p>To enable <a href="https://www.dingtalk.com/">DingTalk</a> notifications you need to create and authorize a dingtalk bot and set the appropriate configuration properties for webhookUrl and secret.</p>
+<p>要想启用 <a href="https://www.dingtalk.com/">DingTalk</a> 消息通知，你需要创建并配置钉钉机器人的授权，并为 webhookUrl 和 secret 提供正确的配置。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">表格 16. DingTalk notifications configuration options</caption>
+<caption class="title">表格 16. 钉钉消息通知配置可选项</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2548,30 +2551,30 @@ This example combines the reminding and filtering notifiers. This allows you to 
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Property name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">属性名</th>
+<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.dingtalk.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable DingTalk notifications.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开启钉钉消息通知。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.dingtalk.webhook-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The DingTalk webhook url to send the notifications to.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">钉钉通知将要发送的webhook url。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.dingtalk.secret</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The secret to get message sign.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">消息认证的secret。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.notify.dingtalk.message</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text to send. SpEL-expressions are supported.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">发送的文本，支持SpEL表达式。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"#{instance.registration.name} #{instance.id} is #{event.statusInfo.status} "</code></p></td>
 </tr>
 </tbody>

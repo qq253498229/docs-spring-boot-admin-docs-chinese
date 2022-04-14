@@ -1,18 +1,16 @@
-=== 通知 ===
+=== 消息通知 ===
 
 [[mail-notifications]]
 ==== 邮件通知 ====
 
-Mail notifications will be delivered as HTML emails rendered using https://www.thymeleaf.org/[Thymeleaf] templates.
-To enable Mail notifications, configure a `JavaMailSender` using `spring-boot-starter-mail` and set a recipient.
+邮件通知是以HTML格式渲染的电子邮件，它使用 https://www.thymeleaf.org/[Thymeleaf] 作为模板。 要想开启邮件通知，需要使用 `spring-boot-starter-mail` 配置 `JavaMailSender` 并设置一个收件人。
 
-.Sample Mail Notification
+.邮件通知的例子
 image::images/mail-notification-sample.png[Sample Mail Notification]
 
-NOTE: To prevent disclosure of sensitive information, the default mail template doesn't show any metadata of
-the instance. If you want to you show some of the metadata you can use a custom template.
+NOTE: 为了防止敏感信息被泄露，默认邮件模板中不显示任何实例的元数据。如果你想显示的话，可以自定义模板。
 
-. Add spring-boot-starter-mail to your dependencies:
+. 将spring-boot-starter-mail添加到依赖中:
 +
 [source,xml]
 .pom.xml
@@ -23,7 +21,7 @@ the instance. If you want to you show some of the metadata you can use a custom 
 </dependency>
 ----
 
-. Configure a JavaMailSender
+. 配置一个JavaMailSender
 +
 .application.properties
 ----
@@ -31,44 +29,45 @@ spring.mail.host=smtp.example.com
 spring.boot.admin.notify.mail.to=admin@example.com
 ----
 
-. Configure the mail with the options below
+. 根据下面的可选项配置邮件
 +
-.Mail notifications configuration options
+.邮件提醒配置的可选项
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |面若防治
 
 | spring.boot.admin.notify.mail.enabled
-| Enable mail notifications
+| 开启邮件提醒
 | `true`
 
 | spring.boot.admin.notify.mail.ignore-changes
-| Comma-delimited list of status changes to be ignored. Format: "<from-status>:<to-status>". Wildcards allowed.
+| 要忽略的状态变化，使用逗号分割。格式是: "<from-status>:<to-status>"。允许使用通配符
 | `"UNKNOWN:UP"`
 
 | spring.boot.admin.notify.mail.template
-| Resource path to the Thymeleaf template used for rendering.
+| 用于渲染的Thymeleaf模板路径
 | `"classpath:/META-INF/spring-boot-admin-server/mail/status-changed.html"`
 
 | spring.boot.admin.notify.mail.to
-| Comma-delimited list of mail recipients
+| 邮件收件人列表，用逗号进行分割
 | `"root@localhost"`
 
 | spring.boot.admin.notify.mail.cc
-| Comma-delimited list of carbon-copy recipients
+| 副本收件人列表，用逗号分割
 |
 
 | spring.boot.admin.notify.mail.from
-| Mail sender
+| 邮件发送人
 | `"Spring Boot Admin <noreply@localhost>"`
 
 | spring.boot.admin.notify.mail.additional-properties
-| Additional properties which can be accessed from the template
+| 可以从模板读取的其它属性
 |
 
 |===
 
 [[pagerduty-notifications]]
 ==== PagerDuty通知 ====
+
 To enable https://www.pagerduty.com/[PagerDuty] notifications you just have to add a generic service to your PagerDuty-account and set `spring.boot.admin.notify.pagerduty.service-key` to the service-key you received.
 
 .PagerDuty notifications configuration options
@@ -104,9 +103,9 @@ To enable https://www.pagerduty.com/[PagerDuty] notifications you just have to a
 |
 |===
 
-
 [[opsgenie-notifications]]
 ==== OpsGenie通知 ====
+
 To enable https://www.opsgenie.com/[OpsGenie] notifications you just have to add a new JSON Rest API integration to your OpsGenie account and set `spring.boot.admin.notify.opsgenie.api-key` to the apiKey you received.
 
 .OpsGenie notifications configuration options
@@ -154,9 +153,9 @@ To enable https://www.opsgenie.com/[OpsGenie] notifications you just have to add
 |
 |===
 
-
 [[hipchat-notifications]]
 ==== Hipchat通知 ====
+
 To enable https://www.hipchat.com/[Hipchat] notifications you need to create an API token on your Hipchat account and set the appropriate configuration properties.
 
 .Hipchat notifications configuration options
@@ -193,11 +192,10 @@ To enable https://www.hipchat.com/[Hipchat] notifications you need to create an 
 |
 |===
 
-
 [[slack-notifications]]
 ==== Slack通知 ====
-To enable https://slack.com/[Slack] notifications you need to add a incoming Webhook under custom integrations on your Slack
-account and configure it appropriately.
+
+To enable https://slack.com/[Slack] notifications you need to add a incoming Webhook under custom integrations on your Slack account and configure it appropriately.
 
 .Slack notifications configuration options
 |===
@@ -233,9 +231,9 @@ account and configure it appropriately.
 |
 |===
 
-
 [[letschat-notifications]]
 ==== Let's Chat通知 ====
+
 To enable https://sdelements.github.io/lets-chat/[Let's Chat] notifications you need to add the host url and add the API token and username from Let's Chat
 
 .Let's Chat notifications configuration options
@@ -272,9 +270,9 @@ To enable https://sdelements.github.io/lets-chat/[Let's Chat] notifications you 
 |
 |===
 
-
 [[ms-teams-notifications]]
 ==== Microsoft Teams通知 ====
+
 To enable Microsoft Teams notifications you need to setup a connector webhook url and set the appropriate configuration property.
 
 .Microsoft Teams notifications configuration options
@@ -322,9 +320,9 @@ To enable Microsoft Teams notifications you need to setup a connector webhook ur
 | `#{instance.registration.name} with id #{instance.id} changed status from #{lastStatus} to #{event.statusInfo.status}`
 |===
 
-
 [[telegram-notifications]]
 ==== Telegram通知 ====
+
 To enable https://telegram.org/[Telegram] notifications you need to create and authorize a telegram bot and set the appropriate configuration properties for auth-token and chat-id.
 
 .Telegram notifications configuration options
@@ -356,9 +354,9 @@ To enable https://telegram.org/[Telegram] notifications you need to create and a
 | `+++"&lt;strong&gt;#{instance.registration.name}&lt;/strong&gt;/#{instance.id} is &lt;strong&gt;#{event.statusInfo.status}&lt;/strong&gt;"+++`
 |===
 
-
 [[discord-notifications]]
 ==== Discord通知 ====
+
 To enable Discord notifications you need to create a webhook and set the appropriate configuration property.
 
 .Discord notifications configuration options
@@ -390,42 +388,45 @@ To enable Discord notifications you need to create a webhook and set the appropr
 | `+++"*#{instance.registration.name}* (#{instance.id}) is *#{event.statusInfo.status}*"+++`
 |===
 
-
 [[notification-proxy]]
-==== 配置提醒的代理 ====
-All Notifiers which are using a `RestTemplate` can be configured to use a proxy.
+==== 为消息通知配置代理 ====
 
-.Notification Proxy configuration options
+所有的消息通知都是使用 `RestTemplate` 来进行发送的，所以我们可以为其配置一个代理。
+
+.通知代理的可选配置
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |默认值
 
 | spring.boot.admin.notify.proxy.host
-| The proxy host
+| 代理的 host
 |
 
 | spring.boot.admin.notify.proxy.port
-| The proxy port
+| 代理的 port
 |
 
 | spring.boot.admin.notify.proxy.username
-| The proxy username (if proxy requires authentication)
+| 代理的 username (如果代理需要身份认证的话)
 |
 
 | spring.boot.admin.notify.proxy.password
-| The proxy password (if proxy requires authentication)
+| 代理的 password (如果代理需要身份认证的话)
 |
 |===
 
-
 [[reminder-notifications]]
-==== 通知提醒 ====
-The `RemindingNotifier` sends reminders for down/offline applications, it delegates the sending of notifications to another notifier.
+==== 通知发送程序 ====
 
-By default a reminder is triggered when a registered application changes to `DOWN` or `OFFLINE`. You can alter this behaviour via `setReminderStatuses()`. The reminder ends when either the status changes to a non-triggering status or the regarding application gets deregistered.
+`RemindingNotifier` 会在应用停机/离线的时候发送消息通知，它会将通知的发送委托给另外一个通知发送程序。
 
-By default the reminders are sent every 10 minutes, to change this use `setReminderPeriod()`. The `RemindingNotifier` itself doesn't start the background thread to send the reminders, you need to take care of this as shown in the given example below;
+默认情况下，这个通知发送程序会在一个已注册发生 `停机` 或 `离线` 的时候触发。
+你也可以通过 `setReminderStatuses()` 来修改这个行为。
+当这个状态变成了无需触发，或者是相关服务注销了的话，这个通知发送程序就会结束。
 
-.How to configure reminders
+默认情况下，通知发送程序每隔10分钟发送一次，可以使用 `setReminderPeriod()` 对这个间隔进行修改。
+`RemindingNotifier` 本身不会开启后台线程来调用通知发送程序，你需要按照下面的示例来处理这个问题;
+
+.如何配置通知发送程序
 [source,java]
 ----
 @Configuration
@@ -443,50 +444,55 @@ public class NotifierConfiguration {
     }
 }
 ----
-<1> The reminders will be sent every 10 minutes.
-<2> Schedules sending of due reminders every 10 seconds.
 
+<1> 通知发送程序会每隔10分钟发送一次。
+<2> 每隔10秒种安排一次通知发送。
 
 [[filtering-notifications]]
 ==== 过滤通知 ====
-The `FilteringNotifier` allows you to filter certain notification based on rules you can add/remove at runtime. It delegates the sending of notifications to another notifier.
 
-If you add a `FilteringNotifier` to your `ApplicationContext` a RESTful interface on `notifications/filter` gets available.
+`FilteringNotifier` 允许在运行时添加/删除消息通知过滤的规则。
+它会将通知的发送委托给另一个发送程序。
 
-This notifier is useful if you don't want receive notifications when deploying your applications. Before stopping the application you can add an (expiring) filter either via a `POST` request.
+如果向 `ApplicationContext` 添加了 `FilteringNotifier`，那么RESTful页面中的 `消息通知/过滤器` 就可以访问了。
 
-.How to configure filtering
+尤其时在部署应用的时候，如果你不想接受提醒，此时过滤器就能帮到你。
+在停止应用之前你可以通过 `POST` 请求发送一个（带有过期时间的）过滤条件。
+
+.如何配置过滤器
 [source,java,indent=0]
 ----
 include::{samples-dir}/spring-boot-admin-sample-servlet/src/main/java/de/codecentric/boot/admin/NotifierConfig.java[tags=configuration-filtering-notifier]
 ----
-<1> Add the `FilteringNotifier` bean using a delegate (e.g. `MailNotifier` when configured)
-<2> Add the `RemindingNotifier` as primary bean using the `FilteringNotifier` as delegate.
 
-TIP: This example combines the reminding and filtering notifiers. This allows you to get notifications after the deployed application hasn't restarted in a certain amount of time (until the filter expires).
+<1> 使用delegate添加一个 `FilteringNotifier` Bean (例如在配置 `MailNotifier` 时)
+<2> 使用 `FilteringNotifier` 作为delegate，将 `RemindingNotifier` 添加为primary bean。
 
+TIP: 这个示例结合了消息提醒和通知过滤。
+这可以让你在部署应用后的一段时间内（直到过滤条件过期）不会收到消息通知。
 
 [[DingTalk-notifications]]
 ==== 钉钉通知 ====
-To enable https://www.dingtalk.com/[DingTalk] notifications you need to create and authorize a dingtalk bot and set the appropriate configuration properties for webhookUrl and secret.
 
-.DingTalk notifications configuration options
+要想启用 https://www.dingtalk.com/[DingTalk] 消息通知，你需要创建并配置钉钉机器人的授权，并为 webhookUrl 和 secret 提供正确的配置。
+
+.钉钉消息通知配置可选项
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |默认值
 
 | spring.boot.admin.notify.dingtalk.enabled
-| Enable DingTalk notifications.
+| 开启钉钉消息通知。
 | `true`
 
 | spring.boot.admin.notify.dingtalk.webhook-url
-| The DingTalk webhook url to send the notifications to.
+| 钉钉通知将要发送的webhook url。
 |
 
 | spring.boot.admin.notify.dingtalk.secret
-| The secret to get message sign.
+| 消息认证的secret。
 |
 
 | spring.boot.admin.notify.dingtalk.message
-| Text to send. SpEL-expressions are supported.
+| 发送的文本，支持SpEL表达式。
 | `+++"#{instance.registration.name} #{instance.id} is #{event.statusInfo.status} "+++`
 |===

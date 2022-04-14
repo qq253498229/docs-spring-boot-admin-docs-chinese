@@ -1,10 +1,9 @@
-
 [[clustering-support]]
 === 集群 ===
-Spring Boot Admin Server supports cluster replication via Hazelcast. It is automatically enabled when a `HazelcastConfig`- or `HazelcastInstance`-Bean is present. You can also configure the Hazelcast instance to be persistent, to keep the status over restarts.
-Also have a look at the http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-hazelcast/[Spring Boot support for Hazelcast].
 
-. Add Hazelcast to your dependencies:
+Spring Boot Admin服务端支持通过Hazelcast的方式建立集群。当提供 `HazelcastConfig` 或 `HazelcastInstance` Bean的时候会自动开启。 你也可以持久化Hazelcast的配置，这样在服务重启之后仍然能保持之前的状态。 同时推荐参考 http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-hazelcast/[Spring Boot对Hazelcast的支持]。
+
+. 将Hazelcast添加到依赖中:
 +
 [source,xml]
 .pom.xml
@@ -12,26 +11,26 @@ Also have a look at the http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/
 include::{samples-dir}/spring-boot-admin-sample-hazelcast/pom.xml[tags=dependency-hazelcast,indent=0]
 ----
 
-. Instantiate a HazelcastConfig:
+. 初始化HazelcastConfig:
 +
 [source,java,indent=0]
 ----
 include::{samples-dir}/spring-boot-admin-sample-hazelcast/src/main/java/de/codecentric/boot/admin/SpringBootAdminHazelcastApplication.java[tags=application-hazelcast]
 ----
 
-.Hazelcast configuration options
+.Hazelcast配置可选项
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |默认值
 
 | spring.boot.admin.hazelcast.enabled
-| Enables the Hazelcast support
+| 开启对Hazelcast的支持
 | `true`
 
 | spring.boot.admin.hazelcast.event-store
-| Name of the Hazelcast-map to store the events
+| 对Hazelcast-map事件的存储名称
 | `"spring-boot-admin-event-store"`
 
 | spring.boot.admin.hazelcast.sent-notifications
-| Name of the Hazelcast-map used to deduplicate the notifications.
+| 用于清除Hazelcast-map对应名称的重复通知
 | `"spring-boot-admin-sent-notifications"`
 |===

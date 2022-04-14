@@ -1696,13 +1696,12 @@ user.password</p></td>
 <div class="sect2">
 <h3 id="clustering-support"><a class="anchor" href="#clustering-support"></a><a class="link" href="#clustering-support">4.4. 集群</a></h3>
 <div class="paragraph">
-<p>Spring Boot Admin Server supports cluster replication via Hazelcast. It is automatically enabled when a <code>HazelcastConfig</code>- or <code>HazelcastInstance</code>-Bean is present. You can also configure the Hazelcast instance to be persistent, to keep the status over restarts.
-Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-hazelcast/">Spring Boot support for Hazelcast</a>.</p>
+<p>Spring Boot Admin服务端支持通过Hazelcast的方式建立集群。当提供 <code>HazelcastConfig</code> 或 <code>HazelcastInstance</code> Bean的时候会自动开启。 你也可以持久化Hazelcast的配置，这样在服务重启之后仍然能保持之前的状态。 同时推荐参考 <a href="http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-hazelcast/">Spring Boot对Hazelcast的支持</a>。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add Hazelcast to your dependencies:</p>
+<p>将Hazelcast添加到依赖中:</p>
 <div class="listingblock">
 <div class="title">pom.xml</div>
 <div class="content">
@@ -1714,7 +1713,7 @@ Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-
 </div>
 </li>
 <li>
-<p>Instantiate a HazelcastConfig:</p>
+<p>初始化HazelcastConfig:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Bean</span>
@@ -1754,7 +1753,7 @@ Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-
 </ol>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">表格 5. Hazelcast configuration options</caption>
+<caption class="title">表格 5. Hazelcast配置可选项</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1762,25 +1761,25 @@ Also have a look at the <a href="http://docs.spring.io/spring-boot/docs/current-
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Property name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
+<th class="tableblock halign-left valign-top">属性名</th>
+<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">默认值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.hazelcast.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the Hazelcast support</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开启对Hazelcast的支持</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.hazelcast.event-store</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the Hazelcast-map to store the events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">对Hazelcast-map事件的存储名称</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"spring-boot-admin-event-store"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.hazelcast.sent-notifications</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the Hazelcast-map used to deduplicate the notifications.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用于清除Hazelcast-map对应名称的重复通知</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"spring-boot-admin-sent-notifications"</code></p></td>
 </tr>
 </tbody>

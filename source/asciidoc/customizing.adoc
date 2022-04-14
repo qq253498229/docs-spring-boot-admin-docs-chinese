@@ -4,8 +4,7 @@
 [[customizing-notifiers]]
 === 自定义通知器 ===
 
-You can add your own Notifiers by adding Spring Beans which implement the `Notifier` interface, at best by extending
-`AbstractEventNotifier` or `AbstractStatusChangeNotifier`.
+你可以实现 `Notifier` 接口，以Spring Beans的形式添加自己的通知程序，当然最好是继承 `AbstractEventNotifier` 或 `AbstractStatusChangeNotifier` 的方式。
 
 [source,java,indent=0]
 ----
@@ -15,7 +14,7 @@ include::{samples-dir}/spring-boot-admin-sample-servlet/src/main/java/de/codecen
 [[customizing-headers]]
 === 自定义HTTP请求头 ===
 
-In case you need to inject custom HTTP headers into the requests made to the monitored application's actuator endpoints you can easily add a `HttpHeadersProvider`:
+为了监控应用而发送的actuator接口，如果你需要在其中添加自定义HTTP请求头的话，可以使用 `HttpHeadersProvider` 来轻松的实现:
 
 [source,java,indent=0]
 ----
@@ -25,8 +24,7 @@ include::{samples-dir}/spring-boot-admin-sample-servlet/src/main/java/de/codecen
 [[customizing-instance-filter]]
 === 对请求和响应进行拦截 ===
 
-You can intercept and modify requests and responses made to the monitored application's actuator endpoints by implementing the `InstanceExchangeFilterFunction` interface.
-This can be useful for auditing or adding some extra security checks.
+为了监控应用而发送的actuator接口，如果你需要拦截并修改其请求以及响应的话，可以通过实现 `InstanceExchangeFilterFunction` 来完成。 这对审核或者是添加额外的安全检查很有作用。
 
 [source,java,indent=0]
 ----
@@ -36,7 +34,7 @@ include::{samples-dir}/spring-boot-admin-sample-servlet/src/main/java/de/codecen
 [[customizing-external-views]]
 === 链接/嵌入外部页面 ===
 
-You can very simply add a link to external pages via configuration or even embed them (adding the `iframe=true`):
+你可以非常简单的通过配置添加一个外部页面的链接甚至是直接将他们嵌入进来 (添加 `iframe=true` 参数)。
 
 [source,yaml,indent=0]
 ----
@@ -46,68 +44,79 @@ include::{samples-dir}/spring-boot-admin-sample-servlet/src/main/resources/appli
 [[customizing-custom-views]]
 === 自定义页面 ===
 
-It is possible to add custom views to the ui. The views must be implemented as https://vuejs.org/[Vue.js] components.
+您也可以向前端添加自定义页面。页面必须是一个 https://vuejs.org/[Vue.js] 组件。
 
-The JavaScript-Bundle and CSS-Stylesheet must be placed on the classpath at `/META-INF/spring-boot-admin-server-ui/extensions/{name}/` so the server can pick them up.
-The {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-custom-ui/[spring-boot-admin-sample-custom-ui] module contains a sample which has the necessary maven setup to build such a module.
+js文件还有css样式表必须放在classpath下的 `/META-INF/spring-boot-admin-server-ui/extensions/{name}/` 路径，这样服务端才能拿到它们。
+{github-src}/spring-boot-admin-samples/spring-boot-admin-sample-custom-ui/[spring-boot-admin-sample-custom-ui] 模块中包含了一个示例，该示例展示了如何配置maven来成功的构建一个模块。
 
-The custom extension registers itself by calling `SBA.use()` and need to expose a `install()` function, which is called by the ui when setting up the routes.
-The `install()` function receives the following parameters in order to register views and/or callbacks:
+要想自定义拓展将自己注册，可以调用 `SBA.use()` 然后还需要暴露 `install()` 函数，这在配置路由参数的时候会被ui调用。
+`install()` 函数在注册页面和/或是回调时接收以下参数:
 
-* Object referencing the {github-src}/spring-boot-admin-server-ui/src/main/frontend/viewRegistry.js[viewRegistry]
+* {github-src}/spring-boot-admin-server-ui/src/main/frontend/viewRegistry.js[viewRegistry] 的对象引用
 
-* Object referencing the {github-src}/spring-boot-admin-server-ui/src/main/frontend/store.js[applicationStore]
+* {github-src}/spring-boot-admin-server-ui/src/main/frontend/store.js[applicationStore] 的对象引用
 
-* Object referencing the the global Vue[Vue]
+* the global Vue[Vue] 的对象引用
 
-* Object referencing the {github-src}/spring-boot-admin-server-ui/src/main/frontend/utils/axios.js[axios]
+* {github-src}/spring-boot-admin-server-ui/src/main/frontend/utils/axios.js[axios] 的对象引用
 
-If new top level routes are added to the frontend, they also must be known to the backend. Add a `/META-INF/spring-boot-admin-server-ui/extensions/{name}/routes.txt` with all your new toplevel routes (one route per line).
+如果前端添加了顶级路由，那么后端也必须知道。 可以在 `/META-INF/spring-boot-admin-server-ui/extensions/{name}/routes.txt` 文件配置所有的顶级路由，每个路由占一行。
 
 [[customizing-custom-views-top-level]]
-==== 添加最外层页面 ====
+==== 添加顶级页面 ====
 
-Here is a simple top level view just listing all registered applications:
+下面是一个简单的顶级页面示例，其中列表出所有已注册的应用:
 [source,html]
+
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/custom.vue[lines=17..-1]
 ----
-<1> If you define a `applications` prop the component will receive all registered applications.
 
-TIP: There are some helpful methods on the application and instances object available. Have a look at {github-src}/spring-boot-admin-server-ui/src/main/frontend/services/application.js[application.js] and {github-src}/spring-boot-admin-server-ui/src/main/frontend/services/instance.js[instance.js]
+<1> 如果你在组件中定义了 `applications` 属性，那么它会接收所有已注册的应用。
 
-And this is how you register the top-level view.
+TIP: 应用中还提供了一些很有用的方法和可用的实例对象。可以参考 {github-src}/spring-boot-admin-server-ui/src/main/frontend/services/application.js[application.js] 以及 {github-src}/spring-boot-admin-server-ui/src/main/frontend/services/instance.js[instance.js]。
+
+这里展示了如何注册顶级试图。
 [source,javascript]
+
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/index.js[tags=customization-ui-toplevel]
 ----
-<1> Name of the view and the route to the view
-<2> Path where the view will be accessible
-<3> The imported custom component, which will be rendered on the route.
+
+<1> 试图以及路由名称
+<2> 试图的访问路径
+<3> 引用的自定义组件，将会在路由上渲染
 <4> The label for the custom view to be shown in the top navigation bar.
-<5> Order for the view. Views in the top navigation bar are sorted by ascending order.
+<5> Order for the view.
+Views in the top navigation bar are sorted by ascending order.
 
 The `routes.txt` config with the added route:
 [source,text]
+
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/routes.txt[]
 ----
 
 [[customizing-custom-views-instance]]
 ==== 查看自定义接口 ====
+
 Here is a view to show a custom endpoint:
 [source,html]
+
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/custom-endpoint.vue[lines=17..-1]
 ----
+
 <1> If you define a `instance` prop the component will receive the instance the view should be rendered for.
 <2> Each instance has a preconfigured https://github.com/axios/axios[axios] instance to access the endpoints with the correct path and headers.
 
 Registering the instance view works like for the top-level view with some additional properties:
 [source,javascript]
+
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/index.js[tags=customization-ui-endpoint]
 ----
+
 <1> The parent must be 'instances' in order to render the new custom view for a single instance.
 <2> You can group views by assigning them to a group.
 <3> If you add a `isEnabled` callback you can figure out dynamically if the view should be show for the particular instance.
@@ -116,33 +125,37 @@ include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/index.js[tags=cust
 NOTE: You can override default views by putting the same group and name as the one you want to override.
 
 === 自定义顶部Logo和标题 ===
+
 You can set custom information in the header (i.e. displaying staging information or company name) by using following configuration properties:
 
 - **spring.boot.admin.ui.brand**: This HTML snippet is rendered in navigation header and defaults to `<img src="assets/img/icon-spring-boot-admin.svg"><span>Spring Boot Admin</span>`.
 By default it shows the SBA logo followed by it's name.
 If you want to show a custom logo you can set: `spring.boot.admin.ui.brand=<img src="custom/custom-icon.png">`.
-Either you just add the image to your jar-file in `/META-INF/spring-boot-admin-server-ui/` (SBA registers a `ResourceHandler` for this location by default),
-or you must ensure yourself that the image gets served correctly (e.g. by registering your own `ResourceHandler`)
+Either you just add the image to your jar-file in `/META-INF/spring-boot-admin-server-ui/` (SBA registers a `ResourceHandler` for this location by default), or you must ensure yourself that the image gets served correctly (e.g. by registering your own `ResourceHandler`)
 
 - **spring.boot.admin.ui.title**: Use this option to customize the browsers window title.
 
 === 自定义登录Logo ===
+
 You can set a custom image to be displayed on the login page.
 
 1. Put the image in a resource location which is served via http (e.g. `/META-INF/spring-boot-admin-server-ui/assets/img/`).
 2. Configure the icons to use using the following property:
-  - **spring.boot.admin.ui.login-icon**: Used as icon on login page. (e.g `assets/img/custom-login-icon.svg`)
+- **spring.boot.admin.ui.login-icon**: Used as icon on login page. (e.g `assets/img/custom-login-icon.svg`)
 
 === 自定义Favicon ===
-It is possible to use a custom favicon, which is also used for desktop notifications. Spring Boot Admin uses a different icon when one or more application is down.
+
+It is possible to use a custom favicon, which is also used for desktop notifications.
+Spring Boot Admin uses a different icon when one or more application is down.
 
 1. Put the favicon (`.png` with at least 192x192 pixels) in a resource location which is served via http (e.g. `/META-INF/spring-boot-admin-server-ui/assets/img/`).
 
 2. Configure the icons to use using the following properties:
-  - `spring.boot.admin.ui.favicon`: Used as default icon. (e.g `assets/img/custom-favicon.png`
-  - `spring.boot.admin.ui.favicon-danger`: Used when one or more service is down. (e.g `assets/img/custom-favicon-danger.png`)
+- `spring.boot.admin.ui.favicon`: Used as default icon. (e.g `assets/img/custom-favicon.png`
+- `spring.boot.admin.ui.favicon-danger`: Used when one or more service is down. (e.g `assets/img/custom-favicon-danger.png`)
 
 === 自定义可用语言 ===
+
 To filter languages to a subset of all supported languages:
 
 - **spring.boot.admin.ui.available-languages**: Used as a filter of existing languages. (e.g `en,de` out of existing `de,en,fr,ko,pt-BR,ru,zh`)

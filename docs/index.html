@@ -613,7 +613,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#customizing-external-views">6.4. 链接/嵌入外部页面</a></li>
 <li><a href="#customizing-custom-views">6.5. 自定义页面</a>
 <ul class="sectlevel3">
-<li><a href="#customizing-custom-views-top-level">6.5.1. 添加最外层页面</a></li>
+<li><a href="#customizing-custom-views-top-level">6.5.1. 添加顶级页面</a></li>
 <li><a href="#customizing-custom-views-instance">6.5.2. 查看自定义接口</a></li>
 </ul>
 </li>
@@ -2905,8 +2905,7 @@ Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横�
 <div class="sect2">
 <h3 id="customizing-notifiers"><a class="anchor" href="#customizing-notifiers"></a><a class="link" href="#customizing-notifiers">6.1. 自定义通知器</a></h3>
 <div class="paragraph">
-<p>You can add your own Notifiers by adding Spring Beans which implement the <code>Notifier</code> interface, at best by extending
-<code>AbstractEventNotifier</code> or <code>AbstractStatusChangeNotifier</code>.</p>
+<p>你可以实现 <code>Notifier</code> 接口，以Spring Beans的形式添加自己的通知程序，当然最好是继承 <code>AbstractEventNotifier</code> 或 <code>AbstractStatusChangeNotifier</code> 的方式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2939,7 +2938,7 @@ Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横�
 <div class="sect2">
 <h3 id="customizing-headers"><a class="anchor" href="#customizing-headers"></a><a class="link" href="#customizing-headers">6.2. 自定义HTTP请求头</a></h3>
 <div class="paragraph">
-<p>In case you need to inject custom HTTP headers into the requests made to the monitored application&#8217;s actuator endpoints you can easily add a <code>HttpHeadersProvider</code>:</p>
+<p>为了监控应用而发送的actuator接口，如果你需要在其中添加自定义HTTP请求头的话，可以使用 <code>HttpHeadersProvider</code> 来轻松的实现:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2957,8 +2956,7 @@ Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横�
 <div class="sect2">
 <h3 id="customizing-instance-filter"><a class="anchor" href="#customizing-instance-filter"></a><a class="link" href="#customizing-instance-filter">6.3. 对请求和响应进行拦截</a></h3>
 <div class="paragraph">
-<p>You can intercept and modify requests and responses made to the monitored application&#8217;s actuator endpoints by implementing the <code>InstanceExchangeFilterFunction</code> interface.
-This can be useful for auditing or adding some extra security checks.</p>
+<p>为了监控应用而发送的actuator接口，如果你需要拦截并修改其请求以及响应的话，可以通过实现 <code>InstanceExchangeFilterFunction</code> 来完成。 这对审核或者是添加额外的安全检查很有作用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2976,7 +2974,7 @@ This can be useful for auditing or adding some extra security checks.</p>
 <div class="sect2">
 <h3 id="customizing-external-views"><a class="anchor" href="#customizing-external-views"></a><a class="link" href="#customizing-external-views">6.4. 链接/嵌入外部页面</a></h3>
 <div class="paragraph">
-<p>You can very simply add a link to external pages via configuration or even embed them (adding the <code>iframe=true</code>):</p>
+<p>你可以非常简单的通过配置添加一个外部页面的链接甚至是直接将他们嵌入进来 (添加 <code>iframe=true</code> 参数)。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2994,39 +2992,39 @@ This can be useful for auditing or adding some extra security checks.</p>
 <div class="sect2">
 <h3 id="customizing-custom-views"><a class="anchor" href="#customizing-custom-views"></a><a class="link" href="#customizing-custom-views">6.5. 自定义页面</a></h3>
 <div class="paragraph">
-<p>It is possible to add custom views to the ui. The views must be implemented as <a href="https://vuejs.org/">Vue.js</a> components.</p>
+<p>您也可以向前端添加自定义页面。页面必须是一个 <a href="https://vuejs.org/">Vue.js</a> 组件。</p>
 </div>
 <div class="paragraph">
-<p>The JavaScript-Bundle and CSS-Stylesheet must be placed on the classpath at <code>/META-INF/spring-boot-admin-server-ui/extensions/{name}/</code> so the server can pick them up.
-The <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-custom-ui/">spring-boot-admin-sample-custom-ui</a> module contains a sample which has the necessary maven setup to build such a module.</p>
+<p>js文件还有css样式表必须放在classpath下的 <code>/META-INF/spring-boot-admin-server-ui/extensions/{name}/</code> 路径，这样服务端才能拿到它们。
+<a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-samples/spring-boot-admin-sample-custom-ui/">spring-boot-admin-sample-custom-ui</a> 模块中包含了一个示例，该示例展示了如何配置maven来成功的构建一个模块。</p>
 </div>
 <div class="paragraph">
-<p>The custom extension registers itself by calling <code>SBA.use()</code> and need to expose a <code>install()</code> function, which is called by the ui when setting up the routes.
-The <code>install()</code> function receives the following parameters in order to register views and/or callbacks:</p>
+<p>要想自定义拓展将自己注册，可以调用 <code>SBA.use()</code> 然后还需要暴露 <code>install()</code> 函数，这在配置路由参数的时候会被ui调用。
+<code>install()</code> 函数在注册页面和/或是回调时接收以下参数:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Object referencing the <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/viewRegistry.js">viewRegistry</a></p>
+<p><a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/viewRegistry.js">viewRegistry</a> 的对象引用</p>
 </li>
 <li>
-<p>Object referencing the <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/store.js">applicationStore</a></p>
+<p><a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/store.js">applicationStore</a> 的对象引用</p>
 </li>
 <li>
-<p>Object referencing the the global Vue[Vue]</p>
+<p>the global Vue[Vue] 的对象引用</p>
 </li>
 <li>
-<p>Object referencing the <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/utils/axios.js">axios</a></p>
+<p><a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/utils/axios.js">axios</a> 的对象引用</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>If new top level routes are added to the frontend, they also must be known to the backend. Add a <code>/META-INF/spring-boot-admin-server-ui/extensions/{name}/routes.txt</code> with all your new toplevel routes (one route per line).</p>
+<p>如果前端添加了顶级路由，那么后端也必须知道。 可以在 <code>/META-INF/spring-boot-admin-server-ui/extensions/{name}/routes.txt</code> 文件配置所有的顶级路由，每个路由占一行。</p>
 </div>
 <div class="sect3">
-<h4 id="customizing-custom-views-top-level"><a class="anchor" href="#customizing-custom-views-top-level"></a><a class="link" href="#customizing-custom-views-top-level">6.5.1. 添加最外层页面</a></h4>
+<h4 id="customizing-custom-views-top-level"><a class="anchor" href="#customizing-custom-views-top-level"></a><a class="link" href="#customizing-custom-views-top-level">6.5.1. 添加顶级页面</a></h4>
 <div class="paragraph">
-<p>Here is a simple top level view just listing all registered applications:</p>
+<p>下面是一个简单的顶级页面示例，其中列表出所有已注册的应用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3053,7 +3051,7 @@ The <code>install()</code> function receives the following parameters in order t
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>If you define a <code>applications</code> prop the component will receive all registered applications.</td>
+<td>如果你在组件中定义了 <code>applications</code> 属性，那么它会接收所有已注册的应用。</td>
 </tr>
 </table>
 </div>
@@ -3064,13 +3062,13 @@ The <code>install()</code> function receives the following parameters in order t
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-There are some helpful methods on the application and instances object available. Have a look at <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/services/application.js">application.js</a> and <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/services/instance.js">instance.js</a>
+应用中还提供了一些很有用的方法和可用的实例对象。可以参考 <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/services/application.js">application.js</a> 以及 <a href="https://github.com/codecentric/spring-boot-admin/tree/master/spring-boot-admin-server-ui/src/main/frontend/services/instance.js">instance.js</a>。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>And this is how you register the top-level view.</p>
+<p>这里展示了如何注册顶级试图。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3107,7 +3105,8 @@ There are some helpful methods on the application and instances object available
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Order for the view. Views in the top navigation bar are sorted by ascending order.</td>
+<td>Order for the view.
+Views in the top navigation bar are sorted by ascending order.</td>
 </tr>
 </table>
 </div>
@@ -3246,8 +3245,7 @@ You can override default views by putting the same group and name as the one you
 <p><strong>spring.boot.admin.ui.brand</strong>: This HTML snippet is rendered in navigation header and defaults to <code>&lt;img src="assets/img/icon-spring-boot-admin.svg"&gt;&lt;span&gt;Spring Boot Admin&lt;/span&gt;</code>.
 By default it shows the SBA logo followed by it&#8217;s name.
 If you want to show a custom logo you can set: <code>spring.boot.admin.ui.brand=&lt;img src="custom/custom-icon.png"&gt;</code>.
-Either you just add the image to your jar-file in <code>/META-INF/spring-boot-admin-server-ui/</code> (SBA registers a <code>ResourceHandler</code> for this location by default),
-or you must ensure yourself that the image gets served correctly (e.g. by registering your own <code>ResourceHandler</code>)</p>
+Either you just add the image to your jar-file in <code>/META-INF/spring-boot-admin-server-ui/</code> (SBA registers a <code>ResourceHandler</code> for this location by default), or you must ensure yourself that the image gets served correctly (e.g. by registering your own <code>ResourceHandler</code>)</p>
 </li>
 <li>
 <p><strong>spring.boot.admin.ui.title</strong>: Use this option to customize the browsers window title.</p>
@@ -3281,7 +3279,8 @@ or you must ensure yourself that the image gets served correctly (e.g. by regist
 <div class="sect2">
 <h3 id="_自定义favicon"><a class="anchor" href="#_自定义favicon"></a><a class="link" href="#_自定义favicon">6.8. 自定义Favicon</a></h3>
 <div class="paragraph">
-<p>It is possible to use a custom favicon, which is also used for desktop notifications. Spring Boot Admin uses a different icon when one or more application is down.</p>
+<p>It is possible to use a custom favicon, which is also used for desktop notifications.
+Spring Boot Admin uses a different icon when one or more application is down.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">

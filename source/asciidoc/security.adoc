@@ -130,8 +130,8 @@ protected void configure(HttpSecurity http) throws Exception {
 
 === 使用自定义TLS ===
 
-SBA Server can also use client certificates to authenticate when accessing the actuator endpoints.
-If a custom configured `ClientHttpConnector` bean is present, Spring Boot will automatically configure a `WebClient.Builder` using it, which will be used by Spring Boot Admin.
+SBA还可以在访问actuator接口的时候使用客户端证书进行身份认证。
+在提供了 `ClientHttpConnector` bean时，Spring Boot就会用它自动配置 `WebClient.Builder`，之后供Spring Boot Admin使用。
 
 [source,java]
 ----

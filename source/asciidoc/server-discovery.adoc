@@ -1,12 +1,14 @@
 [[spring-cloud-discovery-support]]
 === Spring Cloud 服务发现 ===
 
-The Spring Boot Admin Server can use Spring Clouds `DiscoveryClient` to discover applications. The advantage is that the clients don't have to include the `spring-boot-admin-starter-client`. You just have to add a `DiscoveryClient` implementation to your admin server - everything else is done by AutoConfiguration.
+Spring Boot Admin服务端可以使用Spring Clouds 的 `DiscoveryClient` 来发现服务。
+其优点是客户端不必依赖 `spring-boot-admin-starter-client` 了。
+你只需在admin服务端添加一个 `DiscoveryClient` 的实现 - 其它一切都会自动配置完成。
 
 [[spring-cloud-discovery-static-config]]
 ==== 使用SimpleDiscoveryClient进行静态配置 ====
 
-Spring Cloud provides a `SimpleDiscoveryClient`. It allows you to specify client applications via static configuration:
+Spring Cloud提供了一个 `SimpleDiscoveryClient`。它允许我们通过静态配置的方式指定客户端应用:
 
 [source,xml]
 .pom.xml
@@ -36,83 +38,87 @@ spring:
 ----
 
 ==== 其它方式的服务发现客户端 ====
-Spring Boot Admin supports all other implementations of Spring Cloud's `DiscoveryClient` (Eureka, Zookeeper, Consul, ...). You need to add it to the Spring Boot Admin Server and configure it properly.
-An <<discover-clients-via-spring-cloud-discovery,example setup using Eureka>> is shown above.
+Spring Boot Admin同时也支持其它Spring Cloud `DiscoveryClient` 的实现（比如Eureka, Zookeeper, Consul, ...）。
+只需要将他们添加到Spring Boot Admin服务端并正确配置即可。
+这里有一份 <<discover-clients-via-spring-cloud-discovery,使用Eureka作为实现>> 的示例。
 
 ==== 转换服务实例 ====
 
-The information from the service registry are converted by the `ServiceInstanceConverter`. Spring Boot Admin ships with a default and Eureka converter implementation. The correct one is selected by AutoConfiguration.
+服务的注册信息中是通过 `ServiceInstanceConverter` 来进行转换的。Spring Boot Admin提供了一个默认转换方式，还有一个Eureka转换方式的实现。
+这些都是自动配置并选择的。
 
-TIP: You can modify how the information from the registry is used to register the application by using SBA Server configuration options and instance metadata. The values from the metadata takes precedence over the server config. If the plenty of options don't fit your needs you can provide your own `ServiceInstanceConverter`.
+TIP: 你也可以通过SBA服务端配置选项，来修改应用注册时使用哪些信息以及哪些实例元数据。元数据的值会优先于服务端的配置。
+如果这么多选项仍然满足不了您的需求，那么您也可以自定义一个`ServiceInstanceConverter`。
 
-NOTE: When using Eureka, the `healthCheckUrl` known to Eureka is used for health-checking, which can be set on your client using `eureka.instance.healthCheckUrl`.
+NOTE: 在使用Eureka的时候，`healthCheckUrl`选项会被Eureka用在健康检查上，
+它也可以通过 `eureka.instance.healthCheckUrl` 属性配置在您的客户端上。
 
-.Instance metadata options
+.实例支持的元数据选项
 |===
-| Key |Value |Default value
+| Key |Value |默认值
 
 | user.name +
 user.password
-| Credentials being used to access the endpoints.
+| 访问接口所使用的凭证。
 |
 
 | management.scheme
-| The scheme is substituted in the service URL and will be used for accessing the actuator endpoints.
+| 服务URL中使用的scheme，用于访问actuator接口。
 |
 
 | management.address
-| The address is substituted in the service URL and will be used for accessing the actuator endpoints.
+| 服务URL中使用的address，用于访问actuator接口。
 |
 
 | management.port
-| The port is substituted in the service URL and will be used for accessing the actuator endpoints.
+| 服务URL中使用的port，用于访问actuator接口。
 |
 
 | management.context-path
-| The path is appended to the service URL and will be used for accessing the actuator endpoints.
+| 服务URL后添加的上下文路径，用于访问actuator接口。
 | `${spring.boot.admin.discovery.converter.management-context-path}`
 
 | health.path
-| The path is appended to the service URL and will be used for the health-checking. Ignored by the `EurekaServiceInstanceConverter`.
+| 服务URL后添加的路径，用于健康检查。如果配置了 `EurekaServiceInstanceConverter` 则会被忽略。
 | `${spring.boot.admin.discovery.converter.health-endpoint}`
 |===
 
-.Discovery configuration options
+.服务发现配置可选项
 |===
-| Property name |Description |Default value
+| 属性名 |说明 |默认值
 
 | spring.boot.admin.discovery.enabled
-| Enables the DiscoveryClient-support for the admin server.
+| 开启admin服务端的DiscoveryClient支持。
 | `true`
 
 | spring.boot.admin.discovery.converter.management-context-path
-| Will be appended to the service-url of the discovered service when the management-url is converted by the `DefaultServiceInstanceConverter`.
+| 当management-url被 `DefaultServiceInstanceConverter` 转换时，这个路径会拼接到发现服务的service-url后面。
 | `/actuator`
 
 | spring.boot.admin.discovery.converter.health-endpoint-path
-| Will be appended to the management-url of the discovered service when the health-url is converted by the `DefaultServiceInstanceConverter`.
+| 当health-url被 `DefaultServiceInstanceConverter` 转换时，这个路径会拼接到发现服务的management-url后面。
 | `"health"`
 
 | spring.boot.admin.discovery.ignored-services
-| This services will be ignored when using discovery and not registered as application. Supports simple patterns (e.g. +++"foo*"+++, +++"*bar"+++, +++"foo*bar*"+++).
+| 在发现服务的时候，这些服务会被忽略，不会作为服务注册到服务端。支持一些简单的表达式（比如 +++"foo*"+++, +++"*bar"+++, +++"foo*bar*"+++）。
 |
 
 | spring.boot.admin.discovery.services
-| This services will be included when using discovery and registered as application. Supports simple patterns (e.g. +++"foo*"+++, +++"*bar"+++, +++"foo*bar*"+++).
+| 在发现服务的时候，这些服务会被包含进来，作为服务注册到服务端。支持一些简单的表达式（比如 +++"foo*"+++, +++"*bar"+++, +++"foo*bar*"+++）。
 | `"*"`
 
 | spring.boot.admin.discovery.ignored-instances-metadata
-| Instances of services will be ignored if they contain at least one metadata item that matches this list. (e.g. +++"discoverable=false"+++)
+| 如果服务实例的元数据被列表匹配到至少一项，那么这个服务就会被忽略。 (例如 +++"discoverable=false"+++)
 |
 
 | spring.boot.admin.discovery.instances-metadata
-| Instances of services will be included if they contain at least one metadata item that matches this list. (e.g. +++"discoverable=true"+++)
+| 如果服务实例的元数据被列表匹配到至少一项，那么这个服务就会被引入进来。 (例如 +++"discoverable=false"+++)
 |
 |===
 
 ==== CloudFoundry ====
-If you are deploying your applications to CloudFoundry then `vcap.application.application_id` and `vcap.application.instance_index` *_must_* be added to the metadata for proper registration of applications with Spring Boot Admin Server.
-Here is a sample configuration for Eureka:
+如果您想将应用部署到CloudFoundry上，那么就 *_必须_* 配置 `vcap.application.application_id` 以及 `vcap.application.instance_index` 这两个选项，它们会被添加到元数据中，这样才能正确注册到Spring Boot Admin服务端。
+下面是一个针对Eureka的简单配置:
 
 [source,yml]
 .application.yml

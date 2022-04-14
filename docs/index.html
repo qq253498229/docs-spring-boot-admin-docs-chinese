@@ -1344,148 +1344,149 @@ user.password</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.status-interval</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Time interval to check the status of instances.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查实例状态的时间间隔。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10,000ms</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.status-lifetime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lifetime of status. The status won&#8217;t be updated as long the last status isn&#8217;t expired.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">状态的生命周期。只要最后一次的状态没有过期就不会更新。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10,000ms</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.info-interval</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Time interval to check the info of instances.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查实例信息的时间间隔。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1m</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.info-lifetime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lifetime of info. The info won&#8217;t be updated as long the last info isn&#8217;t expired.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">信息的生命周期。只要最后一次的信息没有过期就不会更新。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1m</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.default-timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default timeout when making requests. Individual values for specific endpoints can be overridden using <code>spring.boot.admin.monitor.timeout.*</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">请求默认的超时时间。可以使用 <code>spring.boot.admin.monitor.timeout.*</code> 属性配置某个特定接口的超时时间。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10,000</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.timeout.*</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key-Value-Pairs with the timeout per endpointId. Defaults to default-timeout.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">针对某个接口id超时时间的键值对配置方式。默认情况下就是 default-timeout。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.default-retries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default number of retries for failed requests. Modifying requests (<code>PUT</code>, <code>POST</code>, <code>PATCH</code>, <code>DELETE</code>) are never retried. Individual values for specific endpoints can be overridden using <code>spring.boot.admin.monitor.retries.*</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">请求失败的默认重试次数。修改请求 (<code>PUT</code>, <code>POST</code>, <code>PATCH</code>, <code>DELETE</code>) 永远不会重试。
+可以使用 <code>spring.boot.admin.monitor.retries.*</code> 属性覆盖某个特定接口的重试次数。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.monitor.retries.*</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key-Value-Pairs with the number of retries per endpointId. Defaults to default-retries. Modifying requests (<code>PUT</code>, <code>POST</code>, <code>PATCH</code>, <code>DELETE</code>) are never retried.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">针对某个接口id重试次数的键值对配置方式。默认情况下就是 default-retries。修改请求 (<code>PUT</code>, <code>POST</code>, <code>PATCH</code>, <code>DELETE</code>) 永远不会重试。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.metadata-keys-to-sanitize</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata values for the keys matching these regex patterns will be sanitized in all json output.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根据正则表达式匹配元数据的key，匹配到的结果在所有的json输出中会被清除。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>".<strong>password$", ".*secret$", ".*key$", ".*token$", ".*credentials.</strong>", ".*vcap_services$"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.probed-endpoints</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For Spring Boot 1.x client applications SBA probes for the specified endpoints using an OPTIONS request.
-  If the path differs from the id you can specify this as id:path (e.g. health:ping)..</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">针对Spring Boot 1.x版本的客户端应用，SBA使用该选项来配置特定接口。
+如果路径和id不同，可以设置为 id:path（比如 health:ping）..</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"health", "env", "metrics", "httptrace:trace", "threaddump:dump", "jolokia", "info", "logfile", "refresh", "flyway", "liquibase", "heapdump", "loggers", "auditevents"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.instance-auth.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable pulling credentials from spring configuration properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开启从spring properties配置文件中读取授权信息。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.instance-auth.default-user-name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A default user name used to authenticate to registered services. The <code>spring.boot.admin.instance-auth.enabled</code> property must be <code>true</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">服务注册所使用的默认用户名。前提是 <code>spring.boot.admin.instance-auth.enabled</code> 属性必须设置成 <code>true</code> 。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.instance-auth.default-password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A default user password used to authenticate to registered services. The <code>spring.boot.admin.instance-auth.enabled</code> property must be <code>true</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">服务注册所使用的默认密码。前提是 <code>spring.boot.admin.instance-auth.enabled</code> 属性必须设置成 <code>true</code> 。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.instance-auth.service-map.*.user-name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A user name used to authenticate to the registered service with the specified name. The <code>spring.boot.admin.instance-auth.enabled</code> property must be <code>true</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">某个指定名称的服务注册所使用的用户名。前提是 <code>spring.boot.admin.instance-auth.enabled</code> 属性必须设置成 <code>true</code> 。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.instance-auth.service-map.*.user-password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A user password used to authenticate to the registered service with the specified name. The <code>spring.boot.admin.instance-auth.enabled</code> property must be <code>true</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">某个指定名称的服务注册所使用的密码。前提是 <code>spring.boot.admin.instance-auth.enabled</code> 属性必须设置成 <code>true</code> 。</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.instance-proxy.ignored-headers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Headers not to be forwarded when making requests to clients.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">向客户端转发请求时忽略哪些header。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"Cookie", "Set-Cookie", "Authorization"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.public-url</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base url to use to build the base href in the ui.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If running behind a reverse proxy (using path rewriting) this can be used to make correct self references. If the host/port is omitted it will be inferred from the request.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">构建页面的时候所使用的base href。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果是通过反向代理进行请求（用到了path重写），那么可以使用该选项来配置正确的引用地址。如果 host/port 被省略了，那么会从请求中推断出来。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.brand</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Brand to be shown in the navbar.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">导航栏所使用的品牌标识。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"&lt;img src="assets/img/icon-spring-boot-admin.svg"&gt;&lt;span&gt;Spring Boot Admin&lt;/span&gt;"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.title</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Page-Title to be shown.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">页面中想要显示的标题。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"Spring Boot Admin"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.login-icon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Icon used as image on login page.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">登录页面所显示的图标。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"assets/img/icon-spring-boot-admin.svg"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.favicon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Icon used as default favicon and icon for desktop notifications.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">配置默认的favicon，用作图标和桌面通知图标。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"assets/img/favicon.png"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.favicon-danger</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Icon used as favicon when one or more service is down and for desktop notifications.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">配置默认的favicon，用作图标和桌面通知图标，在服务挂掉的时候显示。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>"assets/img/favicon-danger.png"</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.remember-me-enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Switch to show/hide the remember-me checkbox on the login page.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">切换在登录页面是否显示记住我复选框。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.poll-timer.cache</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polling duration in ms to fetch new cache data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取最新缓存数据的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2500</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.poll-timer.datasource</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polling duration in ms to fetch new datasource data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取最新数据源数据的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2500</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.poll-timer.gc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polling duration in ms to fetch new gc data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取最新gc数据的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2500</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.poll-timer.process</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polling duration in ms to fetch new process data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取最新cpu数据的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2500</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.poll-timer.memory</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polling duration in ms to fetch new memory data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取最新内存数据的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2500</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spring.boot.admin.ui.poll-timer.threads</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polling duration in ms to fetch new threads data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取最新线程数据的间隔（单位毫秒ms）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2500</code></p></td>
 </tr>
 </tbody>

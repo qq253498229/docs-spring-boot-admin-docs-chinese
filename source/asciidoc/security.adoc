@@ -3,49 +3,51 @@
 
 === 保护SBA服务端的安全 ===
 
-Since there are several approaches on solving authentication and authorization in distributed web applications Spring Boot Admin doesn't ship a default one.
-By default `spring-boot-admin-server-ui` provides a login page and a logout button.
+由于在分布式web应用中，有好几种可以解决身份认证和授权的方法，所以Spring Boot Admin没有默认为您选择它们中的哪一个。 默认情况下可以使用 `spring-boot-admin-server-ui` 来提供一个登录页面和注销按钮。
 
-A Spring Security configuration for your server could look like this:
+下面是一个针对Spring的安全配置示例:
 [source,java,indent=0]
+
 ----
 include::{samples-dir}/spring-boot-admin-sample-servlet/src/main/java/de/codecentric/boot/admin/SecuritySecureConfig.java[tags=configuration-spring-security]
 ----
-<1> Grants public access to all static assets and the login page.
-<2> Every other request must be authenticated.
-<3> Configures login and logout.
-<4> Enables HTTP-Basic support. This is needed for the Spring Boot Admin Client to register.
-<5> Enables CSRF-Protection using Cookies
-<6> Disables CSRF-Protection for the endpoint the Spring Boot Admin Client uses to (de-)register.
-<7> Disables CSRF-Protection for the actuator endpoints.
 
-In case you use the Spring Boot Admin Client, it needs the credentials for accessing the server:
+<1> 对所有静态资源和登录页面进行放行处理。
+<2> 其它所有请求都必须经过身份认证。
+<3> 配置登录和注销逻辑。
+<4> 开启HTTP-Basic认证。这是Spring Boot Admin客户端所需的。
+<5> 启用Cookie的CSRF保护
+<6> 禁用Spring Boot Admin客户端对于注册（注销）请求的CSRF保护
+<7> 禁用Spring Boot Admin客户端对于actuator接口的CSRF保护
+
+如果使用Spring Boot Admin客户端，它还需要添加访问服务端的凭证:
 [source,yaml]
 .application.yml
+
 ----
 spring.boot.admin.client:
    username: sba-client
    password: s3cret
 ----
 
-For a complete sample look at {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-servlet/[spring-boot-admin-sample-servlet].
+有关完整的示例，请查看 {github-src}/spring-boot-admin-samples/spring-boot-admin-sample-servlet/[spring-boot-admin-sample-servlet]。
 
-NOTE: If you protect the `/instances` endpoint don't forget to configure the username and password on your SBA-Client using `spring.boot.admin.client.username` and `spring.boot.admin.client.password`.
+NOTE: 如果你想要保护 `/instances` 接口，那么不要忘了在SBA客户端使用 `spring.boot.admin.client.username` 和 `spring.boot.admin.client.password` 配置用户名和密码。
 
 === 保护客户端默认Actuator接口 ===
 
-When the actuator endpoints are secured using HTTP Basic authentication the SBA Server needs credentials to access them. You can submit the credentials in the metadata when registering the application. The `BasicAuthHttpHeaderProvider` then uses this metadata to add the `Authorization` header to access your application's actuator endpoints. You can provide your own `HttpHeadersProvider` to alter the behaviour (e.g. add some decryption) or add extra headers.
+当actuator默认接口使用HTTP Basic身份认证进行安全保护时候，SBA就需要凭证才能访问它们了。 你可以在注册应用的时候在元数据中提交这个凭证。 之后 `BasicAuthHttpHeaderProvider` 就会使用元数据中提供的信息，在header中添加 `Authorization` 然后访问客户端应用的actuator接口了。 你也可以自定义一个 `HttpHeadersProvider` 来改变这个默认的行为（例如添加一些加密揭秘的逻辑）或者是在header中添加额外信息。
 
-NOTE: The SBA Server masks certain metadata in the HTTP interface to prevent leaking of sensitive information.
+NOTE: SBA服务端会屏蔽元数据中的一些信息，以防止敏感信息的泄漏。
 
-WARNING: You should configure HTTPS for your SBA Server or (service registry) when submitting credentials via the metadata.
+WARNING: 在元数据提交身份凭证时，应该为SBA服务端（或者是服务发现）配置HTTPS。
 
-WARNING: When using Spring Cloud Discovery, you must be aware that anybody who can query your service registry can obtain the credentials.
+WARNING: 使用Spring Cloud服务发现的时候，你必须随时注意，任何可以查询服务注册的人都可以看到你的认证信息。
 
-TIP: When using this approach the SBA Server decides whether or not the user can access the registered applications. There are more complex solutions possible (using OAuth2) to let the clients decide if the user can access the endpoints. For that please have a look at the samples in https://github.com/joshiste/spring-boot-admin-samples[joshiste/spring-boot-admin-samples^].
-
+TIP: 使用这种方法SBA服务端就可以决定用户能否访问已注册的应用。 还有更加复杂的解决方案（使用OAuth2）来让客户端决定用户能否访问接口。 关于这一点，请参考 https://github.com/joshiste/spring-boot-admin-samples[joshiste/spring-boot-admin-samples^]。
 
 ==== SBA客户端 ====
+
 [source,yaml]
 .application.yml
 ----
@@ -59,15 +61,16 @@ spring.boot.admin.client:
 
 ==== SBA服务端 ====
 
-You can specify credentials via configuration properties in your admin server.
+你可以通过admin服务端的配置文件来指定凭证。
 
-TIP: You can use this in conjuction with https://cloud.spring.io/spring-cloud-kubernetes/1.1.x/reference/html/#secrets-propertysource[spring-cloud-kubernetes^] to pull credentials from https://kubernetes.io/docs/concepts/configuration/secret/[secrets^].
+TIP: 你可以将它与 https://cloud.spring.io/spring-cloud-kubernetes/1.1.x/reference/html/#secrets-propertysource[spring-cloud-kubernetes^] 结合起来一起使用，这样就能从 https://kubernetes.io/docs/concepts/configuration/secret/[secrets^] 中读取凭证了。
 
-To enable pulling credentials from properties the `spring.boot.admin.instance-auth.enabled` property must be `true` (default).
+要想从配置文件读取凭证，需要将 `spring.boot.admin.instance-auth.enabled` 设置为 `true` （默认情况就是这样）。
 
-NOTE: If your clients provide credentials via metadata (i.e., via service annotations), that metadata will be used instead of the properites.
+NOTE: 如果客户端通过元数据提供了凭证（例如通过服务注解），那么元数据将会替换配置文件中的配置。
 
-You can provide a default username and password by setting `spring.boot.admin.instance-auth.default-user-name` and `spring.boot.admin.instance-auth.default-user-password`. Optionally you can provide credentials for specific services (by name) using the `spring.boot.admin.instance-auth.service-map.\*.user-name` pattern, replacing `*` with the service name.
+你可以通过使用 `spring.boot.admin.instance-auth.default-user-name` 和 `spring.boot.admin.instance-auth.default-user-password` 来提供默认的用户名和密码。 你也可以选择使用 `spring.boot.admin.instance-auth.service-map.\*.user-name` 为指定名称的服务提供凭证，记得将 `*` 替换为服务名。
+
 [source,yaml]
 .application.yml
 ----
@@ -86,6 +89,7 @@ spring.boot.admin:
 ----
 
 ==== Eureka ====
+
 [source,yaml]
 .application.yml
 ----
@@ -97,6 +101,7 @@ eureka:
 ----
 
 ==== Consul ====
+
 [source,yaml]
 .application.yml
 ----
@@ -107,12 +112,12 @@ spring.cloud.consul:
         user-password: ${spring.security.user.password}
 ----
 
-WARNING: Consul does not allow dots (".") in metadata keys, use dashes instead.
-
+WARNING: Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横杠）代理。
 
 ==== 默认Actuator接口的CSRF保护 ====
 
-Some of the actuator endpoints (e.g. `/loggers`) support POST requests. When using Spring Security you need to ignore the actuator endpoints for CSRF-Protection as the Spring Boot Admin Server currently lacks support.
+一些actuator接口 (例如 `/loggers`) 是支持POST请求的。
+在使用Spring Security时需要禁用这些actuator接口的CSRF保护，因为Spring Boot Admin服务端目前缺乏对这方面的支持。
 
 [source,java]
 ----
@@ -122,7 +127,6 @@ protected void configure(HttpSecurity http) throws Exception {
         .ignoringAntMatchers("/actuator/**");
 }
 ----
-
 
 === 使用自定义TLS ===
 

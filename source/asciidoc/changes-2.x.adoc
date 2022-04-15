@@ -1,10 +1,11 @@
 [[monitoring-spring-boot-1.5.x]]
 == 监听1.5.x版本的Spring Boot  ==
 
-It is possible to monitor Spring Boot 1.5.x applications with Spring Boot Admin 2.x. The old Spring Boot Admin Client is
-able to register at a newer server. Since the API has slight changes, you need to set the following property on old clients:
+使用 Spring Boot Admin 2.x 也可以监控 Spring Boot 1.5.x 版本的应用。
+旧版本的Spring Boot Admin客户端可以注册到新版本的服务端上。
+由于API有一些细微的变化，你可以在旧版本的客户端上添加下面的配置:
 
-. Reconfigure the api path for Spring Boot Admin Client 1.5.x:
+. 为 Spring Boot Admin 客户端1.5.x版本重新配置api路径:
 +
 [source,yml]
 .application.yml
@@ -12,40 +13,40 @@ able to register at a newer server. Since the API has slight changes, you need t
 spring.boot.admin.api-path: instances
 ----
 
-As some of the actuator endpoints changed with the Spring Boot 2 release not all options might be available
-(e.g. `/metrics` endpoint); for some of the endpoints we provide legacy converters.
+由于Spring Boot 2版本中，一些actuator接口发生了变化，并非所有选项都可用（比如 `/metrics` 接口）；
+对于这些接口，我们也提供了遗留接口的转换器。
 
 == 2.x版本的变化 ==
 
 * Added stable automatic-module-name to all jars
 
 === 页面
-* Rewritten ui using vue.js
-* Integrated ui-login module into the main ui module
-* Removed ui-activity module, as it was only used rarely
-* Removed Hystrix-Dashboard integration (subject to change)
-* Added support for the session endpoint
-* Added display of the (sanitized) metadata
-* Added option to reset loglevels
-* Added wallboard view
+* 使用vue.js重写了ui页面
+* 将登录页面模块集成到主模块中
+* 删除了活动模块，因为没什么人使用它
+* 移除了Hystrix-Dashboard的集成（可能会改变）
+* 添加了session接口
+* 添加了元数据（屏蔽之后）的显示
+* 添加了重置日志级别的选项
+* 添加了 wallboard 试图
 
 === 后端
-* Moved all classes to the `spring.boot.admin.server` package
-* Spring cloud related extensions moved to `spring-boot-admin-server-cloud`.
-* Redesigned backend using event sourcing principles
-* Added concept of applications (consisting of 1 to n instances)
-* Moved endpoint detection to the backend by querying the `/actuator`-index or by probing via OPTIONS request
-* Replaced Zuul with a custom proxy using the WebClient
-* Removed dependency on spring-cloud-starter
-* Added `CompositeHttpHeadersProvider` to support multiple `HttpHeadersProviders` at the same time
-* Added `InstanceExchangeFilterFunction`s which allows to intercept/modify the requests to the monitored instances
-* Added out-of-the-box support for CloudFoundry
-* Added support for Spring Boot 1.5.x actuator endpoints using `LegacyEndpointConverters`
-* Update `OpsGenieNotifier` to api v2
-* Rewritten the `MailNotifier` to use Thymeleaf templates
+* 将所有的类都移动到了 `spring.boot.admin.server` 包下
+* 与Spring cloud相关的拓展移动到了 `spring-boot-admin-server-cloud`
+* 使用event sourcing 原则对后端重新进行了设计
+* 添加了应用的概念（有1到n个实例组成）
+* 将检测接口移动到后端，通过 `/actuator` 地址发送OPTIONS请求进行索引或者是查看
+* 使用WebClient自定义代理代替Zuul
+* 移除spring-cloud-starter依赖
+* 添加了 `CompositeHttpHeadersProvider` 来适配同时有多个 `HttpHeadersProviders` 的情况
+* 添加了 `InstanceExchangeFilterFunctions` ，它允许对向被监控的实例所发出的请求进行拦截/修改
+* 添加了CloudFoundry开箱即用的支持
+* 添加了使用 `LegacyEndpointConverters` 对 Spring Boot 1.5.x 版本actuator接口的支持
+* 更新 `OpsGenieNotifier` 的api到v2版本
+* 使用Thymeleaf模板重写了 `MailNotifier`
 
 === 客户端
-* Moved all properties to `spring.boot.admin.client.*` and `spring.boot.admin.client.instance.*`
-* Moved all classes to the `spring.boot.admin.client` package
-* Added support webflux applications
-* Added out-of-the-box support for CloudFoundry
+* 将所有的配置移动到 `spring.boot.admin.client.*` 以及 `spring.boot.admin.client.instance.*` 下
+* 将所有源码移动到 `spring.boot.admin.client` 包下
+* 添加了对webflux应用的支持
+* 添加了CloudFoundry开箱即用的支持

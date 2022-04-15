@@ -3337,13 +3337,14 @@ Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横�
 <h2 id="monitoring-spring-boot-1.5.x"><a class="anchor" href="#monitoring-spring-boot-1.5.x"></a><a class="link" href="#monitoring-spring-boot-1.5.x">7. 监听1.5.x版本的Spring Boot</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It is possible to monitor Spring Boot 1.5.x applications with Spring Boot Admin 2.x. The old Spring Boot Admin Client is
-able to register at a newer server. Since the API has slight changes, you need to set the following property on old clients:</p>
+<p>使用 Spring Boot Admin 2.x 也可以监控 Spring Boot 1.5.x 版本的应用。
+旧版本的Spring Boot Admin客户端可以注册到新版本的服务端上。
+由于API有一些细微的变化，你可以在旧版本的客户端上添加下面的配置:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Reconfigure the api path for Spring Boot Admin Client 1.5.x:</p>
+<p>为 Spring Boot Admin 客户端1.5.x版本重新配置api路径:</p>
 <div class="listingblock">
 <div class="title">application.yml</div>
 <div class="content">
@@ -3354,8 +3355,8 @@ able to register at a newer server. Since the API has slight changes, you need t
 </ol>
 </div>
 <div class="paragraph">
-<p>As some of the actuator endpoints changed with the Spring Boot 2 release not all options might be available
-(e.g. <code>/metrics</code> endpoint); for some of the endpoints we provide legacy converters.</p>
+<p>由于Spring Boot 2版本中，一些actuator接口发生了变化，并非所有选项都可用（比如 <code>/metrics</code> 接口）；
+对于这些接口，我们也提供了遗留接口的转换器。</p>
 </div>
 </div>
 </div>
@@ -3374,28 +3375,28 @@ able to register at a newer server. Since the API has slight changes, you need t
 <div class="ulist">
 <ul>
 <li>
-<p>Rewritten ui using vue.js</p>
+<p>使用vue.js重写了ui页面</p>
 </li>
 <li>
-<p>Integrated ui-login module into the main ui module</p>
+<p>将登录页面模块集成到主模块中</p>
 </li>
 <li>
-<p>Removed ui-activity module, as it was only used rarely</p>
+<p>删除了活动模块，因为没什么人使用它</p>
 </li>
 <li>
-<p>Removed Hystrix-Dashboard integration (subject to change)</p>
+<p>移除了Hystrix-Dashboard的集成（可能会改变）</p>
 </li>
 <li>
-<p>Added support for the session endpoint</p>
+<p>添加了session接口</p>
 </li>
 <li>
-<p>Added display of the (sanitized) metadata</p>
+<p>添加了元数据（屏蔽之后）的显示</p>
 </li>
 <li>
-<p>Added option to reset loglevels</p>
+<p>添加了重置日志级别的选项</p>
 </li>
 <li>
-<p>Added wallboard view</p>
+<p>添加了 wallboard 试图</p>
 </li>
 </ul>
 </div>
@@ -3405,43 +3406,43 @@ able to register at a newer server. Since the API has slight changes, you need t
 <div class="ulist">
 <ul>
 <li>
-<p>Moved all classes to the <code>spring.boot.admin.server</code> package</p>
+<p>将所有的类都移动到了 <code>spring.boot.admin.server</code> 包下</p>
 </li>
 <li>
-<p>Spring cloud related extensions moved to <code>spring-boot-admin-server-cloud</code>.</p>
+<p>与Spring cloud相关的拓展移动到了 <code>spring-boot-admin-server-cloud</code></p>
 </li>
 <li>
-<p>Redesigned backend using event sourcing principles</p>
+<p>使用event sourcing 原则对后端重新进行了设计</p>
 </li>
 <li>
-<p>Added concept of applications (consisting of 1 to n instances)</p>
+<p>添加了应用的概念（有1到n个实例组成）</p>
 </li>
 <li>
-<p>Moved endpoint detection to the backend by querying the <code>/actuator</code>-index or by probing via OPTIONS request</p>
+<p>将检测接口移动到后端，通过 <code>/actuator</code> 地址发送OPTIONS请求进行索引或者是查看</p>
 </li>
 <li>
-<p>Replaced Zuul with a custom proxy using the WebClient</p>
+<p>使用WebClient自定义代理代替Zuul</p>
 </li>
 <li>
-<p>Removed dependency on spring-cloud-starter</p>
+<p>移除spring-cloud-starter依赖</p>
 </li>
 <li>
-<p>Added <code>CompositeHttpHeadersProvider</code> to support multiple <code>HttpHeadersProviders</code> at the same time</p>
+<p>添加了 <code>CompositeHttpHeadersProvider</code> 来适配同时有多个 <code>HttpHeadersProviders</code> 的情况</p>
 </li>
 <li>
-<p>Added `InstanceExchangeFilterFunction`s which allows to intercept/modify the requests to the monitored instances</p>
+<p>添加了 <code>InstanceExchangeFilterFunctions</code> ，它允许对向被监控的实例所发出的请求进行拦截/修改</p>
 </li>
 <li>
-<p>Added out-of-the-box support for CloudFoundry</p>
+<p>添加了CloudFoundry开箱即用的支持</p>
 </li>
 <li>
-<p>Added support for Spring Boot 1.5.x actuator endpoints using <code>LegacyEndpointConverters</code></p>
+<p>添加了使用 <code>LegacyEndpointConverters</code> 对 Spring Boot 1.5.x 版本actuator接口的支持</p>
 </li>
 <li>
-<p>Update <code>OpsGenieNotifier</code> to api v2</p>
+<p>更新 <code>OpsGenieNotifier</code> 的api到v2版本</p>
 </li>
 <li>
-<p>Rewritten the <code>MailNotifier</code> to use Thymeleaf templates</p>
+<p>使用Thymeleaf模板重写了 <code>MailNotifier</code></p>
 </li>
 </ul>
 </div>
@@ -3451,16 +3452,16 @@ able to register at a newer server. Since the API has slight changes, you need t
 <div class="ulist">
 <ul>
 <li>
-<p>Moved all properties to <code>spring.boot.admin.client.<strong></code> and <code>spring.boot.admin.client.instance.</strong></code></p>
+<p>将所有的配置移动到 <code>spring.boot.admin.client.<strong></code> 以及 <code>spring.boot.admin.client.instance.</strong></code> 下</p>
 </li>
 <li>
-<p>Moved all classes to the <code>spring.boot.admin.client</code> package</p>
+<p>将所有源码移动到 <code>spring.boot.admin.client</code> 包下</p>
 </li>
 <li>
-<p>Added support webflux applications</p>
+<p>添加了对webflux应用的支持</p>
 </li>
 <li>
-<p>Added out-of-the-box support for CloudFoundry</p>
+<p>添加了CloudFoundry开箱即用的支持</p>
 </li>
 </ul>
 </div>

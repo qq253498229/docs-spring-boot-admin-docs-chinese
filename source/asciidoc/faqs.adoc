@@ -1,6 +1,7 @@
 [[faqs]]
 == 常见问题 ==
 [q-and-a]
-Can I include spring-boot-admin into my business application?::
-  *tl;dr* You can, but you shouldn't. +
-  You can set `spring.boot.admin.context-path` to alter the path where the UI and REST-API is served, but depending on the complexity of your application you might get in trouble. On the other hand in my opinion it makes no sense for an application to monitor itself. In case your application goes down your monitoring tool also does.
+我可以在我的业务系统应用中添加spring-boot-admin吗？::
+  *tl;dr* 可以，但是不应该这么做。 +
+  你可以设置 `spring.boot.admin.context-path` 改变UI以及REST-API的访问路径，但是基于应用的业务复杂度，你还是有可能遇到一些问题。
+  另一方面，在我看来一个应用自己监控自己是没有意义的。如果你的应用挂掉了，那么监控它的工具也就同时挂掉了。

@@ -72,7 +72,7 @@ js文件还有css样式表必须放在classpath下的 `/META-INF/spring-boot-adm
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/custom.vue[lines=17..-1]
 ----
 
-<1> 如果你在组件中定义了 `applications` 属性，那么它会接收所有已注册的应用。
+<1> 如果你在组件中定义了 `applications` 属性，组件会将所有已注册的应用注入进来。
 
 TIP: 应用中还提供了一些很有用的方法和可用的实例对象。可以参考 {github-src}/spring-boot-admin-server-ui/src/main/frontend/services/application.js[application.js] 以及 {github-src}/spring-boot-admin-server-ui/src/main/frontend/services/instance.js[instance.js]。
 
@@ -86,11 +86,10 @@ include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/index.js[tags=cust
 <1> 试图以及路由名称
 <2> 试图的访问路径
 <3> 引用的自定义组件，将会在路由上渲染
-<4> The label for the custom view to be shown in the top navigation bar.
-<5> Order for the view.
-Views in the top navigation bar are sorted by ascending order.
+<4> 在顶部导航栏显示自定义试图的label
+<5> 对试图进行排序。顶部导航栏中的试图是按照升序进行排序的。
 
-The `routes.txt` config with the added route:
+添加了路由的 `routes.txt` 文件:
 [source,text]
 
 ----
@@ -100,69 +99,69 @@ include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/routes.txt[]
 [[customizing-custom-views-instance]]
 ==== 查看自定义接口 ====
 
-Here is a view to show a custom endpoint:
+下面是调用自定义接口的试图:
 [source,html]
 
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/custom-endpoint.vue[lines=17..-1]
 ----
 
-<1> If you define a `instance` prop the component will receive the instance the view should be rendered for.
-<2> Each instance has a preconfigured https://github.com/axios/axios[axios] instance to access the endpoints with the correct path and headers.
+<1> 如果你在组件中定义了 `instance` 属性，组件会将需要渲染的对象注入进来。
 
-Registering the instance view works like for the top-level view with some additional properties:
+<2> 所有的实例中都提前配置好了 https://github.com/axios/axios[axios] 供您访问，您只需要输入正确的路径和请求头就好了。
+
+注册实例的工作方式与顶级试图差不多，但有一些额外的附加属性:
 [source,javascript]
 
 ----
 include::{samples-dir}/spring-boot-admin-sample-custom-ui/src/index.js[tags=customization-ui-endpoint]
 ----
 
-<1> The parent must be 'instances' in order to render the new custom view for a single instance.
-<2> You can group views by assigning them to a group.
-<3> If you add a `isEnabled` callback you can figure out dynamically if the view should be show for the particular instance.
-<4> Register custom i18n translations
+<1> 这里的parent必须是 'instances' ，这样才能为单例提供新的自定义试图。
+<2> 可以对试图进行分组。
+<3> 如果添加了 `isEnabled` 选项，则可以动态判断是否为特定实例显示试图。
+<4> 注册自定义i18n翻译
 
-NOTE: You can override default views by putting the same group and name as the one you want to override.
+NOTE: 你可以以同分组、同名试图的方式对默认试图进行覆盖。
 
 === 自定义顶部Logo和标题 ===
 
-You can set custom information in the header (i.e. displaying staging information or company name) by using following configuration properties:
+你可以使用下列属性对标题中的信息（例如显示登录信息或者是公司名称）进行自定义:
 
-- **spring.boot.admin.ui.brand**: This HTML snippet is rendered in navigation header and defaults to `<img src="assets/img/icon-spring-boot-admin.svg"><span>Spring Boot Admin</span>`.
-By default it shows the SBA logo followed by it's name.
-If you want to show a custom logo you can set: `spring.boot.admin.ui.brand=<img src="custom/custom-icon.png">`.
-Either you just add the image to your jar-file in `/META-INF/spring-boot-admin-server-ui/` (SBA registers a `ResourceHandler` for this location by default), or you must ensure yourself that the image gets served correctly (e.g. by registering your own `ResourceHandler`)
+- **spring.boot.admin.ui.brand**: 这段HTML会渲染到导航标题中，默认是 `<img src="assets/img/icon-spring-boot-admin.svg"><span>Spring Boot Admin</span>`。
+默认情况下这里会显示SBA的logo，后面加上名称。
+你可以在 `/META-INF/spring-boot-admin-server-ui/` 这个路径（SBA默认会从这个路径下注册 `ResourceHandler` ）下添加图片，或者用其它方式确保正确的提供图片（比如手动注册 `ResourceHandler` ）。
 
-- **spring.boot.admin.ui.title**: Use this option to customize the browsers window title.
+- **spring.boot.admin.ui.title**: 使用这个选项可以自定义浏览器窗口标题。
 
 === 自定义登录Logo ===
 
-You can set a custom image to be displayed on the login page.
+你可以自定义登录页面的图片。
 
-1. Put the image in a resource location which is served via http (e.g. `/META-INF/spring-boot-admin-server-ui/assets/img/`).
-2. Configure the icons to use using the following property:
-- **spring.boot.admin.ui.login-icon**: Used as icon on login page. (e.g `assets/img/custom-login-icon.svg`)
+1. 将图片放在http可以访问到的资源目录下（例如 `/META-INF/spring-boot-admin-server-ui/assets/img/`）。
+2. 使用下面的属性来配置要使用的图标:
+- **spring.boot.admin.ui.login-icon**: 用作登录页面上的图标(例 `assets/img/custom-login-icon.svg`)。
 
 === 自定义Favicon ===
 
-It is possible to use a custom favicon, which is also used for desktop notifications.
-Spring Boot Admin uses a different icon when one or more application is down.
+可以使用自定义的favicon，它也会用在桌面通知上。
+当有一个或多个应用关闭时，Spring Boot Admin会使用不同的图标。
 
-1. Put the favicon (`.png` with at least 192x192 pixels) in a resource location which is served via http (e.g. `/META-INF/spring-boot-admin-server-ui/assets/img/`).
+1. 将favicon图标（`.png` 格式，最低192x192像素）放在http可以访问到的资源目录下（例如 `/META-INF/spring-boot-admin-server-ui/assets/img/`）。
 
-2. Configure the icons to use using the following properties:
-- `spring.boot.admin.ui.favicon`: Used as default icon. (e.g `assets/img/custom-favicon.png`
-- `spring.boot.admin.ui.favicon-danger`: Used when one or more service is down. (e.g `assets/img/custom-favicon-danger.png`)
+2. 下面的属性可以配置要使用的图标:
+- `spring.boot.admin.ui.favicon`: 配置默认图标(例 `assets/img/custom-favicon.png`) 。
+- `spring.boot.admin.ui.favicon-danger`: 在一个或多个服务关闭时使用这个图标 (例 `assets/img/custom-favicon-danger.png`)。
 
 === 自定义可用语言 ===
 
-To filter languages to a subset of all supported languages:
+要想筛选所有支持的语言，可以使用下面的选项:
 
-- **spring.boot.admin.ui.available-languages**: Used as a filter of existing languages. (e.g `en,de` out of existing `de,en,fr,ko,pt-BR,ru,zh`)
+- **spring.boot.admin.ui.available-languages**: 配置现有语言的过滤器 (例如 `en,de` out of existing `de,en,fr,ko,pt-BR,ru,zh`)。
 
 === 显示/隐藏页面 ===
 
-You can very simply hide views in the navbar:
+要想在导航栏中隐藏试图，可以很简单的实现：
 
 [source,yaml,indent=0]
 ----

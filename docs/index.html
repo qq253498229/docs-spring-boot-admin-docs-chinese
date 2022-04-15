@@ -3051,7 +3051,7 @@ Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横�
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>如果你在组件中定义了 <code>applications</code> 属性，那么它会接收所有已注册的应用。</td>
+<td>如果你在组件中定义了 <code>applications</code> 属性，组件会将所有已注册的应用注入进来。</td>
 </tr>
 </table>
 </div>
@@ -3089,29 +3089,28 @@ Consul在元数据不允许使用点 (".") 作为key，应该使用减号（横�
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the view and the route to the view</td>
+<td>试图以及路由名称</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Path where the view will be accessible</td>
+<td>试图的访问路径</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The imported custom component, which will be rendered on the route.</td>
+<td>引用的自定义组件，将会在路由上渲染</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The label for the custom view to be shown in the top navigation bar.</td>
+<td>在顶部导航栏显示自定义试图的label</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Order for the view.
-Views in the top navigation bar are sorted by ascending order.</td>
+<td>对试图进行排序。顶部导航栏中的试图是按照升序进行排序的。</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The <code>routes.txt</code> config with the added route:</p>
+<p>添加了路由的 <code>routes.txt</code> 文件:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3122,7 +3121,7 @@ Views in the top navigation bar are sorted by ascending order.</td>
 <div class="sect3">
 <h4 id="customizing-custom-views-instance"><a class="anchor" href="#customizing-custom-views-instance"></a><a class="link" href="#customizing-custom-views-instance">6.5.2. 查看自定义接口</a></h4>
 <div class="paragraph">
-<p>Here is a view to show a custom endpoint:</p>
+<p>下面是调用自定义接口的试图:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3163,16 +3162,16 @@ Views in the top navigation bar are sorted by ascending order.</td>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>If you define a <code>instance</code> prop the component will receive the instance the view should be rendered for.</td>
+<td>如果你在组件中定义了 <code>instance</code> 属性，组件会将需要渲染的对象注入进来。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Each instance has a preconfigured <a href="https://github.com/axios/axios">axios</a> instance to access the endpoints with the correct path and headers.</td>
+<td>所有的实例中都提前配置好了 <a href="https://github.com/axios/axios">axios</a> 供您访问，您只需要输入正确的路径和请求头就好了。</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Registering the instance view works like for the top-level view with some additional properties:</p>
+<p>注册实例的工作方式与顶级试图差不多，但有一些额外的附加属性:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3204,19 +3203,19 @@ Views in the top navigation bar are sorted by ascending order.</td>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The parent must be 'instances' in order to render the new custom view for a single instance.</td>
+<td>这里的parent必须是 'instances' ，这样才能为单例提供新的自定义试图。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>You can group views by assigning them to a group.</td>
+<td>可以对试图进行分组。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>If you add a <code>isEnabled</code> callback you can figure out dynamically if the view should be show for the particular instance.</td>
+<td>如果添加了 <code>isEnabled</code> 选项，则可以动态判断是否为特定实例显示试图。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Register custom i18n translations</td>
+<td>注册自定义i18n翻译</td>
 </tr>
 </table>
 </div>
@@ -3227,7 +3226,7 @@ Views in the top navigation bar are sorted by ascending order.</td>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You can override default views by putting the same group and name as the one you want to override.
+你可以以同分组、同名试图的方式对默认试图进行覆盖。
 </td>
 </tr>
 </table>
@@ -3237,18 +3236,17 @@ You can override default views by putting the same group and name as the one you
 <div class="sect2">
 <h3 id="_自定义顶部logo和标题"><a class="anchor" href="#_自定义顶部logo和标题"></a><a class="link" href="#_自定义顶部logo和标题">6.6. 自定义顶部Logo和标题</a></h3>
 <div class="paragraph">
-<p>You can set custom information in the header (i.e. displaying staging information or company name) by using following configuration properties:</p>
+<p>你可以使用下列属性对标题中的信息（例如显示登录信息或者是公司名称）进行自定义:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>spring.boot.admin.ui.brand</strong>: This HTML snippet is rendered in navigation header and defaults to <code>&lt;img src="assets/img/icon-spring-boot-admin.svg"&gt;&lt;span&gt;Spring Boot Admin&lt;/span&gt;</code>.
-By default it shows the SBA logo followed by it&#8217;s name.
-If you want to show a custom logo you can set: <code>spring.boot.admin.ui.brand=&lt;img src="custom/custom-icon.png"&gt;</code>.
-Either you just add the image to your jar-file in <code>/META-INF/spring-boot-admin-server-ui/</code> (SBA registers a <code>ResourceHandler</code> for this location by default), or you must ensure yourself that the image gets served correctly (e.g. by registering your own <code>ResourceHandler</code>)</p>
+<p><strong>spring.boot.admin.ui.brand</strong>: 这段HTML会渲染到导航标题中，默认是 <code>&lt;img src="assets/img/icon-spring-boot-admin.svg"&gt;&lt;span&gt;Spring Boot Admin&lt;/span&gt;</code>。
+默认情况下这里会显示SBA的logo，后面加上名称。
+你可以在 <code>/META-INF/spring-boot-admin-server-ui/</code> 这个路径（SBA默认会从这个路径下注册 <code>ResourceHandler</code> ）下添加图片，或者用其它方式确保正确的提供图片（比如手动注册 <code>ResourceHandler</code> ）。</p>
 </li>
 <li>
-<p><strong>spring.boot.admin.ui.title</strong>: Use this option to customize the browsers window title.</p>
+<p><strong>spring.boot.admin.ui.title</strong>: 使用这个选项可以自定义浏览器窗口标题。</p>
 </li>
 </ul>
 </div>
@@ -3256,19 +3254,19 @@ Either you just add the image to your jar-file in <code>/META-INF/spring-boot-ad
 <div class="sect2">
 <h3 id="_自定义登录logo"><a class="anchor" href="#_自定义登录logo"></a><a class="link" href="#_自定义登录logo">6.7. 自定义登录Logo</a></h3>
 <div class="paragraph">
-<p>You can set a custom image to be displayed on the login page.</p>
+<p>你可以自定义登录页面的图片。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Put the image in a resource location which is served via http (e.g. <code>/META-INF/spring-boot-admin-server-ui/assets/img/</code>).</p>
+<p>将图片放在http可以访问到的资源目录下（例如 <code>/META-INF/spring-boot-admin-server-ui/assets/img/</code>）。</p>
 </li>
 <li>
-<p>Configure the icons to use using the following property:</p>
+<p>使用下面的属性来配置要使用的图标:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>spring.boot.admin.ui.login-icon</strong>: Used as icon on login page. (e.g <code>assets/img/custom-login-icon.svg</code>)</p>
+<p><strong>spring.boot.admin.ui.login-icon</strong>: 用作登录页面上的图标(例 <code>assets/img/custom-login-icon.svg</code>)。</p>
 </li>
 </ul>
 </div>
@@ -3279,23 +3277,23 @@ Either you just add the image to your jar-file in <code>/META-INF/spring-boot-ad
 <div class="sect2">
 <h3 id="_自定义favicon"><a class="anchor" href="#_自定义favicon"></a><a class="link" href="#_自定义favicon">6.8. 自定义Favicon</a></h3>
 <div class="paragraph">
-<p>It is possible to use a custom favicon, which is also used for desktop notifications.
-Spring Boot Admin uses a different icon when one or more application is down.</p>
+<p>可以使用自定义的favicon，它也会用在桌面通知上。
+当有一个或多个应用关闭时，Spring Boot Admin会使用不同的图标。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Put the favicon (<code>.png</code> with at least 192x192 pixels) in a resource location which is served via http (e.g. <code>/META-INF/spring-boot-admin-server-ui/assets/img/</code>).</p>
+<p>将favicon图标（<code>.png</code> 格式，最低192x192像素）放在http可以访问到的资源目录下（例如 <code>/META-INF/spring-boot-admin-server-ui/assets/img/</code>）。</p>
 </li>
 <li>
-<p>Configure the icons to use using the following properties:</p>
+<p>下面的属性可以配置要使用的图标:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>spring.boot.admin.ui.favicon</code>: Used as default icon. (e.g <code>assets/img/custom-favicon.png</code></p>
+<p><code>spring.boot.admin.ui.favicon</code>: 配置默认图标(例 <code>assets/img/custom-favicon.png</code>) 。</p>
 </li>
 <li>
-<p><code>spring.boot.admin.ui.favicon-danger</code>: Used when one or more service is down. (e.g <code>assets/img/custom-favicon-danger.png</code>)</p>
+<p><code>spring.boot.admin.ui.favicon-danger</code>: 在一个或多个服务关闭时使用这个图标 (例 <code>assets/img/custom-favicon-danger.png</code>)。</p>
 </li>
 </ul>
 </div>
@@ -3306,12 +3304,12 @@ Spring Boot Admin uses a different icon when one or more application is down.</p
 <div class="sect2">
 <h3 id="_自定义可用语言"><a class="anchor" href="#_自定义可用语言"></a><a class="link" href="#_自定义可用语言">6.9. 自定义可用语言</a></h3>
 <div class="paragraph">
-<p>To filter languages to a subset of all supported languages:</p>
+<p>要想筛选所有支持的语言，可以使用下面的选项:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>spring.boot.admin.ui.available-languages</strong>: Used as a filter of existing languages. (e.g <code>en,de</code> out of existing <code>de,en,fr,ko,pt-BR,ru,zh</code>)</p>
+<p><strong>spring.boot.admin.ui.available-languages</strong>: 配置现有语言的过滤器 (例如 <code>en,de</code> out of existing <code>de,en,fr,ko,pt-BR,ru,zh</code>)。</p>
 </li>
 </ul>
 </div>
@@ -3319,7 +3317,7 @@ Spring Boot Admin uses a different icon when one or more application is down.</p
 <div class="sect2">
 <h3 id="_显示隐藏页面"><a class="anchor" href="#_显示隐藏页面"></a><a class="link" href="#_显示隐藏页面">6.10. 显示/隐藏页面</a></h3>
 <div class="paragraph">
-<p>You can very simply hide views in the navbar:</p>
+<p>要想在导航栏中隐藏试图，可以很简单的实现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
